@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+  <div class="form-container">
+    <div class="header">
+      <h1>Create a new account</h1>
+      <p>Already have an account? <a routerLink="/auth/login">Sign in</a></p>
+    </div>
+    <div class="form-field">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')">
+          Please enter a valid email address
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('minlength')">
+          Password must be at least 6 characters long
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('maxlength')">
+          Password cannot be more than 15 characters long
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Register</button>
+    </div>
+  </div>
+</form>
