@@ -1,0 +1,30 @@
+<mat-card class="card">
+  <mat-card-header class="header">
+    <mat-card-title class="card-title">About me</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <div class="discription">
+      <h4>Description</h4>
+      <p>{{description}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="skills">
+      <h4>Skills</h4>
+      <ul>
+        <li *ngFor="let skill of skills">{{skill}}</li>
+      </ul>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="education">
+      <h4>Education</h4>
+      <ul>
+        <li *ngFor="let education of educations">
+        <p>
+          {{education.degree}} in {{education.major}}<br>
+          {{education.collegeName}}, {{education.location}}, Graduated {{education.graduationYear}}.
+        </p>
+        </li>
+      </ul>
+    </div>
+  </mat-card-content>
+</mat-card>
