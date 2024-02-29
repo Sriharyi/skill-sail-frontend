@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DEGREES, LOCATIONS, YEARS} from "../../../../core/constants/constants";
 import {MatSelectChange} from "@angular/material/select";
+import {Edu, FreelancerUpdateForm} from "../../../../shared/models/profile/freelancer-update-form";
 
 @Component({
   selector: 'app-profile-update',
@@ -15,29 +16,46 @@ export class ProfileUpdateComponent {
     private formBuilder: FormBuilder,
   ) { }
 
-  profileForm:FormGroup = this.formBuilder.group({
-    name: '',
-    bio: '',
-    skills: [[]],
-    location: '',
-    collegeName: '',
-    degree: '',
-    major: '',
-    graduationYear: ''
-  });
+  public profileForm!:FormGroup;
+
+
+  ngOnInit(){
+      this.profileForm = this.formBuilder.group<FreelancerUpdateForm>(
+      {
+        displayName: new FormControl("", Validators.required),
+        description: new FormControl("", Validators.required),
+        skills: new FormControl([""], Validators.required),
+        educations: this.formBuilder.array([this.createEducation()])
+      }
+      );
+  }
   skillsOptions: string[] = ['Angular', 'NodeJS', 'MongoDB'];
   protected readonly LOCATIONS = LOCATIONS;
   protected readonly YEARS = YEARS;
   protected readonly DEGREES = DEGREES;
   onSubmit() {
-    console.log(this.profileForm.value);
+
   }
 
-  get selectedSkills(): string[] {
-    return this.profileForm.get('skills')?.value;
+  private createEducation() {
+    return this.formBuilder.group<Edu>({
+      location: new FormControl("", Validators.required),
+      collegeName: new FormControl("", Validators.required),
+      degree: new FormControl("", Validators.required),
+      major: new FormControl("", Validators.required),
+      graduationYear: new FormControl(null, Validators.required)
+    });
   }
 
-  onSkillChange($event: MatSelectChange) {
-    console.log($event);
+  get educations() {
+    return this.profileForm.get('educations') as FormArray;
+  }
+
+  addEducation() {
+    this.educations.push(this.createEducation());
+  }
+
+  deleteEducation(index: number) {
+    this.educations.removeAt(index);
   }
 }
