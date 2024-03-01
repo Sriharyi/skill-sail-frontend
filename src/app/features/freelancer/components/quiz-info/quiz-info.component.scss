@@ -1,0 +1,27 @@
+.card{
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30rem;
+  width: 30rem;
+}
+
+.header{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-content{
+  margin-bottom: 20px;
+}
+
+.card-actions{
+  margin-top: 2rem;
+}

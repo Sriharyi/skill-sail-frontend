@@ -7,13 +7,13 @@
       <div class="form-field">
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input formControlName="name" matInput>
+          <input formControlName="displayName" matInput>
         </mat-form-field>
       </div>
       <div class="form-field">
         <mat-form-field>
           <mat-label>Skills</mat-label>
-          <mat-select formControlName="skills" (selectionChange)="onSkillChange($event)" multiple>
+          <mat-select formControlName="skills" multiple>
             <mat-option *ngFor="let skill of skillsOptions" [value]="skill">{{ skill }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -24,60 +24,66 @@
     <!--      <span *ngFor="let skill of profileForm.get('skills')?.value">{{skill}}<span class="remove" color="warn">x</span></span>-->
     <!--    </div>-->
     <h2>Education:</h2>
-    <div class="form-education">
+  <div formArrayName="educations" *ngFor="let _ of educations.controls; let i=index">
+      <div class="form-education" [formGroupName]="i">
+        <div class="form-field">
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="location">
+              <mat-option *ngFor="let location of LOCATIONS" [value]="location">{{ location }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-      <div class="form-field">
-        <mat-form-field >
-          <mat-label>Country</mat-label>
-          <mat-select formControlName="location">
-            <mat-option *ngFor="let location of LOCATIONS" [value]="location">{{ location }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="form-field">
+          <mat-form-field>
+            <mat-label>CollegeName</mat-label>
+            <input formControlName="collegeName" matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <mat-form-field>
+            <mat-label>Degree</mat-label>
+            <mat-select formControlName="degree">
+              <mat-option *ngFor="let degree of DEGREES" [value]="degree">{{ degree }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <mat-form-field>
+            <mat-label>Major</mat-label>
+            <input formControlName="major" matInput>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <mat-form-field>
+            <mat-label>Graduated Year</mat-label>
+            <mat-select formControlName="graduationYear">
+              <mat-option *ngFor="let year of YEARS" [value]="year">{{ year }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-icon class="delete-btn" (click)="deleteEducation(i)">
+          delete_forever</mat-icon>
       </div>
-
-      <div class="form-field">
-        <mat-form-field >
-          <mat-label>CollegeName</mat-label>
-          <input formControlName="collegeName" matInput>
-        </mat-form-field>
-      </div>
-
-      <div class="form-field">
-        <mat-form-field >
-          <mat-label>Degree</mat-label>
-          <mat-select formControlName="degree">
-            <mat-option *ngFor="let degree of DEGREES" [value]="degree">{{ degree }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-
-      <div class="form-field">
-        <mat-form-field >
-          <mat-label>Major</mat-label>
-          <input formControlName="major" matInput>
-        </mat-form-field>
-      </div>
-
-      <div class="form-field">
-        <mat-form-field>
-          <mat-label>Graduated Year</mat-label>
-          <mat-select formControlName="graduationYear">
-            <mat-option *ngFor="let year of YEARS" [value]="year">{{ year }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
+    <mat-divider></mat-divider>
     </div>
+    <button mat-mini-fab type="button" class="add-button" (click)="addEducation()">
+      <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
     <h3>Bio:</h3>
     <div class="form-bio form-field">
       <mat-form-field appearance="fill" class="example-full-width">
         <mat-label>Bio</mat-label>
-        <textarea class="bio-text" formControlName="bio" #message maxlength="256" placeholder="Tell us about yourself"
-                  matInput ></textarea>
+        <textarea class="bio-text" formControlName="description" #message maxlength="256" placeholder="Tell us about yourself"
+                  matInput></textarea>
         <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
       </mat-form-field>
     </div>
+
 
 
     <div class="form-actions">
