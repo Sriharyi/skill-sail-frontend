@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Question, SkillForm} from "../../../../shared/models/admin/skill-form";
 import {SkillService} from "../../../../core/services/admin/skill.service";
@@ -10,23 +10,25 @@ import {SkillService} from "../../../../core/services/admin/skill.service";
 })
 export class CreateSkillComponent {
 
-  public skillForm!:FormGroup;
+  public skillForm!: FormGroup;
+  public jsonFile!: File;
 
-  constructor(private fb:FormBuilder,private skillservice:SkillService) { }
-
-  ngOnInit(): void {
-      this.skillForm = this.createSkill();
+  constructor(private fb: FormBuilder, private skillservice: SkillService) {
   }
 
-  createSkill(){
+  ngOnInit(): void {
+    this.skillForm = this.createSkill();
+  }
+
+  createSkill() {
     return this.fb.group<SkillForm>({
       skillName: new FormControl("", Validators.required),
       skillDescription: new FormControl("", Validators.required),
-      questions:new FormArray([this.createQuestion()])
+      questions: new FormArray([this.createQuestion()], Validators.required)
     });
   }
 
-  createQuestion(){
+  createQuestion() {
     return this.fb.group<Question>({
       question: new FormControl("", Validators.required),
       options: new FormArray([
@@ -40,21 +42,21 @@ export class CreateSkillComponent {
     });
   }
 
-  get questions(){
+  get questions() {
     return this.skillForm.get('questions') as FormArray;
   }
 
-  addQuestion(){
+  addQuestion() {
     this.questions.push(this.createQuestion());
   }
 
-  removeQuestion(index:number){
+  removeQuestion(index: number) {
     this.questions.removeAt(index);
   }
 
-  submit(){
+  submit() {
     console.log(this.skillForm.value);
-    this.skillservice.createSkill(this.skillForm.value).subscribe(data=>{
+    this.skillservice.createSkill(this.skillForm.value).subscribe(data => {
       console.log(data);
     });
   }
@@ -63,12 +65,32 @@ export class CreateSkillComponent {
     return this.fb.control("", Validators.required);
   }
 
-  getOptions(questionIndex:number){
+  getOptions(questionIndex: number) {
     return (this.questions.at(questionIndex).get('options') as FormArray);
   }
 
+  onFileInput($event: Event) {
+    const target = $event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    if (file.type === 'application/json') {
+      this.jsonFile = file;
+      const fileReader = new FileReader();
+      fileReader.readAsText(file);
+      fileReader.onload = (e) => {
+        const fileContent = fileReader.result;
+        if (fileContent !== null) {
+          const pars = JSON.parse(fileContent.toString());
+          // set the value of the form
+          const questions:Question[] = pars.questions;
+          this.skillForm.value.questions.pop();
+          questions.forEach((question:Question) => {
+            this.skillForm.value.questions.push(question);
+          });
+        }
+      }
+    }
+  }
   ngOnDestroy(): void {
     this.skillForm.reset();
   }
-
 }

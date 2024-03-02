@@ -12,37 +12,18 @@
       </mat-form-field>
     </div>
     <h3>Questions:</h3>
-    <div class="form-group" formArrayName="questions">
+    <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">
+      <mat-icon>library_add</mat-icon>
+      <span>Import as Json File</span>
+      <input #fileInput type="file" (change)="onFileInput($event)" class="file-input"/>
 
-      <div *ngFor="let question of questions.controls; let i=index">
-        <div [formGroupName]="i">
-          <div class="form-group">
-            <mat-form-field class="form-control">
-              <mat-label>Question</mat-label>
-              <input formControlName="question" matInput>
-            </mat-form-field>
-          </div>
-              <div  formArrayName="options">
-              <div *ngFor="let option of getOptions(i).controls; let j = index">
-                <mat-form-field class="form-control">
-                  <mat-label>Option</mat-label>
-                  <input [formControlName]="j" matInput>
-                </mat-form-field>
-            </div>
-          </div>
-          <div class="form-group-type">
-            <mat-form-field class="field">
-              <mat-label>correctOptionIndex</mat-label>
-              <input formControlName="correctOption" matInput type="number">
-            </mat-form-field>
-            <mat-form-field class="field" >
-              <mat-label>Type</mat-label>
-              <input formControlName="type" matInput type="text">
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
+      <ng-container *ngIf="jsonFile"  >
+        <span class="file-name"> | {{jsonFile.name}}</span>
+      </ng-container>
+    </button>
+
+
+
     <div class="form-actions">
       <button mat-raised-button color="primary" type="submit" class="btn btn-primary">Submit</button>
     </div>
