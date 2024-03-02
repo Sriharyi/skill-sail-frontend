@@ -1,47 +1,50 @@
+<ng-container *ngIf="isStarted">
+  <section class="question-section">
+    <div class="question-container">
+      <div class="question-header">
+        <div class="time-container">
+          <div class="time">
+            <span class="time-count"> {{ timerLeftMin }} min : {{ timerLeftSec }} sec </span>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="question-body">
+        <h2 class="question-text">{{ currentQuestion.question }}</h2>
+        <div class="question-options">
+          <ng-container *ngFor="let option of currentQuestion.options; let i = index">
+            <div class="question-option">
+              <input type="radio" name="option" id="option{{i}}" [(ngModel)]="selectedOption" [value]="i">
+              <label for="option{{i}}">{{ i + 1 }} . {{ option }}</label>
+            </div>
+          </ng-container>
+        </div>
+      </div>
 
-<section class="question-section hide">
-  <div class="question-container">
-    <div class="question-header">
-      <div class="time-container">
-        <div class="time">
-          <span class="time-count"> {{timerLeftMin}} min : {{timerLeftSec}} sec </span>
+      <div class="question-footer">
+        <div class="question-left">
+          <div class="question-progress-text">
+          <span class="question-number bold">
+            {{ currentQuestionIndex + 1 }}
+          </span> of <span class="total-question bold">
+            {{ totalQuestions }}
+        </span> questions
+          </div>
         </div>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="question-body">
-      <h2 class="question-text">1. How do you find the length of the string in js? </h2>
-      <div class="question-options">
-        <div class="question-option">
-          <input type="radio" name="option" id="option1" class="radio">
-          <label for="option1" class="option-text">A. length()</label>
-        </div>
-        <div class="question-option">
-          <input type="radio" name="option" id="option2" class="radio">
-          <label for="option2" class="option-text">B. length</label>
-        </div>
-        <div class="question-option">
-          <input type="radio" name="option" id="option3" class="radio">
-          <label for="option3" class="option-text">C. length[]</label>
-        </div>
-        <div class="question-option">
-          <input type="radio" name="option" id="option4" class="radio">
-          <label for="option4" class="option-text">D. length</label>
-        </div>
-      </div>
-    </div>
-    <div class="question-footer">
-      <div class="question-left">
+        <div class="question-action">
+          <ng-container *ngIf="currentQuestionIndex<totalQuestions-1; else submitTemplate">
+            <button mat-raised-button color="primary" (click)="nextQuestion()">Next</button>
+          </ng-container>
 
-        <div class="question-progress-text">
-          <span class="question-number bold">1</span> of <span class="total-question bold">10</span> questions
+          <ng-template #submitTemplate>
+            <button mat-raised-button color="primary" (click)="submitTest()">Submit</button>
+          </ng-template>
         </div>
       </div>
-      <div class="question-action">
-        <button class="next-btn" mat-raised-button color="primary">Next Question
-          <span><i class="fa-solid fa-arrow-right-long arrow"></i></span>
-        </button>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+</ng-container>
+
+<ng-container *ngIf="isFinished">
+    this is result
+</ng-container>

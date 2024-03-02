@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SkillForm} from "../../../shared/models/admin/skill-form";
 import {environment} from "../../../../environments/environment.development";
 import {Observable} from "rxjs";
+import {SkillDto} from "../../../shared/models/admin/skill-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class SkillService {
   }
 
   //get skill by id
-  getSkillById(id:string){
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getSkillById(id:string):Observable<SkillDto>{
+    return this.http.get<SkillDto>(`${this.apiUrl}/${id}`);
   }
 
   //update skill
@@ -57,5 +58,9 @@ export class SkillService {
   //enable & diable skill
   enableSkill(skillId: string, isChecked: boolean){
     return this.http.put(`${this.apiUrl}/enable/${skillId}`, isChecked);
+  }
+
+  getQuestions(skillId: string): Observable<SkillDto>{
+    return this.getSkillById(skillId);
   }
 }
