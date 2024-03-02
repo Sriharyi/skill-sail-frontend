@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment.development';
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { LoginRequest } from 'src/app/shared/models/authentication/login-request';
+import {LoginRequest} from 'src/app/shared/models/authentication/login-request';
 import {SignInResponse} from "../../shared/models/authentication/sign-in-response";
 import {SignUpRequest} from "../../shared/models/authentication/sign-up-request";
-
 
 
 @Injectable({
@@ -13,12 +12,12 @@ import {SignUpRequest} from "../../shared/models/authentication/sign-up-request"
 })
 export class AuthService {
 
-  private authUrl:string = `${environment.DOMAIN}/auth`;
-  private readonly JWT_TOKEN:string = 'JWT_TOKEN';
-  private readonly REFRESH_TOKEN:string = 'REFRESH_TOKEN';
+  private authUrl: string = `${environment.DOMAIN}/auth`;
+  private readonly JWT_TOKEN: string = 'JWT_TOKEN';
+  private readonly REFRESH_TOKEN: string = 'REFRESH_TOKEN';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
-  constructor(private http: HttpClient) {
 
+  constructor(private http: HttpClient) {
   }
 
   httpOptions = {
@@ -28,21 +27,21 @@ export class AuthService {
   };
 
   //login api call
-  login(loginRequest: LoginRequest):Observable<SignInResponse>{
+  login(loginRequest: LoginRequest): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(`${this.authUrl}/authenticate`, loginRequest, this.httpOptions).pipe(
       tap(data => {
-        this.doLoginUser(data);
-      }
-    ));
+          this.doLoginUser(data);
+        }
+      ));
   }
 
   //register api call
-  public register(registerRequest: SignUpRequest):Observable<SignInResponse>{
+  public register(registerRequest: SignUpRequest): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(`${this.authUrl}/register`, registerRequest, this.httpOptions).pipe(
       tap(data => {
-        this.doLoginUser(data);
-      }
-    ));
+          this.doLoginUser(data);
+        }
+      ));
   }
 
   //logout

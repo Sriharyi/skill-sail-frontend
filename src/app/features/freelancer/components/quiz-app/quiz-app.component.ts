@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Question} from 'src/app/shared/models/Freelancer/Question';
+import {Question} from 'src/app/shared/models/freelancer/question';
 import {SkillService} from "../../../../core/services/admin/skill.service";
 
 
