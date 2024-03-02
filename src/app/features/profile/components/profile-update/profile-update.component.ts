@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {DEGREES, LOCATIONS, YEARS} from "../../../../core/constants/constants";
+import {DEGREES, LOCATIONS, SKILLS, YEARS} from "../../../../core/constants/constants";
 import {MatSelectChange} from "@angular/material/select";
 import {Edu, FreelancerUpdateForm} from "../../../../shared/models/profile/freelancer-update-form";
 
@@ -12,29 +12,33 @@ import {Edu, FreelancerUpdateForm} from "../../../../shared/models/profile/freel
 })
 export class ProfileUpdateComponent {
 
+  protected readonly SKILLS: string[] = SKILLS;
+  protected readonly LOCATIONS: string[] = LOCATIONS;
+  protected readonly YEARS: number[] = YEARS;
+  protected readonly DEGREES: string[] = DEGREES;
+
+  public profileForm!: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+  }
 
-  public profileForm!:FormGroup;
-
-
-  ngOnInit(){
-      this.profileForm = this.formBuilder.group<FreelancerUpdateForm>(
+  ngOnInit() {
+    this.profileForm = this.formBuilder.group<FreelancerUpdateForm>(
       {
         displayName: new FormControl("", Validators.required),
         description: new FormControl("", Validators.required),
         skills: new FormControl([""], Validators.required),
         educations: this.formBuilder.array([this.createEducation()])
       }
-      );
+    );
   }
-  skillsOptions: string[] = ['Angular', 'NodeJS', 'MongoDB'];
-  protected readonly LOCATIONS = LOCATIONS;
-  protected readonly YEARS = YEARS;
-  protected readonly DEGREES = DEGREES;
-  onSubmit() {
 
+  onSubmit() {
+    if (this.profileForm.valid) {
+      console.log(this.profileForm.value);
+    }
   }
 
   private createEducation() {

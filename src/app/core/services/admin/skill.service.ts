@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SkillForm} from "../../../shared/models/admin/skill-form";
 import {environment} from "../../../../environments/environment.development";
@@ -10,43 +10,46 @@ import {SkillDto} from "../../../shared/models/admin/skill-dto";
 })
 export class SkillService {
 
-  httpOptions = {
+  private readonly apiUrl: string = `${environment.DOMAIN}/skills`;
+
+  private httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
 
-  private readonly apiUrl = `${environment.DOMAIN}/skills`;
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
 
   //create skill
-  createSkill(skill:SkillForm){
+  createSkill(skill: SkillForm) {
     console.log(skill);
     return this.http.post(`${this.apiUrl}`, skill, this.httpOptions);
   }
 
   //get all skills
-  getSkills(){
+  getSkills() {
     return this.http.get(`${this.apiUrl}`);
   }
 
   //get skill by id
-  getSkillById(id:string):Observable<SkillDto>{
+  getSkillById(id: string): Observable<SkillDto> {
     return this.http.get<SkillDto>(`${this.apiUrl}/${id}`);
   }
 
   //update skill
-  updateSkill(id:string, skill:SkillForm){
+  updateSkill(id: string, skill: SkillForm) {
     return this.http.put(`${this.apiUrl}/${id}`, skill, this.httpOptions);
   }
 
   //delete skill
-  deleteSkill(id:string){
+  deleteSkill(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   //get all skills by page
-  getSkillsByPage(pageIndex:number, pageSize:number):Observable<any>{
+  getSkillsByPage(pageIndex: number, pageSize: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/page/?page=${pageIndex}&size=${pageSize}`);
   }
 
@@ -56,11 +59,11 @@ export class SkillService {
   // }
 
   //enable & diable skill
-  enableSkill(skillId: string, isChecked: boolean){
+  enableSkill(skillId: string, isChecked: boolean) {
     return this.http.put(`${this.apiUrl}/enable/${skillId}`, isChecked);
   }
 
-  getQuestions(skillId: string): Observable<SkillDto>{
+  getQuestions(skillId: string): Observable<SkillDto> {
     return this.getSkillById(skillId);
   }
 }

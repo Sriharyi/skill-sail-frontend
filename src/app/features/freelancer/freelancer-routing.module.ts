@@ -26,10 +26,6 @@ const routes: Routes = [
       {
         path:"test-quiz",
         component: QuizAppComponent
-      },
-      {
-        path:"profile",
-        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
       }
     ]
   }
