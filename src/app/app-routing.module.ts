@@ -21,6 +21,11 @@ const routes: Routes = [
     path: 'freelancer',
     loadChildren: () => import('./features/freelancer/freelancer.module').then(m => m.FreelancerModule),
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
+  }
+
 
 ];
 

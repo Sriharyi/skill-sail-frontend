@@ -29,7 +29,7 @@ export class AuthService {
 
   //login api call
   login(loginRequest: LoginRequest):Observable<SignInResponse>{
-    return this.http.post<SignInResponse>(`${this.authUrl}/login`, loginRequest, this.httpOptions).pipe(
+    return this.http.post<SignInResponse>(`${this.authUrl}/authenticate`, loginRequest, this.httpOptions).pipe(
       tap(data => {
         this.doLoginUser(data);
       }
