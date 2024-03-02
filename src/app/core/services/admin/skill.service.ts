@@ -19,6 +19,7 @@ export class SkillService {
 
   //create skill
   createSkill(skill:SkillForm){
+    console.log(skill);
     return this.http.post(`${this.apiUrl}`, skill, this.httpOptions);
   }
 

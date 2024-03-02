@@ -11,6 +11,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -19,15 +20,16 @@ import {ReactiveFormsModule} from "@angular/forms";
     CreateSkillComponent,
     ManageSkillComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatIconModule
+    ]
 })
 export class AdminModule { }
