@@ -16,7 +16,17 @@ const routes: Routes = [
     path: 'auth',
     component: AuthenticationComponent,
     loadChildren: () => import('./features/authentication/authentication.module').then(m => m.AuthenticationModule),
+  },
+  {
+    path: 'freelancer',
+    loadChildren: () => import('./features/freelancer/freelancer.module').then(m => m.FreelancerModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
   }
+
+
 ];
 
 @NgModule({

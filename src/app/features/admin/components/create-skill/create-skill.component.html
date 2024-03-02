@@ -1,0 +1,28 @@
+<form (ngSubmit)="submit()" [formGroup]="skillForm">
+  <section class="form-container">
+    <h3>Skill Details:</h3>
+    <div class="form-group">
+      <mat-form-field class="form-control">
+        <mat-label>Skill Name</mat-label>
+        <input formControlName="skillName" matInput>
+      </mat-form-field>
+      <mat-form-field class="form-control">
+        <mat-label>Description</mat-label>
+        <input formControlName="skillDescription" matInput>
+      </mat-form-field>
+    </div>
+    <h3>Questions:</h3>
+    <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">
+      <mat-icon>library_add</mat-icon>
+      <span>Import as Json File</span>
+      <input #fileInput type="file" (change)="onFileInput($event)" class="file-input"/>
+
+      <ng-container *ngIf="jsonFile"  >
+        <span class="file-name"> | {{jsonFile.name}}</span>
+      </ng-container>
+    </button>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </section>
+</form>
