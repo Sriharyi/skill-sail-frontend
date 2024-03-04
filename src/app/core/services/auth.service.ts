@@ -18,7 +18,7 @@ export class AuthService {
   private readonly REFRESH_TOKEN: string = 'REFRESH_TOKEN';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  constructor(private http: HttpClient,private userService: UserService) {
+  constructor(private http: HttpClient) {
   }
 
   httpOptions = {
@@ -55,13 +55,8 @@ export class AuthService {
   private doLoginUser(data: SignInResponse) {
     this.storeToken(data.accessToken, data.refreshToken);
     this.isAuthenticatedSubject.next(true);
-    this.setUserData();
   }
 
-  //set user data
-  setUserData() {
-    this.userService.getUserHttp().subscribe();
-  }
 
   //store token
   public storeToken(accessToken: string, refreshToken: string) {

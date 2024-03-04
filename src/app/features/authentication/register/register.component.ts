@@ -44,9 +44,11 @@ export class RegisterComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    this.snackBar.open('Form submitted successfully', 'Close', {
-      duration: 3000
+
+    this.snackBar.open('Successfully Registered', 'Close', {
+      duration: 2000,
     });
+
     const registerData: SignUpRequest = new SignUpRequest(
       <string>this.registerForm.value.email,
       <string>this.registerForm.value.password,
@@ -59,11 +61,7 @@ export class RegisterComponent {
       {
         next: (data) => {
           if (data.accessToken) {
-            if (this.registerForm.value.role === this.POSITIONS[0].value) {
-              this.router.navigate(["/freelancer"]);
-            } else {
-              this.router.navigate(["/employer"]);
-            }
+            this.router.navigate(['/login']);
           }
         }
       }

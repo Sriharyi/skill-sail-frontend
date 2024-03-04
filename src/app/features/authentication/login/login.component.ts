@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {LoginRequest} from "../../../shared/models/authentication/login-request";
-import {AuthService} from "../../../core/services/auth.service";
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { LoginRequest } from "../../../shared/models/authentication/login-request";
+import { AuthService } from "../../../core/services/auth.service";
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 
@@ -35,29 +35,43 @@ export class LoginComponent {
       return;
     }
 
-    this.snackBar.open('Form submitted successfully', 'Close', {
-      duration: 3000
-    });
-
-    const loginData :LoginRequest = new LoginRequest(
+    const loginData: LoginRequest = new LoginRequest(
       <string>this.loginForm.value.email,
       <string>this.loginForm.value.password
     );
     console.log(loginData);
 
-    this.authService.login(loginData).subscribe((data) => {
-        if(data.accessToken){
-            if(this.userService.hasRole(['ROLE_ADMIN'])){
+    this.authService.login(loginData).subscribe(
+      {
+        next: (data) => {
+          if (data.accessToken) {
+            this.userService.getUserHttp().subscribe(user => {
+              if (user.roles.includes('ROLE_ADMIN')) {
                 this.router.navigate(['/admin']);
-            }
-            else if(this.userService.hasRole(['ROLE_FREELANCER'])){
+              }
+              else if (user.roles.includes('ROLE_EMPLOYER')) {
+                this.router.navigate(['/employer']);
+              }
+              else if (user.roles.includes('ROLE_FREELANCER')) {
                 this.router.navigate(['/freelancer']);
-            }
-            else{
+              }
+              else {
                 this.router.navigate(['/unauthorized']);
-            }
+              }
+            });
+
+            this.snackBar.open('Successfully Logged In', 'Close', {
+              duration: 2000,
+            });
+          }
+        },
+        error: (error) => {
+          this.snackBar.open('Invalid Credentials', 'Close', {
+            duration: 3000
+          });
         }
-    });
+      }
+    );
 
 
 
