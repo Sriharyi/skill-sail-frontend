@@ -21,15 +21,16 @@ const routes: Routes = [
   {
     path: 'freelancer',
     loadChildren: () => import('./features/freelancer/freelancer.module').then(m => m.FreelancerModule),
+    data: { roles : ['ROLE_FREELANCER']}
   },
   {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
+    data: { roles : ['ROLE_ADMIN']}
   },{
     path: 'unauthorized',
     component: UnauthorizedComponent
   }
-
 ];
 
 @NgModule({

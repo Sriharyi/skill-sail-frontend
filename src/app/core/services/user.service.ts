@@ -1,6 +1,8 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, tap } from "rxjs";
 import { User } from "src/app/shared/models/authentication/user-dto";
+import { environment } from "src/environments/environment.development";
 
 
 
@@ -10,11 +12,12 @@ import { User } from "src/app/shared/models/authentication/user-dto";
 export class UserService {
 
   private userSubject!: BehaviorSubject<User | null>;
+  private readonly apiUrl = `${environment.DOMAIN}/api/v1/users`;
 
   public readonly USER_KEY = 'USER';
   public user$ = this.userSubject.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     if (localStorage.getItem(this.USER_KEY)) {
       this.userSubject = new BehaviorSubject<User | null>(JSON.parse(<string>localStorage.getItem(this.USER_KEY)));
     }
@@ -32,6 +35,11 @@ export class UserService {
     return this.userSubject.value;
   }
 
+  getUserHttp() {
+    return this.http.get<User>(`${this.apiUrl}/me`).pipe(
+      tap(user => this.setUser(user))
+    );
+  }
   clearUser(): void {
     localStorage.removeItem(this.USER_KEY);
     this.userSubject.next(null);

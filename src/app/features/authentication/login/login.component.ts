@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {LoginRequest} from "../../../shared/models/authentication/login-request";
 import {AuthService} from "../../../core/services/auth.service";
+import { UserService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,9 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router
   ) {
   }
 
@@ -42,7 +46,17 @@ export class LoginComponent {
     console.log(loginData);
 
     this.authService.login(loginData).subscribe((data) => {
-      console.log(data);
+        if(data.accessToken){
+            if(this.userService.hasRole(['ROLE_ADMIN'])){
+                this.router.navigate(['/admin']);
+            }
+            else if(this.userService.hasRole(['ROLE_FREELANCER'])){
+                this.router.navigate(['/freelancer']);
+            }
+            else{
+                this.router.navigate(['/unauthorized']);
+            }
+        }
     });
 
 

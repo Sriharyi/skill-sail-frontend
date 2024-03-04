@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LoginRequest} from 'src/app/shared/models/authentication/login-request';
 import {SignInResponse} from "../../shared/models/authentication/sign-in-response";
 import {SignUpRequest} from "../../shared/models/authentication/sign-up-request";
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class AuthService {
   private readonly REFRESH_TOKEN: string = 'REFRESH_TOKEN';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private userService: UserService) {
   }
 
   httpOptions = {
@@ -54,6 +55,12 @@ export class AuthService {
   private doLoginUser(data: SignInResponse) {
     this.storeToken(data.accessToken, data.refreshToken);
     this.isAuthenticatedSubject.next(true);
+    this.setUserData();
+  }
+
+  //set user data
+  setUserData() {
+    this.userService.getUserHttp().subscribe();
   }
 
   //store token
