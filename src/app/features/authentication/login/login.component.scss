@@ -1,20 +1,65 @@
-.form-container{
+@import "../../../../assets/styles/variables.scss";
+
+.login{
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse; // Changed from row to row-reverse
+  justify-content: space-between;
+  height: auto;
+  padding: 2rem;
+}
+
+.login-right{
+  width: 70%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
-.form-field{
+.login-banner{
+  height: 40rem;
+  width: 50rem;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.mat-card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40rem;
+  height: 46rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mat-card-subtitle{
   margin-bottom: 2rem;
 }
 
-.header{
-  margin-bottom: 2rem;
+.example-full-width{
+  width: 25rem;
+  margin-bottom: 1.5rem;
 }
 
-.header p{
+.form-actions{
+    display: flex;
+    justify-content: center;
+}
+
+ .login-btn{
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
   text-align: center;
+  transition: all 0.1s ease;
 }
+
+.login-btn:hover{
+    filter: brightness(110%);
+    transform: scale(1.05);
+}
+
 

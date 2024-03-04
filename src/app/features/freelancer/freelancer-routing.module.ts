@@ -27,7 +27,8 @@ const routes: Routes = [
         path:"test-quiz",
         component: QuizAppComponent
       }
-    ]
+    ],
+    data: { roles : ['ROLE_FREELANCER']}
   }
 ];
 

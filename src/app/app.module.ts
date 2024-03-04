@@ -8,11 +8,13 @@ import {CoreModule} from "./core/core.module";
 import {HomeModule} from "./features/home/home.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
+import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,
