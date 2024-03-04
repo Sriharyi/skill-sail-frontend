@@ -11,10 +11,11 @@ import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    UnauthorizedComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

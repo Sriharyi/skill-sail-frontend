@@ -1,8 +1,27 @@
 <mat-toolbar color="primary">
   <span>SkillSail</span>
   <span class="example-spacer"></span>
-  <button mat-button routerLink="/home">Home</button>
-  <button mat-button routerLink="/auth">Login</button>
-  <button mat-button routerLink="/auth/register">Register</button>
+  <ng-container *ngIf="isLogged;then loggedIn else loggedOut"></ng-container>
+
+  <ng-template #loggedOut>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/auth">Login</button>
+    <button mat-button routerLink="/auth/register">Register</button>
+  </ng-template>
+
+  <ng-template #loggedIn>
+    <ng-container *ngIf="user;else admin">
+      <button *appRoleBasedAccess="['ROLE_FREELANCER']" mat-button routerLink="/auth/profile">Freelancer Profile</button>
+      <button *appRoleBasedAccess="['ROLE_EMPLOYER']" mat-button routerLink="/auth/profile">Employer Profile</button>
+    </ng-container>
+
+    <ng-template #admin>
+      <button mat-button routerLink="/admin">Admin</button>
+    </ng-template>  
+
+
+  </ng-template>
+
 </mat-toolbar>
+
 

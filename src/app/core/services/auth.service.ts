@@ -17,6 +17,7 @@ export class AuthService {
   private readonly JWT_TOKEN: string = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN: string = 'REFRESH_TOKEN';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
+  public isLoggedIn$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {
   }
