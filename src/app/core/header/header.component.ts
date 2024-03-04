@@ -10,8 +10,10 @@ import { User } from 'src/app/shared/models/authentication/user-dto';
 })
 export class HeaderComponent {
 
+
   public isLogged: boolean = false;
   public user!: User | null;
+  
   constructor(private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -22,6 +24,11 @@ export class HeaderComponent {
     this.userService.user$.subscribe(user => {
       this.user = user;
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.userService.clearUser();
   }
 }
 

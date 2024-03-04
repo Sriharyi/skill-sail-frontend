@@ -1,3 +1,16 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.user-header{
+  margin-right: 1rem;
+}
+
+.mat-menu-btn{
+  margin-right: 2rem;
+}
+
+::ng-deep .mat-menu {
+  width: 200px; /* Set the width */
+  height: max-content;
+}

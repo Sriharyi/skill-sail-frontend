@@ -17,13 +17,15 @@ export class ManageSkillComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private skillService: SkillService,private routr:Router) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private skillService: SkillService,private router:Router) {
   }
 
   ngOnInit(): void {
+    console.log(this.paginator);
   }
 
   ngAfterViewInit() {
+    console.log(this.paginator);
     if (this.paginator) {
       this.paginator.page.subscribe({
         next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
@@ -93,7 +95,7 @@ export class ManageSkillComponent {
   //naviate to edit page with skill id /admin/skills/id/edit
   editSkill(id:string) {
 
-    this.routr.navigate([`/admin/skills/${id}/edit`]);
+    this.router.navigate([`/admin/skills/${id}/edit`]);
 
   }
 

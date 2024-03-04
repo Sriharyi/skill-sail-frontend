@@ -10,18 +10,28 @@
   </ng-template>
 
   <ng-template #loggedIn>
-    <ng-container *ngIf="user;else admin">
-      <button *appRoleBasedAccess="['ROLE_FREELANCER']" mat-button routerLink="/auth/profile">Freelancer Profile</button>
-      <button *appRoleBasedAccess="['ROLE_EMPLOYER']" mat-button routerLink="/auth/profile">Employer Profile</button>
+    <ng-container *ngIf="!user?.roles?.includes('ROLE_ADMIN');else admin">
+     
+      <button class="mat-menu-btn" mat-button [matMenuTriggerFor]="menu">
+        <mat-icon >
+          menu
+        </mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" class="mat-menu">
+          <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/profile">Profile</button>
+          <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']"  routerLink="/employer/profile">Profile</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+
     </ng-container>
+
 
     <ng-template #admin>
       <button mat-button routerLink="/admin">Admin</button>
-    </ng-template>  
-
+    </ng-template>
 
   </ng-template>
 
+
 </mat-toolbar>
-
-
