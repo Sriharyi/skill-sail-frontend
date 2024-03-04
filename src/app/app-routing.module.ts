@@ -1,7 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AuthenticationComponent} from "./features/authentication/authentication.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationComponent } from "./features/authentication/authentication.component";
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
+import { RoleGuard } from './core/guards/role.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,13 +23,15 @@ const routes: Routes = [
   {
     path: 'freelancer',
     loadChildren: () => import('./features/freelancer/freelancer.module').then(m => m.FreelancerModule),
-    data: { roles : ['ROLE_FREELANCER']}
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ROLE_FREELANCER'] }
   },
   {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
-    data: { roles : ['ROLE_ADMIN']}
-  },{
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ROLE_ADMIN'] }
+  }, {
     path: 'unauthorized',
     component: UnauthorizedComponent
   }
