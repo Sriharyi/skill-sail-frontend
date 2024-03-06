@@ -4,6 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SignUpRequest } from "../../../shared/models/authentication/sign-up-request";
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {
   }
@@ -61,8 +63,30 @@ export class RegisterComponent {
       {
         next: (data) => {
           if (data.accessToken) {
-            this.router.navigate(['/login']);
+            this.userService.getUserHttp().subscribe(user => {
+              if (user.roles.includes('ROLE_ADMIN')) {
+                this.router.navigate(['/admin']);
+              }
+              else if (user.roles.includes('ROLE_EMPLOYER')) {
+                this.router.navigate(['/employer']);
+              }
+              else if (user.roles.includes('ROLE_FREELANCER')) {
+                this.router.navigate(['/freelancer']);
+              }
+              else {
+                this.router.navigate(['/unauthorized']);
+              }
+            });
+
+            this.snackBar.open('Successfully Logged In', 'Close', {
+              duration: 2000,
+            });
           }
+        },
+        error: (error) => {
+          this.snackBar.open('Invalid Credentials', 'Close', {
+            duration: 3000
+          });
         }
       }
     );

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingService } from 'src/app/core/services/loading.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,5 +7,6 @@ import { LoadingService } from 'src/app/core/services/loading.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+
 
 }

@@ -13,20 +13,21 @@ export class RoleBasedAccessDirective {
     private userService: UserService
   ) { }
 
-  ngOnChanges() {
-    const userRoles = this.userService.getRoles();
-    let hasRole = false;
-    if (this.appRoleBasedAccess
-    ) {
-      hasRole = userRoles.some(role => this.appRoleBasedAccess
-        .includes(role));
+    ngOnInit() {
+      console.log(this.appRoleBasedAccess);
+      const userRoles = this.userService.getRoles();
+      console.log(userRoles);
+      let hasRole = false;
+      if (this.appRoleBasedAccess
+      ) {
+        hasRole = userRoles.some(role => this.appRoleBasedAccess
+          .includes(role));
+      }
+  
+      if (hasRole) {
+        this.viewContainer.createEmbeddedView(this.templateRef);
+      } else {
+        this.viewContainer.clear();
+      }
     }
-
-    if (hasRole) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
-    } else {
-      this.viewContainer.clear();
-    }
-  }
-
 }

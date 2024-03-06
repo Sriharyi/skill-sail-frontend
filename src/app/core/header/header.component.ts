@@ -24,9 +24,6 @@ export class HeaderComponent {
 
     this.userService.user$.subscribe(user => {
       this.user = user;
-      // if (user) {
-      //   this.isUserAdmin = user.roles.includes('ROLE_ADMIN');
-      // }
     });
   }
 

@@ -21,7 +21,7 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path:"test-info",
+        path:"assessment/:testId",
         component:QuizInfoComponent
       },
       {

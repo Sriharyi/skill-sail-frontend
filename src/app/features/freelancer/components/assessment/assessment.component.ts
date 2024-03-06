@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { SkillService } from 'src/app/core/services/admin/skill.service';
 import { AssessmentService } from 'src/app/core/services/freelancer/assessment.service';
 import { SkillDto } from 'src/app/shared/models/admin/skill-dto';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-assessment',
@@ -16,7 +18,7 @@ export class AssessmentComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private skillService: SkillService, private changeDetectorRef: ChangeDetectorRef,private assesmentService:AssessmentService) {
+  constructor(private skillService: SkillService, private changeDetectorRef: ChangeDetectorRef,private assesmentService:AssessmentService,private router:Router) {
 
   }
 
@@ -32,29 +34,27 @@ export class AssessmentComponent {
   }
 
   takeAssessment(skillId: string) {
-
-    if(this.isUserAllowedToTakeAssessment(skillId)){
-      this.assesmentService.takeAssessment(skillId).subscribe({
-        next: (response) => {
-          if (response) {
-            alert('Assessment taken successfully');
-          }
-        }
-      });
-    }
-  
-  }
-  isUserAllowedToTakeAssessment(skillId: string) {
-    let isAllowed = false;
     this.assesmentService.canUserTakeAssessment(skillId).subscribe({
       next: (response) => {
-        if (response) {
-          isAllowed = true;
-        } 
+          if(!response.canTake){
+            Swal.fire('Oops...', response.message, 'error');
+          }
+          else{
+            this.assesmentService.takeAssessment(skillId).subscribe({
+              next: (response) => {
+                  console.log(response);
+                  const testId = response.id;
+                  const skillId = response.skillId;
+                  this.router.navigate([`/freelancer/assessment/${testId}`], { queryParams: { skillId: skillId } });
+              }
+          });
+        }
       }
     });
-    return isAllowed;
+          
+  
   }
+
 
   loadPage(pageIndex: number, pageSize: number) {
     this.skillService.getSkillsByPage(pageIndex, pageSize).subscribe(

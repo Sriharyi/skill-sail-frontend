@@ -38,6 +38,8 @@ export class UserService {
   }
 
   setUser(user: User): void {
+    console.log(user);
+    
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.userSubject.next(user);
   }

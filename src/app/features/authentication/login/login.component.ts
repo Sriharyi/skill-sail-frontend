@@ -39,7 +39,6 @@ export class LoginComponent {
       <string>this.loginForm.value.email,
       <string>this.loginForm.value.password
     );
-    console.log(loginData);
 
     this.authService.login(loginData).subscribe(
       {
@@ -59,7 +58,6 @@ export class LoginComponent {
                 this.router.navigate(['/unauthorized']);
               }
             });
-
             this.snackBar.open('Successfully Logged In', 'Close', {
               duration: 2000,
             });
