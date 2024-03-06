@@ -28,7 +28,7 @@ export class ManageSkillComponent {
       this.paginator.page.subscribe({
         next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
       });
-      this.loadPage(0, 5);
+      this.loadPage(0, 2);
     }
     this.changeDetectorRef.detectChanges();
   }
@@ -62,9 +62,7 @@ export class ManageSkillComponent {
 
   //naviate to edit page with skill id /admin/skills/id/edit
   editSkill(id: string) {
-
     this.router.navigate([`/admin/skills/${id}/edit`]);
-
   }
 
   deleteSkill(id: string) {
@@ -75,4 +73,5 @@ export class ManageSkillComponent {
       error: (err) => console.error(err),
     });
   }
+  
 }

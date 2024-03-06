@@ -50,7 +50,7 @@ export class SkillService {
 
   //get all skills by page
   getSkillsByPage(pageIndex: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/page/?page=${pageIndex}&size=${pageSize}`);
+    return this.http.get(`${this.apiUrl}/page?page=${pageIndex}&size=${pageSize}`);
   }
 
   // //get all skills by category
