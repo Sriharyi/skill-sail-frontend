@@ -41,3 +41,17 @@ export const SKILLS: string[] = [
   'JavaScript',
   'TypeScript',
 ]
+
+export const CATEGORIES: string[] = [
+  'Frontend',
+  'Backend',
+  'Fullstack',
+  'Database',
+  'DevOps',
+  'Testing',
+  'Design',
+  'Management',
+  'Leadership',
+  'Soft Skills',
+  'Other'
+]

@@ -10,6 +10,12 @@
         <mat-label>Description</mat-label>
         <input formControlName="skillDescription" matInput>
       </mat-form-field>
+      <mat-form-field class="form-control">
+        <mat-label>SkillCategory</mat-label>
+        <mat-select formControlName="skillCategory">
+          <mat-option *ngFor="let category of CATEGORIES" [value]="category">{{category}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <h3>Questions:</h3>
     <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">

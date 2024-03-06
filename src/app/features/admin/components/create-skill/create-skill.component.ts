@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Question, SkillForm} from "../../../../shared/models/admin/skill-form";
 import {SkillService} from "../../../../core/services/admin/skill.service";
+import { CATEGORIES } from 'src/app/core/constants/constants';
 
 @Component({
   selector: 'app-create-skill',
@@ -12,6 +13,7 @@ export class CreateSkillComponent {
 
   public skillForm!: FormGroup;
   public jsonFile!: File;
+  public readonly CATEGORIES = CATEGORIES;
 
   constructor(private fb: FormBuilder, private skillservice: SkillService) {
   }
@@ -24,6 +26,7 @@ export class CreateSkillComponent {
     return this.fb.group<SkillForm>({
       skillName: new FormControl("", Validators.required),
       skillDescription: new FormControl("", Validators.required),
+      skillCategory: new FormControl("", Validators.required),
       questions: new FormArray([this.createQuestion()], Validators.required)
     });
   }

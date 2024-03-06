@@ -4,6 +4,7 @@ import {FreelancerLandingComponent} from "./pages/freelancer-landing/freelancer-
 import {QuizInfoComponent} from "./components/quiz-info/quiz-info.component";
 import {QuizAppComponent} from "./components/quiz-app/quiz-app.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import { AssessmentComponent } from './components/assessment/assessment.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path:"test-quiz",
         component: QuizAppComponent
+      },
+      {
+        path:"skills",
+        component:AssessmentComponent
       },
       {
         path:"profile",
