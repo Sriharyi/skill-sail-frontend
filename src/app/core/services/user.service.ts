@@ -16,7 +16,7 @@ export class UserService {
 
   public readonly USER_KEY = 'USER';
   public user$!: Observable<User | null>;
-  public isUserNotAdmin: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
+  public isUserNotAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserNotAdmin$ = this.isUserNotAdmin.asObservable();
 
   constructor(private http: HttpClient) {
@@ -27,7 +27,7 @@ export class UserService {
     if (localStorage.getItem(this.USER_KEY)) {
       this.userSubject = new BehaviorSubject<User | null>(JSON.parse(<string>localStorage.getItem(this.USER_KEY)));
       this.user$ = this.userSubject.asObservable();
-      if(!this.userSubject.value?.roles.includes('ROLE_ADMIN')){
+      if (!this.userSubject.value?.roles.includes('ROLE_ADMIN')) {
         this.isUserNotAdmin.next(true);
       }
     }
@@ -44,6 +44,9 @@ export class UserService {
 
   getUser() {
     return this.userSubject.value;
+  }
+  getUserId():string {
+    return <string>this.userSubject.value?.id;
   }
 
   getUserHttp() {
@@ -72,14 +75,6 @@ export class UserService {
   hasPermission(permissions: string[]): boolean {
     return permissions.some(permission => this.getPermissions().includes(permission));
   }
-
-  // isLoggedIn(): boolean {
-  //   return this.userSubject.value !== null;
-  // }
-
-  // isLoggedOut(): boolean {
-  //   return !this.isLoggedIn();
-  // }
 
   isFreelancer(): boolean {
     return this.hasRole(['ROLE_FREELANCER']);

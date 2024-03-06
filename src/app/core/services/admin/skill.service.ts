@@ -9,7 +9,7 @@ import {SkillDto} from "../../../shared/models/admin/skill-dto";
   providedIn: 'root'
 })
 export class SkillService {
-
+ 
   private readonly apiUrl: string = `${environment.DOMAIN}/skills`;
 
   private httpOptions: { headers: HttpHeaders } = {
