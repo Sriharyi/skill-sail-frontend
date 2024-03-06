@@ -13,6 +13,7 @@ export class HeaderComponent {
 
   public isLogged: boolean = false;
   public user!: User | null;
+  public isUserNotAdmin = this.userService.isUserNotAdmin$;
   
   constructor(private authService: AuthService, private userService: UserService) { }
 
@@ -23,6 +24,9 @@ export class HeaderComponent {
 
     this.userService.user$.subscribe(user => {
       this.user = user;
+      // if (user) {
+      //   this.isUserAdmin = user.roles.includes('ROLE_ADMIN');
+      // }
     });
   }
 

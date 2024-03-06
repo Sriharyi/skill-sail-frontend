@@ -1,5 +1,13 @@
+
+@import "../../../../../assets/styles/variables.scss";
+
+.profile{
+  background-color: $background-color;
+}
+
 .profile-header{
   display: flex;
   height: 25rem;
   justify-content: space-around;
 }
+

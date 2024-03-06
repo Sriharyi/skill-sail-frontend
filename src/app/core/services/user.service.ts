@@ -15,12 +15,21 @@ export class UserService {
   private readonly apiUrl = `${environment.DOMAIN}/users`;
 
   public readonly USER_KEY = 'USER';
-  public user$!:Observable<User | null>;
+  public user$!: Observable<User | null>;
+  public isUserNotAdmin: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
+  public isUserNotAdmin$ = this.isUserNotAdmin.asObservable();
 
   constructor(private http: HttpClient) {
+    this.autoLoad();
+  }
+
+  private autoLoad() {
     if (localStorage.getItem(this.USER_KEY)) {
       this.userSubject = new BehaviorSubject<User | null>(JSON.parse(<string>localStorage.getItem(this.USER_KEY)));
       this.user$ = this.userSubject.asObservable();
+      if(!this.userSubject.value?.roles.includes('ROLE_ADMIN')){
+        this.isUserNotAdmin.next(true);
+      }
     }
     else {
       this.userSubject = new BehaviorSubject<User | null>(null);
