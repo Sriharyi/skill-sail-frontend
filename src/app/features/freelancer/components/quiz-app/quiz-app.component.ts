@@ -1,6 +1,10 @@
-import {Component} from '@angular/core';
-import {Question} from 'src/app/shared/models/freelancer/question';
-import {SkillService} from "../../../../core/services/admin/skill.service";
+import { Component } from '@angular/core';
+import { Question } from 'src/app/shared/models/freelancer/question';
+import { SkillService } from "../../../../core/services/admin/skill.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { AssessmentService } from 'src/app/core/services/freelancer/assessment.service';
+import { AssessmentDto } from 'src/app/shared/models/freelancer/assessment';
 
 
 @Component({
@@ -9,8 +13,7 @@ import {SkillService} from "../../../../core/services/admin/skill.service";
   styleUrls: ['./quiz-app.component.scss']
 })
 export class QuizAppComponent {
-  constructor(private skillService: SkillService) {
-  }
+
 
   timerLeftMin: number = 4;
   timerLeftSec: number = 59;
@@ -24,16 +27,23 @@ export class QuizAppComponent {
   isTimeUp: boolean = false;
   isStarted: boolean = false;
   interval: any;
-  totalQuestions: number = 5;
+  totalQuestions: number = 0;
 
+  private assessmentId: string = '';
+  private skillId: string = '';
+
+  constructor(private skillService: SkillService, private route: ActivatedRoute, private router: Router, private assessmentService: AssessmentService) {
+  }
 
   ngOnInit() {
     //get the id from router path
-    this.skillService.getQuestions("65e209511d49537d8184af3d").subscribe({
+    this.skillId = this.route.snapshot.queryParams['skillId'];
+    this.assessmentId = this.route.snapshot.params['testId'];
+    this.skillService.getQuestions(this.skillId).subscribe({
       next: (data) => {
-        if(data.questions) {
-          console.log(data.questions);
+        if (data.questions) {
           this.questions = data.questions;
+          this.totalQuestions = this.questions.length;
           this.startQuiz();
         }
       },
@@ -50,7 +60,7 @@ export class QuizAppComponent {
   }
 
   private startTimer() {
-     this.interval = setInterval(() => {
+    this.interval = setInterval(() => {
       if (this.timerLeftSec > 0) {
         this.timerLeftSec--;
       } else {
@@ -61,38 +71,38 @@ export class QuizAppComponent {
           clearInterval(this.interval);
           this.isTimeUp = true;
           this.isFinished = true;
+          this.ShowResult();
         }
       }
     }, 1000);
   }
 
   nextQuestion() {
-   this.isCorrectAnswer();
-   this.currentQuestionIndex++;
-   this.UpdateQuestion();
-   this.selectedOption = -1;
+    this.isCorrectAnswer();
+    this.currentQuestionIndex++;
+    this.UpdateQuestion();
+    this.selectedOption = -1;
   }
 
   private isCorrectAnswer() {
-    console.log(this.selectedOption)
     const correctOption = this.currentQuestion.correctOption;
-    console.log(correctOption);
+
     if (this.selectedOption === correctOption) {
       this.correctAnswer++;
-      console.log("hello")
     } else {
-      if(this.selectedOption !== -1)
-      {
-        console.log("wrong")
+      if (this.selectedOption !== -1) {
+
         this.wrongAnswer++;
       }
     }
   }
 
   private UpdateQuestion() {
+
     if (this.currentQuestionIndex < this.questions.length) {
       this.currentQuestion = this.questions[this.currentQuestionIndex];
     }
+
   }
 
 
@@ -109,11 +119,45 @@ export class QuizAppComponent {
   }
 
   private ShowResult() {
-    console.log('Correct Answers: ' + this.correctAnswer);
-    console.log('Wrong Answers: ' + this.wrongAnswer);
-    const correctAns = this.correctAnswer*10;
-    const wrongAns = this.wrongAnswer*5;
-    const totalPoint = (correctAns  - wrongAns)<0?0:(correctAns-wrongAns);
-    alert(totalPoint);
+
+    let result: AssessmentDto = {
+      id: this.assessmentId,
+      skillId: this.skillId,
+      freelancerId: '',
+      status: '',
+      score: 0
+    }
+
+    result.score = (this.correctAnswer*10) - (this.wrongAnswer*5);
+
+    const totalscore = this.totalQuestions * 10;
+    const passScore = totalscore * 0.8;
+
+    if (result.score >= passScore) {
+      result.status = 'COMPLETED';
+    } else {
+      result.status = 'FAILED';
+    }
+
+    this.assessmentService.submitAssessment(this.assessmentId, result).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.showResultDialog(data);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  showResultDialog(data: AssessmentDto) {
+    Swal.fire({
+      title: 'Test Completed',
+      text: `You have scored ${data.score} out of ${this.totalQuestions * 10} and your status is ${data.status}`,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      this.router.navigate(['/freelancer/skills']);
+    });
   }
 }

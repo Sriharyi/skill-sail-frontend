@@ -36,5 +36,12 @@ export class AssessmentService {
     }
 
 
+    //submit assessment
+    submitAssessment(assessmentId: string, updatedData: AssessmentDto) {
+        updatedData.freelancerId = this.userService.getUserId();    
+        return this.http.put<AssessmentDto>(`${this.apiUrl}/${assessmentId}`, updatedData);
+    }
+
+
 }
 

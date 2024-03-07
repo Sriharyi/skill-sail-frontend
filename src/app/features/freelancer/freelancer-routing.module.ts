@@ -25,7 +25,7 @@ const routes: Routes = [
         component:QuizInfoComponent
       },
       {
-        path:"test-quiz",
+        path:"assessment/start/:testId",
         component: QuizAppComponent
       },
       {
