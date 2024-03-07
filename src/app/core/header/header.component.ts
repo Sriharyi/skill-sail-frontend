@@ -11,28 +11,20 @@ import { User } from 'src/app/shared/models/authentication/user-dto';
 export class HeaderComponent {
 
 
-  public isLogged: boolean = false;
+  public isLogged$ = this.authService.isLoggedIn$;
   public user: User | null = null;
   public isUser: boolean = false;
   public userType: string = '';
 
   
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(public authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
-
-    this.authService.isLoggedIn$.subscribe(isLogged => {
-      console.log(isLogged);
-      this.isLogged = isLogged;
-    });
-
     this.userService.user$.subscribe(user => {
       this.user = user;
-      console.log(user);
       if (user) {
         this.isUser = true;
         this.userType = user.roles[0];
-        console.log(this.userType);
       }else{  
         this.isUser = false;
       }

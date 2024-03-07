@@ -21,7 +21,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     if (localStorage.getItem(this.USER_KEY)) {
-      console.log('user exists');
       const user = JSON.parse(<string>localStorage.getItem(this.USER_KEY));
       this.userSubject.next(user);
       this.user = user;
@@ -40,7 +39,6 @@ export class UserService {
  
 
   setUser(user: User): void {
-    console.log(user);
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.userSubject.next(user);
     this.user = user;
