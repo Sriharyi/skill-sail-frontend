@@ -19,10 +19,6 @@
         </mat-form-field>
       </div>
     </div>
-
-    <!--    <div class="selected">-->
-    <!--      <span *ngFor="let skill of profileForm.get('skills')?.value">{{skill}}<span class="remove" color="warn">x</span></span>-->
-    <!--    </div>-->
     <h2>Education:</h2>
   <div formArrayName="educations" *ngFor="let _ of educations.controls; let i=index">
       <div class="form-education" [formGroupName]="i">

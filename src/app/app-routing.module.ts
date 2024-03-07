@@ -27,6 +27,12 @@ const routes: Routes = [
     data: { roles: ['ROLE_FREELANCER'] }
   },
   {
+    path: 'employer',
+    loadChildren: () => import('./features/employer/employer.module').then(m => m.EmployerModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ROLE_EMPLOYER'] }
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard, RoleGuard],

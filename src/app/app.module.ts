@@ -10,11 +10,11 @@ import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,

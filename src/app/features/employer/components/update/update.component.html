@@ -1,0 +1,63 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="profileForm" class="form">
+    <div class="form-container">
+        <h2>
+            <mat-icon>business</mat-icon>
+            Company Information
+        </h2>
+        <div class="form-content">
+
+            <div class="form-field">
+                <mat-form-field>
+                    <mat-label>Company Name</mat-label>
+                    <input formControlName="companyName" matInput>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <mat-form-field>
+                    <mat-label>Company Website</mat-label>
+                    <input formControlName="companyWebsite" matInput>
+                </mat-form-field>
+            </div>
+           
+        </div>
+        <div class="form-content">
+           
+
+            <div class="form-field">
+                <mat-form-field>
+                    <mat-label>Location</mat-label>
+                    <mat-select formControlName="companyLocation">
+                        <mat-option *ngFor="let location of LOCATIONS" [value]="location">{{ location}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <mat-form-field>
+                    <mat-label>Industry</mat-label>
+                    <mat-select formControlName="companyIndustry">
+                        <mat-option *ngFor="let industry of INDUSTRIES" [value]="industry">{{ industry }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <h2>
+            <mat-icon>description</mat-icon>
+            Company Description
+        </h2>
+        <div class="form-description">
+            <mat-form-field appearance="fill" class="form-description-field">
+                <!-- <mat-label>Description</mat-label> -->
+                <textarea class="bio-text" formControlName="companyDescription" #message maxlength="1024"
+                    placeholder="Tell us about yourself" matInput></textarea>
+                <mat-hint align="end">{{ message.value.length }} / 1024</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">Update</button>
+        </div>
+    </div>
+</form>

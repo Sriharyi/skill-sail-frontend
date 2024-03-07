@@ -55,3 +55,15 @@ export const CATEGORIES: string[] = [
   'Soft Skills',
   'Other'
 ]
+
+export const INDUSTRIES: string[] = [
+  'Technology',
+  'Healthcare',
+  'Finance',
+  'Retail',
+  'Manufacturing',
+  'Education',
+  'Government',
+  'Non-profit',
+  'Other'
+]

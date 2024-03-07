@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProfileService } from 'src/app/core/services/profile/profile.service';
+import { EmpProfileService } from 'src/app/core/services/employer/emp-profile.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile-card',
@@ -9,17 +10,19 @@ import { ProfileService } from 'src/app/core/services/profile/profile.service';
 export class ProfileCardComponent {
 
   @Input()
-  name = 'sriharyi';
+  companyName = 'Company Name';
+  
   @Input()
-  username = 'sriharyi';
+  companyLogo = 'assets/images/profile/avatar.png';
+
   @Output()
   editProfile = new EventEmitter<void>();
 
   public profilePicture: string | ArrayBuffer | null | undefined;
 
-  public avatar = "/assets/images/freelancer/freelancer-profile-picture.jpg";
 
-  constructor(private profileService:ProfileService) { }
+
+  constructor(private profileService:EmpProfileService) { }
 
 
   ngOnInit(): void {
@@ -35,24 +38,20 @@ export class ProfileCardComponent {
     if (file) {
       // Check the file type
       if (!file.type.startsWith('image/')) {
-        alert('Invalid file type. Please select an image file.');
+          Swal.fire('Error', 'Please select an image file', 'error');
         return;
       }
 
       // Check the file size (5MB in this example)
       if (file.size > 5000000) {
-        alert('File is too large. Please select a file smaller than 5MB.');
+        Swal.fire('Error', 'File size exceeds 5MB', 'error');
         return;
       }
 
-      const user = JSON.parse(localStorage.getItem('USER')!);
-      const id = user.id;
-
      // update the profile picture
-      this.profileService.updateProfilePicture(id,file).subscribe({
+      this.profileService.updateProfilePicture(file).subscribe({
         next: (response) => {
-          this.avatar = response;
-          console.log('response', response);
+          this.companyLogo = response;
         },
         error: (error) => {
           console.error('There was an error!', error);
