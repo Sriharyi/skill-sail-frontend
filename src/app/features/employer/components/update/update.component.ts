@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { INDUSTRIES, LOCATIONS } from 'src/app/core/constants/constants';
 import { EmpProfileService } from 'src/app/core/services/employer/emp-profile.service';
@@ -12,6 +12,7 @@ import { EmployerUpdateForm, EmployerUpdateRequest } from 'src/app/shared/models
 })
 export class UpdateComponent {
   profileForm: FormGroup<EmployerUpdateForm>;
+
   protected readonly LOCATIONS = LOCATIONS;
   protected readonly INDUSTRIES = INDUSTRIES;
 

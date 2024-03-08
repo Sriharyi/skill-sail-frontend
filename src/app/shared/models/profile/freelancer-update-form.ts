@@ -14,3 +14,5 @@ export interface Edu {
   major: FormControl<string | null>;
   graduationYear: FormControl<number | null>;
 }
+
+

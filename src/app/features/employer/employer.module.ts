@@ -16,20 +16,27 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { ProjectComponent } from './pages/project/project.component';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
-  declarations: [EmployerComponent, DashboardComponent, ProfileComponent, ProfileCardComponent, UpdateComponent, ProfileRatingComponent, ProfileAboutComponent],
-  imports: [
-    CommonModule,
-    EmployerRoutingModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDividerModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatInputModule,
-  ]
+  declarations: [EmployerComponent, DashboardComponent, ProfileComponent, ProfileCardComponent, UpdateComponent, ProfileRatingComponent, ProfileAboutComponent, ProjectComponent],
+    imports: [
+        CommonModule,
+        EmployerRoutingModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDividerModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ]
 })
 export class EmployerModule { }

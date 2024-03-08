@@ -4,6 +4,7 @@ import { EmployerComponent } from './employer.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UpdateComponent } from './components/update/update.component';
+import { ProjectComponent } from './pages/project/project.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path:":id/edit",
         component: UpdateComponent
+      },
+      {
+        path:"project/create",
+        component: ProjectComponent
       }
     
     ],

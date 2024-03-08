@@ -17,6 +17,7 @@ export class ProfileCardComponent {
 
   public profilePicture: string | ArrayBuffer | null | undefined;
 
+  @Input()
   public avatar = "/assets/images/freelancer/freelancer-profile-picture.jpg";
 
   constructor(private profileService:ProfileService) { }
@@ -52,7 +53,6 @@ export class ProfileCardComponent {
       this.profileService.updateProfilePicture(id,file).subscribe({
         next: (response) => {
           this.avatar = response;
-          console.log('response', response);
         },
         error: (error) => {
           console.error('There was an error!', error);

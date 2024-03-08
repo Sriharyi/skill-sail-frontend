@@ -9,7 +9,7 @@ import {SkillDto} from "../../../shared/models/admin/skill-dto";
   providedIn: 'root'
 })
 export class SkillService {
- 
+
   private readonly apiUrl: string = `${environment.DOMAIN}/skills`;
 
   private httpOptions: { headers: HttpHeaders } = {
@@ -61,6 +61,11 @@ export class SkillService {
   //enable & diable skill
   enableSkill(skillId: string, isChecked: boolean) {
     return this.http.put(`${this.apiUrl}/enable/${skillId}`, isChecked);
+  }
+
+  //get skills by category
+  getSkillsByCategory(category: string): Observable<SkillDto[]> {
+    return this.http.get<SkillDto[]>(`${this.apiUrl}/category?category=${category}`);
   }
 
   getQuestions(skillId: string): Observable<SkillDto> {

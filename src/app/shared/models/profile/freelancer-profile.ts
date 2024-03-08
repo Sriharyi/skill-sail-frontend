@@ -1,22 +1,34 @@
 import {Education} from "./education";
 
 export class FreelancerProfile {
-  _id: string;
+  id: string;
   profilePic: string;
   displayName: string;
   userName: string;
   description: string;
   skills: string[];
-  education: Education[];
+  educations: Education[];
 
-  constructor(_id:string, profilePic:string, displayName:string, userName:string, description:string, skills:string[], education:Education[]){
-    this._id = _id;
+  constructor(id:string, profilePic:string, displayName:string, userName:string, description:string, skills:string[], educations:Education[]){
+    this.id = id;
     this.profilePic = profilePic;
     this.displayName = displayName;
     this.userName = userName;
     this.description = description;
     this.skills = skills;
-    this.education = education;
+    this.educations = educations;
+  }
+
+  public static createInitial(): FreelancerProfile {
+    return new FreelancerProfile(
+      '', 
+      '', 
+      '', 
+      '', 
+      '', 
+      [], 
+      []  
+    );
   }
 }
 

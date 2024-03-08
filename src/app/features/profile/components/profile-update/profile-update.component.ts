@@ -4,6 +4,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {DEGREES, LOCATIONS, SKILLS, YEARS} from "../../../../core/constants/constants";
 import {MatSelectChange} from "@angular/material/select";
 import {Edu, FreelancerUpdateForm} from "../../../../shared/models/profile/freelancer-update-form";
+import { ProfileService } from 'src/app/core/services/profile/profile.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-update',
@@ -19,9 +21,11 @@ export class ProfileUpdateComponent {
 
   public profileForm!: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {
+  constructor(private formBuilder: FormBuilder,private profiileService:ProfileService,private route:ActivatedRoute,private router:Router,private snackBar: MatSnackBar) {
+    const id  = this.route.snapshot.paramMap.get('id');
+    this.profiileService.getProfile().subscribe((profile) => {
+      this.profileForm.patchValue(profile);
+    });
   }
 
   ngOnInit() {
@@ -37,7 +41,15 @@ export class ProfileUpdateComponent {
 
   onSubmit() {
     if (this.profileForm.valid) {
-      console.log(this.profileForm.value);
+      this.profiileService.updateProfile(this.profileForm.value).subscribe(
+        {
+          next: (response) => {
+            this.snackBar.open("Profile Updated", "Close", {
+              duration: 2000,
+            });
+            this.router.navigate(["/freelancer/profile"]);
+          }
+        });
     }
   }
 

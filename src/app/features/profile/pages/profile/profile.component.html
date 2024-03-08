@@ -1,7 +1,7 @@
 <section class="profile">
   <div class="profile-header">
-    <app-profile-card [name]="profile.displayName" [username]="profile.userName" (editProfile)="openDialog()"></app-profile-card>
+    <app-profile-card [name]="profile.displayName" [avatar]="profile.profilePic" [username]="profile.userName" (editProfile)="update()"></app-profile-card>
     <app-profile-badges></app-profile-badges>
   </div>
-  <app-profile-about [description]="profile.description" [skills]="profile.skills" [educations]="profile.education"></app-profile-about>  
+  <app-profile-about [description]="profile.description" [skills]="profile.skills" [educations]="profile.educations"></app-profile-about>  
 </section>

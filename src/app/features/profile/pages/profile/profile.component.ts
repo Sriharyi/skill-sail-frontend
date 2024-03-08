@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {FreelancerProfile} from "../../../../shared/models/profile/freelancer-profile";
-import {MatDialog} from "@angular/material/dialog";
-import {ProfileUpdateComponent} from "../../components/profile-update/profile-update.component";
+import { Router } from '@angular/router';
+import { FreelancerProfile } from "../../../../shared/models/profile/freelancer-profile";
+import { ProfileService } from 'src/app/core/services/profile/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,28 +9,18 @@ import {ProfileUpdateComponent} from "../../components/profile-update/profile-up
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  profile:FreelancerProfile;
-  constructor(
-   public dialog: MatDialog
-  ) {
-    this.profile = new FreelancerProfile("1", "https://via.placeholder.com/150", "Sriharyi C", "sriharyi", "I am a full stack developer", ["Angular", "NodeJS", "MongoDB"], [
-      {
-        location: "India",
-        collegeName: "Sri Krishna College of Engineering and Technology",
-        degree: "Bachelors",
-        major: "Computer Science and Engineering",
-        graduationYear: 2020
-      }
-    ]);
+  profile: FreelancerProfile = FreelancerProfile.createInitial();
+  constructor(private router: Router,private ProfileService:ProfileService) {
+   
   }
   ngOnInit(): void {
+    this.ProfileService.getProfile().subscribe((profile) => {
+      this.profile = profile;
+    });
   }
 
-  openDialog() {
-    this.dialog.open(ProfileUpdateComponent, {
-        width: '600px',
-        height: '600px',
-      }
-      );
+  update() {
+    const id = this.profile.id;
+    this.router.navigate([`/freelancer/profile/${id}/edit`]);
   }
 }
