@@ -21,7 +21,7 @@ export interface ProjectCreateRequest{
     bidDeadline: string;
 }
 
-export interface ProjectCreateResponse{
+export interface ProjectResponse {
     id: string;
     freelancerProfileId: string;
     title: string;
@@ -34,4 +34,12 @@ export interface ProjectCreateResponse{
     bidDeadline: string;
     status: string;
 }
-        
+//paginated response
+export interface Page<T>{
+    content: T[];
+    totalPages: number;
+    totalElements: number;
+    last: boolean;
+    size: number;
+    number: number;
+}

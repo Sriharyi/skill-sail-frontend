@@ -7,6 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  filters: string[] = [
+
+  ];
+  searchText: string = "";
+  heroImageUrl: any = "";
+  userName: string= "sriharyi";
 
 
+  removeFilter(filter: string) {
+      console.log(filter);
+  }
 }

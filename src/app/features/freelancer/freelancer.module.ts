@@ -13,6 +13,10 @@ import { QuizInfoComponent } from './components/quiz-info/quiz-info.component';
 import { FreelancerRoutingModule } from './freelancer-routing.module';
 import { FreelancerLandingComponent } from './pages/freelancer-landing/freelancer-landing.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import { FindProjectComponent } from './components/find-project/find-project.component';
+import { ProjectInfoComponent } from './components/project-info/project-info.component';
 
 
 @NgModule({
@@ -21,17 +25,21 @@ import { MatTableModule } from '@angular/material/table';
     DashboardComponent,
     QuizInfoComponent,
     QuizAppComponent,
-    AssessmentComponent
+    AssessmentComponent,
+    FindProjectComponent,
+    ProjectInfoComponent
   ],
-    imports: [
-        CommonModule,
-        FreelancerRoutingModule,
-        MatButtonModule,
-        MatCardModule,
-        MatListModule,
-        FormsModule,
-        MatPaginatorModule,
-        MatTableModule
-    ]
+  imports: [
+    CommonModule,
+    FreelancerRoutingModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    FormsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatInputModule,
+    MatIconModule
+  ]
 })
 export class FreelancerModule { }
