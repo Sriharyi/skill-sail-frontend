@@ -1,0 +1,29 @@
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment.development";
+import {BidForm, BidRequest, BidResponse} from "../../../shared/models/freelancer/bid";
+import {UserService} from "../user.service";
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BidService {
+
+  private readonly apiUrl = `${environment.DOMAIN}/bids`
+  constructor(private http: HttpClient,private userService:UserService) {
+  }
+
+  //create a bid
+  createBid(bid:BidRequest){
+    bid.freelancerId = this.userService.getUserId();
+    return this.http.post<BidResponse>(this.apiUrl,bid);
+  }
+
+  //get all bids for a project
+  getBidsByProjectId(projectId:string){
+    return this.http.get<BidResponse[]>(`${this.apiUrl}/project/${projectId}`);
+  }
+
+}

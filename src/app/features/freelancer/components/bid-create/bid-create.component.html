@@ -1,0 +1,19 @@
+<section class="bid-container">
+  <form [formGroup]="bidForm" (ngSubmit)="submitBid()" class="bid-form">
+    <h3>Bid Amount:</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Bid Amount</mat-label>
+      <input matInput formControlName="bidAmount" type="number" placeholder="0">
+      <span matTextPrefix>&#8377;&nbsp;</span>
+      <mat-error *ngIf="bidForm.controls['bidAmount'].invalid">Bid Amount is required</mat-error>
+    </mat-form-field>
+    <h3>Propose Your Idea: </h3>
+    <mat-form-field appearance="fill" class="proposal-field">
+      <mat-label>Proposal</mat-label>
+      <textarea matInput formControlName="proposal" required></textarea>
+      <mat-error *ngIf="bidForm.controls['proposal'].invalid">Proposal is required</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="bidForm.invalid">Submit Bid</button>
+  </form>
+</section>

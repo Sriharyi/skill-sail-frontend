@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
@@ -17,6 +17,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import { FindProjectComponent } from './components/find-project/find-project.component';
 import { ProjectInfoComponent } from './components/project-info/project-info.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import { BidCreateComponent } from './components/bid-create/bid-create.component';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { ProjectInfoComponent } from './components/project-info/project-info.com
     QuizAppComponent,
     AssessmentComponent,
     FindProjectComponent,
-    ProjectInfoComponent
+    ProjectInfoComponent,
+    BidCreateComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,10 @@ import { ProjectInfoComponent } from './components/project-info/project-info.com
     MatPaginatorModule,
     MatTableModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ]
 })
 export class FreelancerModule { }

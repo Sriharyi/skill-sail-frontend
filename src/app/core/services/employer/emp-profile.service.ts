@@ -37,5 +37,8 @@ export class EmpProfileService {
     const id = this.userService.getUserId();
     return this.http.put(`${this.API}/${id}`, profile);
   }
-  
+
+  getProfilebyId(employerId: string) {
+    return this.http.get<EmployerProfile>(`${this.API}/${employerId}`);
+  }
 }

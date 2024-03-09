@@ -62,7 +62,6 @@ export class ProjectComponent {
 
   onSubmit() {
     const request:ProjectCreateRequest = this.projectForm.value as ProjectCreateRequest;
-    console.log(request);
     this.projectService.createProject(request).subscribe(
       {
         next: (value) => {

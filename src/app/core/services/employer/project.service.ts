@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Page, ProjectCreateRequest, ProjectResponse} from "../../../shared/models/employer/project-create";
 import {environment} from "../../../../environments/environment.development";
 import {tap} from "rxjs";
+import {UserService} from "../user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import {tap} from "rxjs";
 export class ProjectService {
 
   private  readonly apiUrl:string = `${environment.DOMAIN}/projects`;
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private userService:UserService) {
   }
 
   //create project
   createProject(project:ProjectCreateRequest){
+    project.employerProfileId = this.userService.getUserId();
     return this.http.post<ProjectResponse>(`${this.apiUrl}`,project);
   }
 

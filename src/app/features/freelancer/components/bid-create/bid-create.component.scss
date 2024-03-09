@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 750px;
+  animation: custom-dialog-enter 1s ease;
+}
+
+@keyframes custom-dialog-enter {
+  from {
+    transform: scale(0) rotate(360deg);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.bid-container{
+  padding: 20px;
+}
+
+
+.bid-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif; // Change the font family of the form fields
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+
