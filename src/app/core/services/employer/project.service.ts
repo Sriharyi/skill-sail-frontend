@@ -34,5 +34,11 @@ export class ProjectService {
     return this.http.get<Page<ProjectResponse>>(`${this.apiUrl}/page?page=${page}&size=${size}`);
   }
 
+  //get projects by employer id
+  getProjectsByEmployerId(){
+    const employerId = this.userService.getUserId();
+    return this.http.get<ProjectResponse[]>(`${this.apiUrl}/employer/${employerId}`);
+  }
+
 
 }

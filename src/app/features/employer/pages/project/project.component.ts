@@ -55,8 +55,8 @@ export class ProjectComponent {
       category: this.fb.control(""),
       skills: this.fb.control([]),
       budget: this.fb.control(null),
-      deadline: this.fb.control(""),
-      bidDeadline: this.fb.control("")
+      deadline: this.fb.control(null),
+      bidDeadline: this.fb.control(null),
     });
   }
 

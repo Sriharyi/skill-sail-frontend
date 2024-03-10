@@ -5,6 +5,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UpdateComponent } from './components/update/update.component';
 import { ProjectComponent } from './pages/project/project.component';
+import {ViewProjectsComponent} from "./pages/view-projects/view-projects.component";
+import {ViewBidsComponent} from "./pages/view-bids/view-bids.component";
 
 const routes: Routes = [
   {
@@ -31,8 +33,18 @@ const routes: Routes = [
       {
         path:"project/create",
         component: ProjectComponent
+      },
+      {
+        path:"project/:id/edit",
+        component: ProjectComponent
+      },
+      {
+        path:"projects",
+        component: ViewProjectsComponent
+      },{
+        path:"bids/:id",
+        component: ViewBidsComponent
       }
-    
     ],
   }
 ];

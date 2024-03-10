@@ -37,8 +37,8 @@ export class ProjectInfoComponent {
       category: '',
       skills: [],
       budget: 0,
-      deadline: '',
-      bidDeadline: '',
+      deadline: new Date(),
+      bidDeadline: new Date(),
       status: ''
     };
   }

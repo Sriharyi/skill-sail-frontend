@@ -1,0 +1,20 @@
+
+<div *ngIf="projectStatus === 'open'" class="project-container">
+  <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card" (click)="openProject(project)"></app-project-card>
+  </ng-container>
+</div>
+
+<div *ngIf="projectStatus === 'active'" class="project-container">
+  <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card"></app-project-card>
+  </ng-container>
+</div>
+
+<div *ngIf="projectStatus === 'completed'" class="project-container">
+  <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card"></app-project-card>
+  </ng-container>
+</div>
+
+

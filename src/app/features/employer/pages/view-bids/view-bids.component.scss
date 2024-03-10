@@ -1,0 +1,21 @@
+div.mat-elevation-z8 {
+  margin: 20px;
+  margin-top: 10rem;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+table {
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; // Adjust this value to suit your needs
+}

@@ -6,8 +6,8 @@ export interface ProjectForm{
     category: FormControl<string | null>;
     skills: FormControl<string[] | null>;
     budget: FormControl<number | null>;
-    deadline: FormControl<string | null>;
-    bidDeadline: FormControl<string | null>;
+    deadline: FormControl<Date | null>;
+    bidDeadline: FormControl<Date | null>;
 }
 
 export interface ProjectCreateRequest{
@@ -17,8 +17,8 @@ export interface ProjectCreateRequest{
     category: string;
     skills: string[];
     budget: number;
-    deadline: string;
-    bidDeadline: string;
+    deadline: Date;
+    bidDeadline: Date;
 }
 
 export interface ProjectResponse {
@@ -30,8 +30,8 @@ export interface ProjectResponse {
     category: string;
     skills: string[];
     budget: number;
-    deadline: string;
-    bidDeadline: string;
+    deadline: Date;
+    bidDeadline: Date;
     status: string;
 }
 //paginated response

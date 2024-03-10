@@ -20,26 +20,29 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
-  declarations: [
-    ProfileCardComponent,
-    ProfileBadgesComponent,
-    ProfileAboutComponent,
-    ProfileComponent,
-    ProfileUpdateComponent
-  ],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    MatListModule,
-    MatIconModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatSnackBarModule
-  ]
+    declarations: [
+        ProfileCardComponent,
+        ProfileBadgesComponent,
+        ProfileAboutComponent,
+        ProfileComponent,
+        ProfileUpdateComponent
+    ],
+    exports: [
+        ProfileCardComponent
+    ],
+    imports: [
+        CommonModule,
+        ProfileRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        MatListModule,
+        MatIconModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatSnackBarModule
+    ]
 })
 export class ProfileModule { }

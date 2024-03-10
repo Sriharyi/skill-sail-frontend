@@ -20,23 +20,32 @@ import { ProjectComponent } from './pages/project/project.component';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { ViewProjectsComponent } from './pages/view-projects/view-projects.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { ViewBidsComponent } from './pages/view-bids/view-bids.component';
+import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
-  declarations: [EmployerComponent, DashboardComponent, ProfileComponent, ProfileCardComponent, UpdateComponent, ProfileRatingComponent, ProfileAboutComponent, ProjectComponent],
-    imports: [
-        CommonModule,
-        EmployerRoutingModule,
-        MatCardModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDividerModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule,
-        MatChipsModule,
-        MatDatepickerModule,
-        MatNativeDateModule
-    ]
+  declarations: [EmployerComponent, DashboardComponent, ProfileComponent, ProfileCardComponent, UpdateComponent, ProfileRatingComponent, ProfileAboutComponent, ProjectComponent, ViewProjectsComponent, ProjectCardComponent, ViewBidsComponent],
+  imports: [
+    CommonModule,
+    EmployerRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule
+  ]
 })
 export class EmployerModule { }

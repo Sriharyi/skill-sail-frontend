@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment.development";
 import {BidForm, BidRequest, BidResponse} from "../../../shared/models/freelancer/bid";
 import {UserService} from "../user.service";
+import {EmployerBidResponse} from "../../../shared/models/employer/employer-bid";
+import {of} from "rxjs";
 
 
 
@@ -23,7 +25,11 @@ export class BidService {
 
   //get all bids for a project
   getBidsByProjectId(projectId:string){
-    return this.http.get<BidResponse[]>(`${this.apiUrl}/project/${projectId}`);
+    return this.http.get<EmployerBidResponse[]>(`${this.apiUrl}/project/${projectId}`);
   }
 
+  hireFreelancer(bidId: string) {
+      return this.http.put(`${this.apiUrl}/${bidId}/hire`, {});
+  }
 }
+
