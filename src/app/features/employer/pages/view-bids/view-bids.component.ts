@@ -6,13 +6,17 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import Swal from "sweetalert2";
-
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 @Component({
   selector: 'app-view-bids',
   templateUrl: './view-bids.component.html',
   styleUrls: ['./view-bids.component.scss']
 })
 export class ViewBidsComponent {
+
+    private  destroy$ = new Subject<void>();
+
     displayedColumns: string[] = ['position','freelancerName', 'proposal', 'bidAmount', 'action'];
     dataSource = new MatTableDataSource<EmployerBidResponse>();
 
@@ -25,9 +29,6 @@ export class ViewBidsComponent {
       this.projectId = route.snapshot.params['id'];
     }
 
-    ngOnInit(): void {
-
-    }
 
     ngAfterViewInit() {
       this.bidService.getBidsByProjectId(this.projectId).subscribe({
@@ -47,13 +48,15 @@ export class ViewBidsComponent {
 
     }
 
+    ngOnDestroy() {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
+
   applyFilter($event: KeyboardEvent) {
 
   }
 
-  announceSortChange($event: any) {
-
-  }
 
 
   //hire freelancer

@@ -2,7 +2,8 @@
 
 .register{
   display: flex;
-  flex-direction: row-reverse; // Changed from row to row-reverse
+  flex-direction: row-reverse;
+  background-color: $background-color;
   justify-content: space-between;
   height: auto;
   padding: 2rem;
@@ -27,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: $secondary-background-color;
   width: 40rem;
   height: 46rem;
   border-radius: 10px;

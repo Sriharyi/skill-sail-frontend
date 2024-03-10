@@ -1,1 +1,40 @@
-<p>home works!</p>
+<section class="home">
+  <div class="container">
+    <div class="welcome-section">
+      <h1>Welcome to our Freelancer Platform</h1>
+      <p>Find skilled freelancers or post your project and get it done!</p>
+    </div>
+
+    <div class="info-section">
+      <h2>How it Works</h2>
+      <div class="step">
+        <h3>1. Post a Project</h3>
+        <p>Describe your project and get proposals from freelancers.</p>
+      </div>
+      <div class="step">
+        <h3>2. Hire Freelancers</h3>
+        <p>Choose the best freelancer for your project and get started.</p>
+      </div>
+      <div class="step">
+        <h3>3. Get Work Done</h3>
+        <p>Collaborate with freelancers and get your project completed.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="main-section">
+    <div class="container">
+      <div class="freelancer-section">
+        <h2>For Freelancers</h2>
+        <p>Join our platform to showcase your skills and find exciting projects to work on.</p>
+        <a mat-raised-button color="primary" routerLink="/auth/register" [queryParams]="{role:'ROLE_FREELANCER'}">Sign Up as Freelancer</a>
+      </div>
+      <div class="employer-section">
+        <h2>For Employers</h2>
+        <p>Find talented freelancers for your projects and get your work done efficiently.</p>
+        <a mat-raised-button color="primary" routerLink="/auth/register" [queryParams]="{role:'ROLE_EMPLOYER'}">Sign Up as Employer</a>
+      </div>
+    </div>
+  </section>
+
+</section>

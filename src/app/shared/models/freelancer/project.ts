@@ -24,3 +24,15 @@ export class Project {
     return new Project(json.id, json.title, json.description, json.skills, json.budget, json.deadline);
   }
 }
+
+
+export interface ProjectCard {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  skills: string[];
+  bidAmount: number;
+  status: string;
+  deadline: Date;
+}

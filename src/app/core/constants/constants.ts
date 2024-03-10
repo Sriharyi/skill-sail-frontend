@@ -47,21 +47,11 @@ export const CATEGORIES: string[] = [
   'Backend',
   'Fullstack',
   'Database',
-  'DevOps',
-  'Testing',
-  'Design',
-  'Management',
-  'Leadership',
-  'Soft Skills',
   'Other'
 ]
 
 export const INDUSTRIES: string[] = [
   'Technology',
-  'Healthcare',
-  'Finance',
-  'Retail',
-  'Manufacturing',
   'Education',
   'Government',
   'Non-profit',

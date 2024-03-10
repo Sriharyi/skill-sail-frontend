@@ -4,6 +4,7 @@ import {Page, ProjectCreateRequest, ProjectResponse} from "../../../shared/model
 import {environment} from "../../../../environments/environment.development";
 import {tap} from "rxjs";
 import {UserService} from "../user.service";
+import {ProjectCard} from "../../../shared/models/freelancer/project";
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +42,8 @@ export class ProjectService {
   }
 
 
+  getAcceptedProjects() {
+    const freelancerId = this.userService.getUserId();
+    return this.http.get<ProjectCard[]>(`${this.apiUrl}/freelancer/${freelancerId}`);
+  }
 }

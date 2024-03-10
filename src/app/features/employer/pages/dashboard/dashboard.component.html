@@ -1,1 +1,22 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Welcome Section -->
+  <mat-card class="welcome-section">
+    <mat-card-header>
+      <mat-card-title>Welcome to the Employer Dashboard</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>From here, you can manage all aspects of your projects.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Launch Project Section -->
+  <mat-card class="launch-project-section">
+    <mat-card-header>
+      <mat-card-title>Launch a New Project</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Ready to start a new project? Click the button below to get started.</p>
+      <button mat-raised-button color="primary" [routerLink]="['/employer/project/create']">Launch Project</button>
+    </mat-card-content>
+  </mat-card>
+</div>

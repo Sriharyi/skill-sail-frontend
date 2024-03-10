@@ -2,11 +2,10 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {AdminRoutingModule} from './admin-routing.module';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
-import {CreateSkillComponent} from './components/create-skill/create-skill.component';
-import {ManageSkillComponent} from './components/manage-skill/manage-skill.component';
+import {CreateSkillComponent} from './pages/create-skill/create-skill.component';
+import {ManageSkillComponent} from './pages/manage-skill/manage-skill.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -16,13 +15,17 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatSelectModule } from '@angular/material/select';
+import { DashboardInfoComponent } from './pages/dashboard-info/dashboard-info.component';
+import { AdminComponent } from './admin.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
   declarations: [
-    DashboardComponent,
     CreateSkillComponent,
-    ManageSkillComponent
+    ManageSkillComponent,
+    DashboardInfoComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatPaginatorModule,
     FormsModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
   ]
 })
 export class AdminModule {

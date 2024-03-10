@@ -1,27 +1,35 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {CreateSkillComponent} from "./components/create-skill/create-skill.component";
-import {ManageSkillComponent} from "./components/manage-skill/manage-skill.component";
+import {AdminComponent} from "./admin.component";
+import {CreateSkillComponent} from "./pages/create-skill/create-skill.component";
+import {ManageSkillComponent} from "./pages/manage-skill/manage-skill.component";
+import {DashboardInfoComponent} from "./pages/dashboard-info/dashboard-info.component";
+
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: "dashboard",
-    component: DashboardComponent,
+    component: AdminComponent,
     children: [
       {
-        path: "create-skill",
+        path: "",
+        redirectTo: "dashboard",
+        pathMatch: "full"
+      },
+      {
+        path: "dashboard",
+        component: DashboardInfoComponent
+      },
+      {
+        path: "skill/create",
         component: CreateSkillComponent
       },
       {
-        path: "manage-skill",
+        path: "skills",
         component: ManageSkillComponent
-      }],
+      }
+
+    ]
   }
 ];
 

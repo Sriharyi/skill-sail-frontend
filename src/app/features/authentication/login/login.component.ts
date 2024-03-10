@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoginRequest } from "../../../shared/models/authentication/login-request";
 import { AuthService } from "../../../core/services/auth.service";
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
+  private destroy$: Subject<void> = new Subject<void>();
+
+  loginForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -19,17 +25,23 @@ export class LoginComponent {
     private userService: UserService,
     private router: Router
   ) {
+    this.loginForm = this.createLoginForm();
   }
-
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-  });
 
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
+  createLoginForm(): FormGroup {
+    return this.fb.group({
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+    });
+  }
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
@@ -67,6 +79,7 @@ export class LoginComponent {
           this.snackBar.open('Invalid Credentials', 'Close', {
             duration: 3000
           });
+          this.loginForm.reset();
         }
       }
     );

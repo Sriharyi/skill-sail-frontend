@@ -1,34 +1,42 @@
-<form (ngSubmit)="submit()" [formGroup]="skillForm">
-  <section class="form-container">
-    <h3>Skill Details:</h3>
-    <div class="form-group">
-      <mat-form-field class="form-control">
-        <mat-label>Skill Name</mat-label>
-        <input formControlName="skillName" matInput>
-      </mat-form-field>
-      <mat-form-field class="form-control">
-        <mat-label>Description</mat-label>
-        <input formControlName="skillDescription" matInput>
-      </mat-form-field>
-      <mat-form-field class="form-control">
-        <mat-label>SkillCategory</mat-label>
-        <mat-select formControlName="skillCategory">
-          <mat-option *ngFor="let category of CATEGORIES" [value]="category">{{category}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <h3>Questions:</h3>
-    <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">
-      <mat-icon>library_add</mat-icon>
-      <span>Import as Json File</span>
-      <input #fileInput type="file" (change)="onFileInput($event)" class="file-input"/>
+<section class="form-container">
+  <div class="form">
+    <h1>Add Skill:</h1>
+    <form (ngSubmit)="submit()" [formGroup]="skillForm">
+      <h3>Skill Details:</h3>
+      <div class="form-group">
+        <mat-form-field class="form-control">
+          <mat-label>Skill Name</mat-label>
+          <input formControlName="skillName" matInput>
+        </mat-form-field>
+        <mat-form-field class="form-control">
+          <mat-label>Description</mat-label>
+          <input formControlName="skillDescription" matInput>
+        </mat-form-field>
+        <mat-form-field class="form-control">
+          <mat-label>SkillCategory</mat-label>
+          <mat-select formControlName="skillCategory">
+            <mat-option *ngFor="let category of CATEGORIES" [value]="category">{{category}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <h3>Questions:</h3>
+      <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">
+        <mat-icon>library_add</mat-icon>
+        <span>Import as Json File</span>
+        <input #fileInput type="file" (change)="onFileInput($event)" class="file-hide"/>
 
-      <ng-container *ngIf="jsonFile"  >
-        <span class="file-name"> | {{jsonFile.name}}</span>
-      </ng-container>
-    </button>
-    <div class="form-actions">
-      <button mat-raised-button color="primary" type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </section>
-</form>
+        <ng-container *ngIf="jsonFile"  >
+          <span class="file-name"> | {{jsonFile.name}}</span>
+        </ng-container>
+      </button>
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="info">
+   <h1>Question Json Format:</h1>
+    <p>Questions are imported as a json file. The format of the json file is as follows:</p>
+    <img src="assets/images/utility/questionformat.png" >
+  </div>
+</section>

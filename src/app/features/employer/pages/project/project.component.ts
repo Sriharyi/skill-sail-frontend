@@ -5,7 +5,10 @@ import {SkillService} from "../../../../core/services/admin/skill.service";
 import {ProjectService} from "../../../../core/services/employer/project.service";
 import {CATEGORIES} from "../../../../core/constants/constants";
 import {SkillDto} from "../../../../shared/models/admin/skill-dto";
-
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -16,14 +19,17 @@ export class ProjectComponent {
   public projectForm: FormGroup<ProjectForm>;
   skillsList: string[] = [];
   categoriesList: string[] = CATEGORIES;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor( private fb:FormBuilder,private projectService:ProjectService,private skillService:SkillService) {
+  constructor( private fb:FormBuilder,private projectService:ProjectService,private skillService:SkillService,private router:Router) {
     this.projectForm = this.createProjectForm();
 
   }
 
   ngOnInit(): void {
-      this.projectForm.get('category')?.valueChanges.subscribe(
+      this.projectForm.get('category')?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
         {
           next: (value) => {
               if(value){
@@ -62,10 +68,19 @@ export class ProjectComponent {
 
   onSubmit() {
     const request:ProjectCreateRequest = this.projectForm.value as ProjectCreateRequest;
-    this.projectService.createProject(request).subscribe(
+    this.projectService.createProject(request)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
       {
         next: (value) => {
-          console.log(value);
+          Swal.fire({
+            title: 'Success!',
+            text: 'Project created successfully',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then(() => {
+            this.router.navigate(['/employer/projects'] , {queryParams: {status: 'open'}});
+          }) ;
         },
         error: (error) => {
           console.log(error);
@@ -74,7 +89,4 @@ export class ProjectComponent {
     );
   }
 
-  // resetForm() {
-  //   this.projectForm.reset();
-  // }
 }

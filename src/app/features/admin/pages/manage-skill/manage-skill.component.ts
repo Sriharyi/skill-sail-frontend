@@ -4,7 +4,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { SkillDto } from "../../../../shared/models/admin/skill-dto";
 import { SkillService } from "../../../../core/services/admin/skill.service";
 import { Router } from "@angular/router";
-
+import { takeUntil} from "rxjs/operators";
+import { Subject } from "rxjs";
 @Component({
   selector: 'app-manage-skill',
   templateUrl: './manage-skill.component.html',
@@ -14,6 +15,7 @@ export class ManageSkillComponent {
   displayedColumns: string[] = ['S.No', 'skillName', 'skillDescription', 'skillCategory', 'Enable', 'Edit', 'Delete'];
   dataSource = new MatTableDataSource<SkillDto>();
   isChecked = true;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -25,7 +27,9 @@ export class ManageSkillComponent {
 
   ngAfterViewInit() {
     if (this.paginator) {
-      this.paginator.page.subscribe({
+      this.paginator.page
+      .pipe(takeUntil(this.destroy$))
+        .subscribe({
         next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
       });
       this.loadPage(0, 2);
@@ -33,8 +37,17 @@ export class ManageSkillComponent {
     this.changeDetectorRef.detectChanges();
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+
+
   loadPage(pageIndex: number, pageSize: number) {
-    this.skillService.getSkillsByPage(pageIndex, pageSize).subscribe(
+    this.skillService.getSkillsByPage(pageIndex, pageSize)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
       {
         next: (response) => {
           if (response) {
@@ -48,12 +61,14 @@ export class ManageSkillComponent {
     );
   }
 
- 
+
   //enable / diable skill
   enableSkill(skillId: string) {
-    this.skillService.enableSkill(skillId, this.isChecked).subscribe({
+    this.skillService.enableSkill(skillId, this.isChecked)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
       next: (data) => {
-        console.log(data);
+        this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
       },
       error: (err) => console.error(err),
     });
@@ -66,12 +81,15 @@ export class ManageSkillComponent {
   }
 
   deleteSkill(id: string) {
-    this.skillService.deleteSkill(id).subscribe({
+    this.skillService.deleteSkill(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
       next: (data) => {
         this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
       },
       error: (err) => console.error(err),
     });
   }
-  
+
+
 }

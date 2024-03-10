@@ -39,3 +39,14 @@ export class BidResponse{
     }
   }
 }
+
+
+export interface FreelancerBidResponse{
+      id:string;
+      projectId:string;
+      projectName:string;
+      companyName:string;
+      bidDeadline:Date;
+      bidAmount:number;
+      status:string;
+}

@@ -1,0 +1,20 @@
+@import "src/assets/styles/variables.scss";
+
+.admin-dashboard {
+  background-color: $background-color;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  h1 {
+    color: #3f51b5;
+    font-size: 2.5em;
+  }
+  p {
+    color: #607d8b;
+    font-size: 1.2em;
+  }
+}

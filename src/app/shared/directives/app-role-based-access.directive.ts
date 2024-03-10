@@ -15,9 +15,7 @@ export class RoleBasedAccessDirective {
   ) { }
 
   ngOnInit() {
-    console.log(this.appRoleBasedAccess);
     const userRoles = this.userService.getRoles();
-    console.log(userRoles);
     let hasRole = false;
     if (this.appRoleBasedAccess) {
       hasRole = this.userService.hasAnyRole(this.appRoleBasedAccess);
@@ -27,6 +25,6 @@ export class RoleBasedAccessDirective {
     } else {
       this.viewContainer.clear();
     }
-    
+
   }
 }

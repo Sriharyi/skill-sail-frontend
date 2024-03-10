@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-rating.component.scss']
 })
 export class ProfileRatingComponent {
-
+  rating: string = '4.5';
 }
