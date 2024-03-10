@@ -1,11 +1,10 @@
-import {Injectable} from '@angular/core';
-import {environment} from 'src/environments/environment.development';
-import {BehaviorSubject, Observable, tap} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {LoginRequest} from 'src/app/shared/models/authentication/login-request';
-import {SignInResponse} from "../../shared/models/authentication/sign-in-response";
-import {SignUpRequest} from "../../shared/models/authentication/sign-up-request";
-import { UserService } from './user.service';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, tap } from "rxjs";
+import { LoginRequest } from 'src/app/shared/models/authentication/login-request';
+import { environment } from 'src/environments/environment.development';
+import { SignInResponse } from "../../shared/models/authentication/sign-in-response";
+import { SignUpRequest } from "../../shared/models/authentication/sign-up-request";
 
 
 @Injectable({
@@ -16,7 +15,7 @@ export class AuthService {
   private authUrl: string = `${environment.DOMAIN}/auth`;
   private readonly JWT_TOKEN: string = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN: string = 'REFRESH_TOKEN';
-  
+
   public isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   public isLoggedIn$ = this.isAuthenticatedSubject.asObservable();
 
@@ -33,8 +32,8 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(`${this.authUrl}/authenticate`, loginRequest, this.httpOptions).pipe(
       tap(data => {
-          this.doLoginUser(data);
-        }
+        this.doLoginUser(data);
+      }
       ));
   }
 
@@ -42,8 +41,8 @@ export class AuthService {
   public register(registerRequest: SignUpRequest): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(`${this.authUrl}/register`, registerRequest, this.httpOptions).pipe(
       tap(data => {
-          this.doLoginUser(data);
-        }
+        this.doLoginUser(data);
+      }
       ));
   }
 

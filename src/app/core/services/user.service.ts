@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
+import { BehaviorSubject, tap } from "rxjs";
 import { User } from "src/app/shared/models/authentication/user-dto";
 import { environment } from "src/environments/environment.development";
 
@@ -11,11 +11,11 @@ import { environment } from "src/environments/environment.development";
 })
 export class UserService {
 
-  
+
   private readonly apiUrl = `${environment.DOMAIN}/users`;
-  
+
   public readonly USER_KEY = 'USER';
-  private userSubject:BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
   private user: User;
 
@@ -36,7 +36,7 @@ export class UserService {
     }
   }
 
- 
+
 
   setUser(user: User): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
@@ -74,7 +74,7 @@ export class UserService {
   }
 
 
- 
+
 
 
 

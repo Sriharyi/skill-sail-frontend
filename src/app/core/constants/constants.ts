@@ -13,7 +13,7 @@ export const DEGREES: string[] = [
   'Masters',
   'Doctorate'
 ];
-export const YEARS: number[] = Array.from({length: 50}, (v, k) => 2024 - k);
+export const YEARS: number[] = Array.from({ length: 50 }, (v, k) => 2024 - k);
 export const SKILLS: string[] = [
   'Angular',
   'React',

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { LoginRequest } from "../../../shared/models/authentication/login-request";
-import { AuthService } from "../../../core/services/auth.service";
-import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { UserService } from 'src/app/core/services/user.service';
+import { AuthService } from "../../../core/services/auth.service";
+import { LoginRequest } from "../../../shared/models/authentication/login-request";
 
 @Component({
   selector: 'app-login',

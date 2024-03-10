@@ -20,7 +20,7 @@ export class ProfileCardComponent {
   @Input()
   public avatar = "/assets/images/freelancer/freelancer-profile-picture.jpg";
 
-  constructor(private profileService:ProfileService) { }
+  constructor(private profileService: ProfileService) { }
 
 
   ngOnInit(): void {
@@ -49,8 +49,8 @@ export class ProfileCardComponent {
       const user = JSON.parse(localStorage.getItem('USER')!);
       const id = user.id;
 
-     // update the profile picture
-      this.profileService.updateProfilePicture(id,file).subscribe({
+      // update the profile picture
+      this.profileService.updateProfilePicture(id, file).subscribe({
         next: (response) => {
           this.avatar = response;
         },

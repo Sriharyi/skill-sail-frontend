@@ -20,5 +20,5 @@ export class LoadingService {
     this._loading.next(false);
   }
 
-  
+
 }

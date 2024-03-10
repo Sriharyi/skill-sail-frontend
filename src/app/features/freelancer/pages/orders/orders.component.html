@@ -1,5 +1,11 @@
-<div class="order-container">
+<section class="order">
+  <header class="header">
+    <h2>My Projects</h2>
+    <p>Here are the projects that are allocated to you</p>
+  </header>
+  <div class="order-container">
     <ng-container *ngFor="let project of projects">
       <app-order-card [project]="project" class="card"></app-order-card>
     </ng-container>
-</div>
+  </div>
+</section>

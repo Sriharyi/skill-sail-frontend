@@ -1,4 +1,4 @@
-import {Education} from "./education";
+import { Education } from "./education";
 
 export class FreelancerProfile {
   id: string;
@@ -21,15 +21,20 @@ export class FreelancerProfile {
 
   public static createInitial(): FreelancerProfile {
     return new FreelancerProfile(
-      '', 
-      '', 
-      '', 
-      '', 
-      '', 
-      [], 
-      []  
+      '',
+      '',
+      '',
+      '',
+      '',
+      [],
+      []
     );
   }
 }
+
+export interface EarnedSkillResponse{
+   skills: string[];
+}
+
 
 

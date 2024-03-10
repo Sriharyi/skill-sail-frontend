@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialogRef} from "@angular/material/dialog";
-import {BidForm} from "../../../../shared/models/freelancer/bid";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { BidForm } from "../../../../shared/models/freelancer/bid";
 
 @Component({
   selector: 'app-bid-create',

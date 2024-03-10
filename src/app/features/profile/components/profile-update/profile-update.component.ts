@@ -1,18 +1,20 @@
-import {Component} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {DEGREES, LOCATIONS, SKILLS, YEARS} from "../../../../core/constants/constants";
-import {MatSelectChange} from "@angular/material/select";
-import {Edu, FreelancerUpdateForm} from "../../../../shared/models/profile/freelancer-update-form";
-import { ProfileService } from 'src/app/core/services/profile/profile.service';
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { ProfileService } from 'src/app/core/services/profile/profile.service';
+import { DEGREES, LOCATIONS, SKILLS, YEARS } from "../../../../core/constants/constants";
+import { Edu, FreelancerUpdateForm } from "../../../../shared/models/profile/freelancer-update-form";
 @Component({
   selector: 'app-profile-update',
   templateUrl: './profile-update.component.html',
   styleUrls: ['./profile-update.component.scss']
 })
 export class ProfileUpdateComponent {
+
+  private destroy$: Subject<void> = new Subject<void>();
 
   protected readonly SKILLS: string[] = SKILLS;
   protected readonly LOCATIONS: string[] = LOCATIONS;
@@ -21,11 +23,14 @@ export class ProfileUpdateComponent {
 
   public profileForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private profiileService:ProfileService,private route:ActivatedRoute,private router:Router,private snackBar: MatSnackBar) {
-    const id  = this.route.snapshot.paramMap.get('id');
-    this.profiileService.getProfile().subscribe((profile) => {
-      this.profileForm.patchValue(profile);
-    });
+
+  constructor(private formBuilder: FormBuilder, private profiileService: ProfileService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.profiileService.getProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((profile) => {
+        this.profileForm.patchValue(profile);
+      });
   }
 
   ngOnInit() {
@@ -39,17 +44,24 @@ export class ProfileUpdateComponent {
     );
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   onSubmit() {
     if (this.profileForm.valid) {
-      this.profiileService.updateProfile(this.profileForm.value).subscribe(
-        {
-          next: (response) => {
-            this.snackBar.open("Profile Updated", "Close", {
-              duration: 2000,
-            });
-            this.router.navigate(["/freelancer/profile"]);
-          }
-        });
+      this.profiileService.updateProfile(this.profileForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          {
+            next: (response) => {
+              this.snackBar.open("Profile Updated", "Close", {
+                duration: 2000,
+              });
+              this.router.navigate(["/freelancer/profile"]);
+            }
+          });
     }
   }
 

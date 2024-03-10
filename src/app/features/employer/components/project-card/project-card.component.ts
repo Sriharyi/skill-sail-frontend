@@ -1,16 +1,16 @@
-import {Component, Input} from '@angular/core';
-import {ProjectResponse} from "../../../../shared/models/employer/project-create";
+import { Component, Input } from '@angular/core';
+import { ProjectResponse } from "../../../../shared/models/employer/project-create";
 
 @Component({
-  selector: 'app-project-card',
-  templateUrl: './project-card.component.html',
-  styleUrls: ['./project-card.component.scss']
+    selector: 'app-project-card',
+    templateUrl: './project-card.component.html',
+    styleUrls: ['./project-card.component.scss']
 })
 export class ProjectCardComponent {
     @Input() project: ProjectResponse;
 
     constructor() {
-        this.project  = {
+        this.project = {
             id: '',
             freelancerProfileId: '',
             title: '',

@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Question, SkillForm} from "../../../../shared/models/admin/skill-form";
-import {SkillService} from "../../../../core/services/admin/skill.service";
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { CATEGORIES } from 'src/app/core/constants/constants';
+import { SkillService } from "../../../../core/services/admin/skill.service";
+import { Question, SkillForm } from "../../../../shared/models/admin/skill-form";
 
 @Component({
   selector: 'app-create-skill',
@@ -84,9 +84,9 @@ export class CreateSkillComponent {
         if (fileContent !== null) {
           const pars = JSON.parse(fileContent.toString());
           // set the value of the form
-          const questions:Question[] = pars.questions;
+          const questions: Question[] = pars.questions;
           this.skillForm.value.questions.pop();
-          questions.forEach((question:Question) => {
+          questions.forEach((question: Question) => {
             this.skillForm.value.questions.push(question);
           });
         }

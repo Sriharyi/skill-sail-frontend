@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {ProjectService} from "../../../../core/services/employer/project.service";
-import {ProjectResponse} from "../../../../shared/models/employer/project-create";
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ProjectService } from "../../../../core/services/employer/project.service";
+import { ProjectResponse } from "../../../../shared/models/employer/project-create";
 
 @Component({
   selector: 'app-view-projects',
@@ -12,12 +12,12 @@ export class ViewProjectsComponent {
 
   public projects: ProjectResponse[] = [];
 
-  public projectStatus : string = "";
-  constructor(private projectService:ProjectService,private router: Router,private route: ActivatedRoute) {
-        this.route.queryParams.subscribe(params => {
-             this.projectStatus = params['status'];
-             this.loadProjects();
-        });
+  public projectStatus: string = "";
+  constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.projectStatus = params['status'];
+      this.loadProjects();
+    });
   }
 
   ngOnInit(): void {
@@ -41,11 +41,11 @@ export class ViewProjectsComponent {
   }
 
   private filterProjects() {
-    if(this.projectStatus === "active") {
+    if (this.projectStatus === "active") {
       this.projects = this.projects.filter(project => project.status.toLowerCase() === "active");
-    } else if(this.projectStatus === "completed") {
+    } else if (this.projectStatus === "completed") {
       this.projects = this.projects.filter(project => project.status.toLowerCase() === "completed");
-    } else{
+    } else {
       this.projects = this.projects.filter(project => project.status.toLowerCase() === "open");
     }
   }

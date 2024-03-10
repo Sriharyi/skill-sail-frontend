@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { AuthService } from '../services/auth.service';
-import { User } from 'src/app/shared/models/authentication/user-dto';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/shared/models/authentication/user-dto';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',

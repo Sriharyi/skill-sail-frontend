@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { SkillDto } from "../../../../shared/models/admin/skill-dto";
-import { SkillService } from "../../../../core/services/admin/skill.service";
 import { Router } from "@angular/router";
-import { takeUntil} from "rxjs/operators";
 import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { SkillService } from "../../../../core/services/admin/skill.service";
+import { SkillDto } from "../../../../shared/models/admin/skill-dto";
 @Component({
   selector: 'app-manage-skill',
   templateUrl: './manage-skill.component.html',
@@ -28,10 +28,10 @@ export class ManageSkillComponent {
   ngAfterViewInit() {
     if (this.paginator) {
       this.paginator.page
-      .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntil(this.destroy$))
         .subscribe({
-        next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
-      });
+          next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
+        });
       this.loadPage(0, 2);
     }
     this.changeDetectorRef.detectChanges();
@@ -48,17 +48,17 @@ export class ManageSkillComponent {
     this.skillService.getSkillsByPage(pageIndex, pageSize)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-      {
-        next: (response) => {
-          if (response) {
-            this.dataSource.data = response.content;
-            this.paginator.length = response.totalElements;
-            this.paginator.pageIndex = response.number;
-            this.paginator.pageSize = response.size;
+        {
+          next: (response) => {
+            if (response) {
+              this.dataSource.data = response.content;
+              this.paginator.length = response.totalElements;
+              this.paginator.pageIndex = response.number;
+              this.paginator.pageSize = response.size;
+            }
           }
         }
-      }
-    );
+      );
   }
 
 
@@ -67,11 +67,11 @@ export class ManageSkillComponent {
     this.skillService.enableSkill(skillId, this.isChecked)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-      next: (data) => {
-        this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
-      },
-      error: (err) => console.error(err),
-    });
+        next: (data) => {
+          this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
+        },
+        error: (err) => console.error(err),
+      });
   }
 
 
@@ -84,11 +84,11 @@ export class ManageSkillComponent {
     this.skillService.deleteSkill(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-      next: (data) => {
-        this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
-      },
-      error: (err) => console.error(err),
-    });
+        next: (data) => {
+          this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
+        },
+        error: (err) => console.error(err),
+      });
   }
 
 

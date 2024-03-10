@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {ProjectCreateRequest, ProjectForm} from 'src/app/shared/models/employer/project-create';
-import {SkillService} from "../../../../core/services/admin/skill.service";
-import {ProjectService} from "../../../../core/services/employer/project.service";
-import {CATEGORIES} from "../../../../core/constants/constants";
-import {SkillDto} from "../../../../shared/models/admin/skill-dto";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from "@angular/router";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { ProjectCreateRequest, ProjectForm } from 'src/app/shared/models/employer/project-create';
 import Swal from "sweetalert2";
-import {Router} from "@angular/router";
+import { CATEGORIES } from "../../../../core/constants/constants";
+import { SkillService } from "../../../../core/services/admin/skill.service";
+import { ProjectService } from "../../../../core/services/employer/project.service";
+import { SkillDto } from "../../../../shared/models/admin/skill-dto";
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -21,34 +21,34 @@ export class ProjectComponent {
   categoriesList: string[] = CATEGORIES;
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor( private fb:FormBuilder,private projectService:ProjectService,private skillService:SkillService,private router:Router) {
+  constructor(private fb: FormBuilder, private projectService: ProjectService, private skillService: SkillService, private router: Router) {
     this.projectForm = this.createProjectForm();
 
   }
 
   ngOnInit(): void {
-      this.projectForm.get('category')?.valueChanges
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
+    this.projectForm.get('category')?.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         {
           next: (value) => {
-              if(value){
-                  this.skillService.getSkillsByCategory(value).subscribe(
-                      {
-                          next: (value) => {
-                              value.forEach((skill: SkillDto) => {
-                                  this.skillsList.push(skill.skillName);
-                              });
-                          },
-                          error: (error) => {
-                              console.log(error);
-                          }
-                      }
-                  );
-              }
+            if (value) {
+              this.skillService.getSkillsByCategory(value).subscribe(
+                {
+                  next: (value) => {
+                    value.forEach((skill: SkillDto) => {
+                      this.skillsList.push(skill.skillName);
+                    });
+                  },
+                  error: (error) => {
+                    console.log(error);
+                  }
+                }
+              );
+            }
           },
           error: (error) => {
-              console.log(error);
+            console.log(error);
           }
         }
       );
@@ -67,26 +67,26 @@ export class ProjectComponent {
   }
 
   onSubmit() {
-    const request:ProjectCreateRequest = this.projectForm.value as ProjectCreateRequest;
+    const request: ProjectCreateRequest = this.projectForm.value as ProjectCreateRequest;
     this.projectService.createProject(request)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-      {
-        next: (value) => {
-          Swal.fire({
-            title: 'Success!',
-            text: 'Project created successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(() => {
-            this.router.navigate(['/employer/projects'] , {queryParams: {status: 'open'}});
-          }) ;
-        },
-        error: (error) => {
-          console.log(error);
+        {
+          next: (value) => {
+            Swal.fire({
+              title: 'Success!',
+              text: 'Project created successfully',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            }).then(() => {
+              this.router.navigate(['/employer/projects'], { queryParams: { status: 'open' } });
+            });
+          },
+          error: (error) => {
+            console.log(error);
+          }
         }
-      }
-    );
+      );
   }
 
 }

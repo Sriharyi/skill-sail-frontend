@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {ProjectCard} from "../../../../shared/models/freelancer/project";
+import { Component, Input } from '@angular/core';
+import { ProjectCard } from "../../../../shared/models/freelancer/project";
 
 @Component({
   selector: 'app-order-card',

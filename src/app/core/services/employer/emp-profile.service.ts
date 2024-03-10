@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EmployerProfile } from 'src/app/shared/models/employer/emp-profile';
+import { EmployerUpdateRequest } from 'src/app/shared/models/employer/employer-update';
 import { environment } from 'src/environments/environment.development';
 import { UserService } from '../user.service';
-import { EmployerProfile } from 'src/app/shared/models/employer/emp-profile';
-import { EmployerUpdateForm, EmployerUpdateRequest } from 'src/app/shared/models/employer/employer-update';
 
 @Injectable({
   providedIn: 'root'

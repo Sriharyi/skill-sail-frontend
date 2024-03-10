@@ -11,7 +11,7 @@ export class ProfileCardComponent {
 
   @Input()
   companyName = 'Company Name';
-  
+
   @Input()
   companyLogo = 'assets/images/profile/avatar.png';
 
@@ -22,7 +22,7 @@ export class ProfileCardComponent {
 
 
 
-  constructor(private profileService:EmpProfileService) { }
+  constructor(private profileService: EmpProfileService) { }
 
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class ProfileCardComponent {
     if (file) {
       // Check the file type
       if (!file.type.startsWith('image/')) {
-          Swal.fire('Error', 'Please select an image file', 'error');
+        Swal.fire('Error', 'Please select an image file', 'error');
         return;
       }
 
@@ -48,7 +48,7 @@ export class ProfileCardComponent {
         return;
       }
 
-     // update the profile picture
+      // update the profile picture
       this.profileService.updateProfilePicture(file).subscribe({
         next: (response) => {
           this.companyLogo = response;

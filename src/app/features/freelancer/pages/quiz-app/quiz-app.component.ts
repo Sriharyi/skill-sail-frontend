@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { Question } from 'src/app/shared/models/freelancer/question';
-import { SkillService } from "../../../../core/services/admin/skill.service";
 import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { AssessmentService } from 'src/app/core/services/freelancer/assessment.service';
 import { AssessmentDto } from 'src/app/shared/models/freelancer/assessment';
-
+import { Question } from 'src/app/shared/models/freelancer/question';
+import Swal from 'sweetalert2';
+import { SkillService } from "../../../../core/services/admin/skill.service";
+import { ProfileService } from "../../../../core/services/profile/profile.service";
 
 @Component({
   selector: 'app-quiz-app',
@@ -13,6 +15,7 @@ import { AssessmentDto } from 'src/app/shared/models/freelancer/assessment';
   styleUrls: ['./quiz-app.component.scss']
 })
 export class QuizAppComponent {
+
 
 
   timerLeftMin: number = 4;
@@ -31,26 +34,29 @@ export class QuizAppComponent {
 
   private assessmentId: string = '';
   private skillId: string = '';
+  private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private skillService: SkillService, private route: ActivatedRoute, private router: Router, private assessmentService: AssessmentService) {
+  constructor(private skillService: SkillService, private route: ActivatedRoute, private router: Router, private assessmentService: AssessmentService, private freelancerService: ProfileService) {
   }
 
   ngOnInit() {
     //get the id from router path
     this.skillId = this.route.snapshot.queryParams['skillId'];
     this.assessmentId = this.route.snapshot.params['testId'];
-    this.skillService.getQuestions(this.skillId).subscribe({
-      next: (data) => {
-        if (data.questions) {
-          this.questions = data.questions;
-          this.totalQuestions = this.questions.length;
-          this.startQuiz();
+    this.skillService.getQuestions(this.skillId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          if (data.questions) {
+            this.questions = data.questions;
+            this.totalQuestions = this.questions.length;
+            this.startQuiz();
+          }
+        },
+        error: (error) => {
+          console.error(error);
         }
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+      });
   }
 
   startQuiz() {
@@ -108,6 +114,8 @@ export class QuizAppComponent {
 
   ngOnDestroy() {
     clearInterval(this.interval);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   submitTest() {
@@ -128,10 +136,14 @@ export class QuizAppComponent {
       score: 0
     }
 
-    result.score = (this.correctAnswer*10) - (this.wrongAnswer*5);
+    result.score = (this.correctAnswer * 10) - (this.wrongAnswer * 5);
 
     const totalscore = this.totalQuestions * 10;
     const passScore = totalscore * 0.8;
+
+    if (result.score < 0) {
+      result.score = 0;
+    }
 
     if (result.score >= passScore) {
       result.status = 'COMPLETED';
@@ -139,15 +151,16 @@ export class QuizAppComponent {
       result.status = 'FAILED';
     }
 
-    this.assessmentService.submitAssessment(this.assessmentId, result).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.showResultDialog(data);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+    this.assessmentService.submitAssessment(this.assessmentId, result)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.showResultDialog(data);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
   }
 
   showResultDialog(data: AssessmentDto) {

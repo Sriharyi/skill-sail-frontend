@@ -1,10 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../environments/environment.development";
-import {BidForm, BidRequest, BidResponse, FreelancerBidResponse} from "../../../shared/models/freelancer/bid";
-import {UserService} from "../user.service";
-import {EmployerBidResponse} from "../../../shared/models/employer/employer-bid";
-import {of} from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "../../../../environments/environment.development";
+import { EmployerBidResponse } from "../../../shared/models/employer/employer-bid";
+import { BidRequest, BidResponse, FreelancerBidResponse } from "../../../shared/models/freelancer/bid";
+import { UserService } from "../user.service";
 
 
 @Injectable({

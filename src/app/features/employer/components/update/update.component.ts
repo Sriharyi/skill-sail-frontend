@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { INDUSTRIES, LOCATIONS } from 'src/app/core/constants/constants';
 import { EmpProfileService } from 'src/app/core/services/employer/emp-profile.service';
 import { EmployerUpdateForm, EmployerUpdateRequest } from 'src/app/shared/models/employer/employer-update';
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -13,19 +13,19 @@ import {Subject} from "rxjs";
 })
 export class UpdateComponent {
   profileForm: FormGroup<EmployerUpdateForm>;
-  private  destroy$ = new Subject<void>();
+  private destroy$ = new Subject<void>();
 
   protected readonly LOCATIONS = LOCATIONS;
   protected readonly INDUSTRIES = INDUSTRIES;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private employerService: EmpProfileService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private employerService: EmpProfileService) {
     const id = this.route.snapshot.params['id'];
     this.employerService.getProfile()
-    .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(response => {
-      console.log(response);
-      this.profileForm.patchValue(response);
-    });
+        console.log(response);
+        this.profileForm.patchValue(response);
+      });
 
     this.profileForm = this.createProfileForm();
   }
@@ -58,9 +58,9 @@ export class UpdateComponent {
           this.router.navigate(['/employer/profile']);
         },
         error: (error) => {
-         console.error(error);
+          console.error(error);
         }
-    });
+      });
 
   }
 

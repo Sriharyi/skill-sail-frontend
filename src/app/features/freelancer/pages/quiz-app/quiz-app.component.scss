@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 805px;
-  background-color: $secondary-background-color;
+  background-color: $background-color;
 }
 
 .question-container {
@@ -16,7 +16,7 @@
   min-height: 30rem;
   margin-top: 2rem;
   padding: 2rem;
-  background-color: $background-color;
+  background-color: $secondary-background-color;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }

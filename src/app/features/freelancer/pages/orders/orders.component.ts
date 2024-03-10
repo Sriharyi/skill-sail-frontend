@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {ProjectCard} from "../../../../shared/models/freelancer/project";
-import {ProjectService} from "../../../../core/services/employer/project.service";
-
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { ProjectService } from "../../../../core/services/employer/project.service";
+import { ProjectCard } from "../../../../shared/models/freelancer/project";
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -9,23 +10,32 @@ import {ProjectService} from "../../../../core/services/employer/project.service
 })
 export class OrdersComponent {
 
-  projects:ProjectCard[] = [];
-  constructor(private projectService:ProjectService){
+  private destroy$: Subject<void> = new Subject<void>();
+
+  projects: ProjectCard[] = [];
+  constructor(private projectService: ProjectService) {
   }
 
   ngOnInit() {
-        this.loadProjects();
+    this.loadProjects();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadProjects() {
-    this.projectService.getAcceptedProjects().subscribe({
-      next: (response) => {
-        this.projects = response;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+    this.projectService.getAcceptedProjects()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.projects = response;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
   }
 
 }

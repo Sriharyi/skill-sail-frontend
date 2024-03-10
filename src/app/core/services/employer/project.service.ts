@@ -1,42 +1,41 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Page, ProjectCreateRequest, ProjectResponse} from "../../../shared/models/employer/project-create";
-import {environment} from "../../../../environments/environment.development";
-import {tap} from "rxjs";
-import {UserService} from "../user.service";
-import {ProjectCard} from "../../../shared/models/freelancer/project";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "../../../../environments/environment.development";
+import { Page, ProjectCreateRequest, ProjectResponse } from "../../../shared/models/employer/project-create";
+import { ProjectCard } from "../../../shared/models/freelancer/project";
+import { UserService } from "../user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  private  readonly apiUrl:string = `${environment.DOMAIN}/projects`;
-  constructor(private http:HttpClient,private userService:UserService) {
+  private readonly apiUrl: string = `${environment.DOMAIN}/projects`;
+  constructor(private http: HttpClient, private userService: UserService) {
   }
 
   //create project
-  createProject(project:ProjectCreateRequest){
+  createProject(project: ProjectCreateRequest) {
     project.employerProfileId = this.userService.getUserId();
-    return this.http.post<ProjectResponse>(`${this.apiUrl}`,project);
+    return this.http.post<ProjectResponse>(`${this.apiUrl}`, project);
   }
 
   //get all projects
-  getProjects(){
+  getProjects() {
     return this.http.get<ProjectResponse[]>(`${this.apiUrl}`);
   }
 
-  getProjectById(id:number){
+  getProjectById(id: number) {
     return this.http.get<ProjectResponse>(`${this.apiUrl}/${id}`);
   }
 
   //get paginated projects
-  getPaginatedProjects(page:number, size:number){
+  getPaginatedProjects(page: number, size: number) {
     return this.http.get<Page<ProjectResponse>>(`${this.apiUrl}/page?page=${page}&size=${size}`);
   }
 
   //get projects by employer id
-  getProjectsByEmployerId(){
+  getProjectsByEmployerId() {
     const employerId = this.userService.getUserId();
     return this.http.get<ProjectResponse[]>(`${this.apiUrl}/employer/${employerId}`);
   }

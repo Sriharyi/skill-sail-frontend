@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Project} from "../../../../shared/models/freelancer/project";
-import {ProjectService} from "../../../../core/services/employer/project.service";
-import {Page, ProjectResponse} from "../../../../shared/models/employer/project-create";
+import { Component } from '@angular/core';
+import { ProjectService } from "../../../../core/services/employer/project.service";
+import { Page, ProjectResponse } from "../../../../shared/models/employer/project-create";
+import { Project } from "../../../../shared/models/freelancer/project";
 
 @Component({
   selector: 'app-find-project',
@@ -18,7 +18,7 @@ export class FindProjectComponent {
 
   ngOnInit() {
     this.projectService.getPaginatedProjects(0, 10).subscribe({
-      next: (response:Page<ProjectResponse>) => {
+      next: (response: Page<ProjectResponse>) => {
         this.projects = response.content.map((project) => Project.fromJson(project));
       }
     });

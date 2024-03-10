@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UpdateComponent } from './components/update/update.component';
 import { EmployerComponent } from './employer.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { UpdateComponent } from './components/update/update.component';
 import { ProjectComponent } from './pages/project/project.component';
-import {ViewProjectsComponent} from "./pages/view-projects/view-projects.component";
-import {ViewBidsComponent} from "./pages/view-bids/view-bids.component";
+import { ViewBidsComponent } from "./pages/view-bids/view-bids.component";
+import { ViewProjectsComponent } from "./pages/view-projects/view-projects.component";
 
 const routes: Routes = [
   {

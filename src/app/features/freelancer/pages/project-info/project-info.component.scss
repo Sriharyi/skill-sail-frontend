@@ -1,9 +1,14 @@
-@import "src/assets/styles/variables.scss";
+@import "src/assets/styles/variables";
+
+.project{
+  background-color: $background-color;
+  min-height: 100vh;
+}
 
 .project-info {
   display: flex;
-  justify-content: space-between;
-  margin: 20px;
+  justify-content: space-around;
+  padding: 20px;
 }
 
 .project-details,
@@ -58,9 +63,10 @@ img {
   margin-top: 20px;
 
   button {
-    margin: 0 10px;
+    margin: 10px 10px;
     width: 20rem;
     height: 5rem;
+    font-size: 20px;
     transition: transform 0.3s ease-in-out;
   }
 

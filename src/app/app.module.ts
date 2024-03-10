@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from "./core/core.module";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
-import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
-import { LoaderComponent } from './shared/components/loader/loader.component';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
