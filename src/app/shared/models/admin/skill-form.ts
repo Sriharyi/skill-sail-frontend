@@ -1,8 +1,9 @@
-import {FormArray, FormControl} from "@angular/forms";
+import { FormArray, FormControl } from "@angular/forms";
 
 export interface SkillForm {
   skillName: FormControl<string | null>;
   skillDescription: FormControl<string | null>;
+  skillCategory: FormControl<string | null>;
   questions: FormArray;
 }
 

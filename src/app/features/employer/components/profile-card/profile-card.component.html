@@ -1,0 +1,13 @@
+<mat-card class="card">
+    <mat-card-header class="header">
+      <div class="avatar-container">
+        <img mat-card-avatar class="header-image" [src]="companyLogo  "alt="Avatar">
+        <mat-icon class="edit-icon" (click)="fileInput.click()">add_a_photo</mat-icon>
+        <input type="file" id="fileInput" #fileInput style="display: none" (change)="onFileSelected($event)">
+      </div>
+      <mat-card-title class="card-title">{{companyName}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions class="actions">
+      <button mat-button color="primary" (click)="openDialog()">Edit Profile</button>
+    </mat-card-actions>
+  </mat-card>

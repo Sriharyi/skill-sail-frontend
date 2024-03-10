@@ -1,0 +1,58 @@
+
+@import "src/assets/styles/variables.scss";
+
+
+.status-pending {
+  color: orange;
+}
+
+.status-accepted {
+  color: green;
+}
+
+.status-rejected {
+  color: red;
+}
+
+.my-bid-section{
+  background-color: $background-color;
+  min-height: 92.5vh;
+}
+
+div.mat-elevation-z8 {
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+table {
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; // Adjust this value to suit your needs
+}
+
+.my-bid-header {
+  text-align: center;
+  padding: 20px;
+  background-color: $secondary-background-color;
+  border-radius: 5px;
+
+  h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666;
+  }
+}

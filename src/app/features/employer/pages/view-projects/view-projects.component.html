@@ -1,0 +1,36 @@
+<section class="main-section">
+  <div *ngIf="projectStatus === 'open'" class="project-header">
+    <h1>Open Projects</h1>
+    <p>These are the projects that are currently open for Bidding</p>
+  </div>
+
+
+  <div *ngIf="projectStatus === 'open'" class="project-container">
+    <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card" (click)="openProject(project)"></app-project-card>
+    </ng-container>
+  </div>
+
+  <div *ngIf="projectStatus === 'active'" class="project-header">
+    <h1>Active Projects</h1>
+    <p>These are the projects that are currently In Progress</p>
+  </div>
+
+
+  <div *ngIf="projectStatus === 'active'" class="project-container">
+    <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card"></app-project-card>
+    </ng-container>
+  </div>
+
+  <div *ngIf="projectStatus === 'completed'" class="project-header">
+    <h1>Completed Projects</h1>
+    <p>These are the projects that are currently Completed</p>
+  </div>
+
+  <div *ngIf="projectStatus === 'completed'" class="project-container">
+    <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card"></app-project-card>
+    </ng-container>
+  </div>
+</section>

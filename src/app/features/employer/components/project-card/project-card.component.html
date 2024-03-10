@@ -1,0 +1,14 @@
+<mat-card class="project-card">
+  <mat-card-header class="project-card-header">
+    <mat-card-title><mat-icon>title</mat-icon> {{ project.title }}</mat-card-title>
+    <mat-card-subtitle><mat-icon>category</mat-icon> {{ project.category }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="project-card-content">
+    <p><mat-icon>description</mat-icon> {{ project.description }}</p>
+    <p><mat-icon>build</mat-icon> Skills: {{ project.skills.join(', ') }}</p>
+    <p><mat-icon>attach_money</mat-icon> Budget: {{ project.budget }}</p>
+    <p><mat-icon>update</mat-icon> Status: <span class="highlight">{{ project.status }}</span> </p>
+    <p><mat-icon>calendar_today</mat-icon> Deadline: {{ project.deadline | date }}</p>
+    <p><mat-icon>alarm</mat-icon> Bid Deadline: <span class="highlight"> {{ project.bidDeadline | date }} </span></p>
+  </mat-card-content>
+</mat-card>

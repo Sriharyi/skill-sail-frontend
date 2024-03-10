@@ -1,16 +1,21 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {HeaderComponent} from './header/header.component';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from '@angular/core';
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { RouterLink } from "@angular/router";
+import { PermissionBasedAccessDirective } from '../shared/directives/app-permission-based-access.directive';
+import { RoleBasedAccessDirective } from '../shared/directives/app-role-based-access.directive';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    RoleBasedAccessDirective,
+    PermissionBasedAccessDirective,
   ],
   exports: [
     HeaderComponent
@@ -22,6 +27,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonModule,
     RouterLink,
     HttpClientModule,
+    MatMenuModule
   ]
 })
 export class CoreModule {

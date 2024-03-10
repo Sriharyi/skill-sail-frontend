@@ -1,23 +1,53 @@
 .form-container {
   padding: 2rem;
+  width: 30%;
+  margin: auto;
 }
 
 .form-content {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .form-education {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 1rem;
 }
 
-.example-full-width {
-  width: 100%;
-}
-.add-button{
-  margin: 1rem 30rem;
+.education-div{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
+.example-width{
+  width: 100%;
+}
+
+.example-full-width {
+  width: 90%;
+}
+
+.delete-btn{
+  margin-top: 1rem;
+
+}
+
+.edu-width{
+  width: 150%;
+}
+
+.form-bio{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-actions{
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
 } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {AuthService} from "../services/auth.service";
-import {environment} from 'src/environments/environment.development';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
+import { AuthService } from "../services/auth.service";
 
 
 @Injectable()

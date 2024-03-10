@@ -1,8 +1,74 @@
 <mat-toolbar color="primary">
   <span>SkillSail</span>
   <span class="example-spacer"></span>
-  <button mat-button routerLink="/home">Home</button>
-  <button mat-button routerLink="/auth">Login</button>
-  <button mat-button routerLink="/auth/register">Register</button>
-</mat-toolbar>
+  <ng-container *ngIf="isLogged$ | async;then loggedIn else loggedOut"></ng-container>
 
+  <ng-template #loggedOut>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/auth">Login</button>
+    <button mat-button routerLink="/auth/register">Register</button>
+  </ng-template>
+
+  <ng-template #loggedIn>
+    <ng-container *ngIf="isUser;then userIn else notUser"></ng-container>
+  </ng-template>
+
+  <ng-template #notUser>
+    <button mat-button routerLink="/home">Home</button>
+  </ng-template>
+
+  <ng-template #userIn>
+    <ng-container *ngIf="userType === 'ROLE_ADMIN';then admin"></ng-container>
+    <ng-container *ngIf="userType === 'ROLE_EMPLOYER';then employer"></ng-container>
+    <ng-container *ngIf="userType === 'ROLE_FREELANCER';then freelancer"></ng-container>
+  </ng-template>
+
+  <ng-template #admin>
+    <button class="mat-menu-btn" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>
+        menu
+      </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_ADMIN']" routerLink="/admin">Admin</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_ADMIN']" routerLink="/admin/skills">Manages Skills</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_ADMIN']" routerLink="/admin/skill/create">Add Skill</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </ng-template>
+
+  <ng-template #freelancer>
+    <button class="mat-menu-btn" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>
+        menu
+      </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/profile">My Profile</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/dashboard">My DashBoard</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/projects">Explore Projects</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/bids">My Bids</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/orders">My Orders</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/skills">Skill Assessments</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </ng-template>
+
+  <ng-template #employer>
+    <button class="mat-menu-btn" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>
+        menu
+      </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/profile">My Profile</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/dashboard">My DashBoard</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/project/create">Launch Project</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/projects" [queryParams]="{status: 'open'}" >Open Projects</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/projects" [queryParams]="{status: 'active'}" >Active Projects</button>
+      <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/projects" [queryParams]="{status: 'completed'}">Completed Projects</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </ng-template>
+
+</mat-toolbar>

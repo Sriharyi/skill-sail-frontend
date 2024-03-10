@@ -1,4 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/shared/models/authentication/user-dto';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +11,35 @@ import {Component} from '@angular/core';
 })
 export class HeaderComponent {
 
+
+  public isLogged$ = this.authService.isLoggedIn$;
+  public user: User | null = null;
+  public isUser: boolean = false;
+  public userType: string = '';
+  private user$: Subscription = new Subscription();
+
+
+  constructor(public authService: AuthService, private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.user$ = this.userService.user$.subscribe(user => {
+      this.user = user;
+      if (user) {
+        this.isUser = true;
+        this.userType = user.roles[0];
+      } else {
+        this.isUser = false;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.user$.unsubscribe();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.userService.clearUser();
+  }
 }
+

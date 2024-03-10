@@ -1,0 +1,30 @@
+@import "src/assets/styles/variables.scss";
+
+.project-card {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-card-header {
+  background-color: #f0f0f0;
+  color: $primary-color;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.project-card-content {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+mat-icon {
+  color: $primary-color;
+  margin-right: 5px;
+}
+
+.highlight {
+  color: $accent-color;
+  font-weight: bold;
+}

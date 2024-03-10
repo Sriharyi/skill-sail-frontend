@@ -1,4 +1,4 @@
-import {Question} from "../freelancer/question";
+import { Question } from "../freelancer/question";
 
 export interface SkillDto{
     id: string;

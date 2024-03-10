@@ -1,36 +1,36 @@
 import { Component } from '@angular/core';
-import {FreelancerProfile} from "../../../../shared/models/profile/freelancer-profile";
-import {MatDialog} from "@angular/material/dialog";
-import {ProfileUpdateComponent} from "../../components/profile-update/profile-update.component";
-
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
+import { ProfileService } from 'src/app/core/services/profile/profile.service';
+import { FreelancerProfile } from "../../../../shared/models/profile/freelancer-profile";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  profile:FreelancerProfile;
-  constructor(
-   public dialog: MatDialog
-  ) {
-    this.profile = new FreelancerProfile("1", "https://via.placeholder.com/150", "Sriharyi C", "sriharyi", "I am a full stack developer", ["Angular", "NodeJS", "MongoDB"], [
-      {
-        location: "India",
-        collegeName: "Sri Krishna College of Engineering and Technology",
-        degree: "Bachelors",
-        major: "Computer Science and Engineering",
-        graduationYear: 2020
-      }
-    ]);
+
+  private destroy$: Subject<void> = new Subject<void>();
+  profile: FreelancerProfile = FreelancerProfile.createInitial();
+  constructor(private router: Router, private ProfileService: ProfileService) {
+
   }
   ngOnInit(): void {
+    this.ProfileService.getProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((profile) => {
+        this.profile = profile;
+      });
   }
 
-  openDialog() {
-    this.dialog.open(ProfileUpdateComponent, {
-        width: '600px',
-        height: '600px',
-      }
-      );
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  update() {
+    const id = this.profile.id;
+    this.router.navigate([`/freelancer/profile/${id}/edit`]);
   }
 }

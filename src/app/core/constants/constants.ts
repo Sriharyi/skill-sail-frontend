@@ -13,7 +13,7 @@ export const DEGREES: string[] = [
   'Masters',
   'Doctorate'
 ];
-export const YEARS: number[] = Array.from({length: 50}, (v, k) => 2024 - k);
+export const YEARS: number[] = Array.from({ length: 50 }, (v, k) => 2024 - k);
 export const SKILLS: string[] = [
   'Angular',
   'React',
@@ -40,4 +40,20 @@ export const SKILLS: string[] = [
   'CSS',
   'JavaScript',
   'TypeScript',
+]
+
+export const CATEGORIES: string[] = [
+  'Frontend',
+  'Backend',
+  'Fullstack',
+  'Database',
+  'Other'
+]
+
+export const INDUSTRIES: string[] = [
+  'Technology',
+  'Education',
+  'Government',
+  'Non-profit',
+  'Other'
 ]

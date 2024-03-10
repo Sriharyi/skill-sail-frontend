@@ -1,0 +1,46 @@
+<ng-container *ngIf="isStarted">
+  <section class="question-section">
+    <div class="question-container">
+      <div class="question-header">
+        <div class="time-container">
+          <div class="time">
+            <span class="time-count"> {{ timerLeftMin }} min : {{ timerLeftSec }} sec </span>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="question-body">
+        <h2 class="question-text">{{ currentQuestion.question }}</h2>
+        <div class="question-options">
+          <ng-container *ngFor="let option of currentQuestion.options; let i = index">
+            <div class="question-option">
+              <input type="radio" name="option" id="option{{i}}" [(ngModel)]="selectedOption" [value]="i">
+              <label for="option{{i}}">{{ i + 1 }} . {{ option }}</label>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="question-footer">
+        <div class="question-left">
+          <div class="question-progress-text">
+          <span class="question-number bold">
+            {{ currentQuestionIndex + 1 }}
+          </span> of <span class="total-question bold">
+            {{ totalQuestions }}
+        </span> questions
+          </div>
+        </div>
+        <div class="question-action">
+          <ng-container *ngIf="currentQuestionIndex<totalQuestions-1; else submitTemplate">
+            <button mat-raised-button color="primary" (click)="nextQuestion()">Next</button>
+          </ng-container>
+
+          <ng-template #submitTemplate>
+            <button mat-raised-button color="primary" (click)="submitTest()">Submit</button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>

@@ -1,0 +1,79 @@
+@import "src/assets/styles/variables";
+
+.project{
+  background-color: $background-color;
+  min-height: 100vh;
+}
+
+.project-info {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.project-details,
+.employer-details {
+  width: 45%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.project-details:hover,
+.employer-details:hover {
+  transform: scale(1.05);
+}
+
+mat-card {
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+mat-list-item {
+  line-height: 1.6;
+  font-size: 18px;
+  color: #333;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.highlight {
+  color: $accent-color;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.bid-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    margin: 10px 10px;
+    width: 20rem;
+    height: 5rem;
+    font-size: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+}
+
+
+

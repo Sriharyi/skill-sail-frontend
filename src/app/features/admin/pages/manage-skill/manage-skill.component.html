@@ -1,0 +1,73 @@
+
+<section class="container">
+  <!-- Top Section -->
+  <mat-card class="top-section">
+    <mat-card-header>
+      <mat-card-title>Manage Skills</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>This section allows you to manage skills in your application.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Bottom Section -->
+  <div class="bottom-section">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="S.No">
+          <th mat-header-cell *matHeaderCellDef>S.NO</th>
+          <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="skillName">
+          <th mat-header-cell *matHeaderCellDef>SkillName</th>
+          <td mat-cell *matCellDef="let element;">{{element.skillName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="skillDescription">
+          <th mat-header-cell *matHeaderCellDef>SkillDescription</th>
+          <td mat-cell *matCellDef="let element;">{{element.skillDescription}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="skillCategory">
+          <th mat-header-cell *matHeaderCellDef>SkillCategory</th>
+          <td mat-cell *matCellDef="let element;">{{element.skillCategory}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Enable">
+          <th mat-header-cell *matHeaderCellDef>Enable/Disable</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle [(ngModel)]="isChecked" (click)="enableSkill(element.id)">{{isChecked?"Enabled":"Disabled"}}</mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="editSkill(element.id)"><mat-icon>create</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="deleteSkill(element.id)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator #paginator
+                     [length]="paginator.length"
+                     [pageIndex]="paginator.pageIndex"
+                     [pageSize]="paginator.pageSize"
+                     [pageSizeOptions]="[2, 5, 10, 20]"
+                     [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</section>

@@ -1,4 +1,4 @@
-import {FormArray, FormControl} from "@angular/forms";
+import { FormArray, FormControl } from "@angular/forms";
 
 export interface FreelancerUpdateForm {
   displayName: FormControl<string | null>;
@@ -14,3 +14,5 @@ export interface Edu {
   major: FormControl<string | null>;
   graduationYear: FormControl<number | null>;
 }
+
+

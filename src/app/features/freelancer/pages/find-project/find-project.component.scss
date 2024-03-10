@@ -1,0 +1,75 @@
+@import "src/assets/styles/variables";
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  background-color: $background-color;
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: $background-color;
+  padding: 2em;
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  padding: 2em;
+}
+
+.project-card {
+  width: 30%;
+  margin: 1em;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  mat-card-header {
+    background-color: $primary-color;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+
+  mat-card-title,
+  mat-card-subtitle {
+    color: #fff;
+  }
+
+  mat-card-content {
+    padding: 1em;
+  }
+
+  .highlight{
+    color: $accent-color;
+    font-weight: bold;
+  }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+
+    button {
+      color: #fff;
+      background-color: #007bff;
+    }
+  }
+}
+
+.example-form-field {
+  width: 30%;
+}
+

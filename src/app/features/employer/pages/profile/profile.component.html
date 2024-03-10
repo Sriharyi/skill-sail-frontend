@@ -1,0 +1,15 @@
+<section class="profile">
+    <div class="profile-header">
+        <app-profile-card
+            [companyName]="profile.companyName"
+            [companyLogo]="profile.companyLogo"
+            (editProfile)="onEditProfile($event)"
+        ></app-profile-card>
+    </div>
+    <app-profile-about [companyEmail]="profile.companyEmail"
+                       [companyWebsite]="profile.companyWebsite"
+                        [companyIndustry]="profile.companyIndustry"
+                        [companyLocation]="profile.companyLocation"
+                        [companyDescription]="profile.companyDescription"
+                       ></app-profile-about>
+</section>

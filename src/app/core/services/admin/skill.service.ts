@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SkillForm} from "../../../shared/models/admin/skill-form";
-import {environment} from "../../../../environments/environment.development";
-import {Observable} from "rxjs";
-import {SkillDto} from "../../../shared/models/admin/skill-dto";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
+import { environment } from "../../../../environments/environment.development";
+import { SkillDto } from "../../../shared/models/admin/skill-dto";
+import { SkillForm } from "../../../shared/models/admin/skill-form";
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +50,7 @@ export class SkillService {
 
   //get all skills by page
   getSkillsByPage(pageIndex: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/page/?page=${pageIndex}&size=${pageSize}`);
+    return this.http.get(`${this.apiUrl}/page?page=${pageIndex}&size=${pageSize}`);
   }
 
   // //get all skills by category
@@ -61,6 +61,11 @@ export class SkillService {
   //enable & diable skill
   enableSkill(skillId: string, isChecked: boolean) {
     return this.http.put(`${this.apiUrl}/enable/${skillId}`, isChecked);
+  }
+
+  //get skills by category
+  getSkillsByCategory(category: string): Observable<SkillDto[]> {
+    return this.http.get<SkillDto[]>(`${this.apiUrl}/category?category=${category}`);
   }
 
   getQuestions(skillId: string): Observable<SkillDto> {

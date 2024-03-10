@@ -1,0 +1,56 @@
+@import "src/assets/styles/variables.scss";
+
+.form-container{
+  background-color: $background-color;
+  display: flex;
+  flex-direction: row;
+}
+
+.form {
+  width: 45%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid $primary-color;
+  height: 48rem;
+  h1 {
+    color: $primary-color;
+    font-size: 2em;
+  }
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+  }
+}
+
+.file-hide{
+    display: none;
+}
+
+.form-actions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 30rem;
+  margin-top: 3rem;
+  button{
+    width: 10rem;
+  }
+}
+
+.info {
+  width: 45%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: $primary-color;
+    font-size: 2em;
+  }
+
+}

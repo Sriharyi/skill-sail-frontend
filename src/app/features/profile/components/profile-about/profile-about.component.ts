@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Education} from "../../../../shared/models/profile/education";
+import { Component, Input } from '@angular/core';
+import { Education } from "../../../../shared/models/profile/education";
 
 @Component({
   selector: 'app-profile-about',
@@ -12,7 +12,7 @@ export class ProfileAboutComponent {
   @Input()
   skills = ["Angular", "NodeJS", "MongoDB"];
   @Input()
-  educations :Education[] = [
+  educations: Education[] = [
     {
       location: "India",
       collegeName: "Sri Krishna College of Engineering and Technology",
