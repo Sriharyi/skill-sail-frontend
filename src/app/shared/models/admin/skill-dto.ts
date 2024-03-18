@@ -5,4 +5,5 @@ export interface SkillDto{
     skillName: string;
     skillDescription: string;
     questions?: Question[];
+    enable: boolean;
 }

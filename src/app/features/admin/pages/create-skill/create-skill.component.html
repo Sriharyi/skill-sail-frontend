@@ -14,7 +14,7 @@
         </mat-form-field>
         <mat-form-field class="form-control">
           <mat-label>SkillCategory</mat-label>
-          <mat-select formControlName="skillCategory">
+          <mat-select formControlName="skillCategory" multiple>
             <mat-option *ngFor="let category of CATEGORIES" [value]="category">{{category}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -23,7 +23,7 @@
       <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">
         <mat-icon>library_add</mat-icon>
         <span>Import as Json File</span>
-        <input #fileInput type="file" (change)="onFileInput($event)" class="file-hide"/>
+        <input #fileInput  type="file" (change)="onFileInput($event)" class="file-hide"/>
 
         <ng-container *ngIf="jsonFile"  >
           <span class="file-name"> | {{jsonFile.name}}</span>

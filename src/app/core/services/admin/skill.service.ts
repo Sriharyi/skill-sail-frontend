@@ -24,7 +24,6 @@ export class SkillService {
 
   //create skill
   createSkill(skill: SkillForm) {
-    console.log(skill);
     return this.http.post(`${this.apiUrl}`, skill, this.httpOptions);
   }
 
@@ -45,7 +44,7 @@ export class SkillService {
 
   //delete skill
   deleteSkill(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   //get all skills by page
@@ -53,14 +52,9 @@ export class SkillService {
     return this.http.get(`${this.apiUrl}/page?page=${pageIndex}&size=${pageSize}`);
   }
 
-  // //get all skills by category
-  // getSkillsByCategory(category:string){
-  //   return this.http.get(`${this.apiUrl}/category/${category}`);
-  // }
-
   //enable & diable skill
-  enableSkill(skillId: string, isChecked: boolean) {
-    return this.http.put(`${this.apiUrl}/enable/${skillId}`, isChecked);
+  toggleSkill(skillId: string) {
+    return this.http.put(`${this.apiUrl}/toggle/${skillId}`, null, this.httpOptions);
   }
 
   //get skills by category

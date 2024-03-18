@@ -14,7 +14,6 @@ import { SkillDto } from "../../../../shared/models/admin/skill-dto";
 export class ManageSkillComponent {
   displayedColumns: string[] = ['S.No', 'skillName', 'skillDescription', 'skillCategory', 'Enable', 'Edit', 'Delete'];
   dataSource = new MatTableDataSource<SkillDto>();
-  isChecked = true;
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -32,7 +31,7 @@ export class ManageSkillComponent {
         .subscribe({
           next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
         });
-      this.loadPage(0, 2);
+      this.loadPage(0, 10);
     }
     this.changeDetectorRef.detectChanges();
   }
@@ -63,8 +62,8 @@ export class ManageSkillComponent {
 
 
   //enable / diable skill
-  enableSkill(skillId: string) {
-    this.skillService.enableSkill(skillId, this.isChecked)
+  toggleSkill(skillId: string) {
+    this.skillService.toggleSkill(skillId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
@@ -77,14 +76,14 @@ export class ManageSkillComponent {
 
   //naviate to edit page with skill id /admin/skills/id/edit
   editSkill(id: string) {
-    this.router.navigate([`/admin/skills/${id}/edit`]);
+    this.router.navigate([`/admin/skill/${id}/edit`]);
   }
 
   deleteSkill(id: string) {
     this.skillService.deleteSkill(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (data) => {
+        next: ()  => {
           this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
         },
         error: (err) => console.error(err),
