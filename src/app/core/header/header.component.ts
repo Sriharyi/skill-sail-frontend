@@ -15,7 +15,6 @@ export class HeaderComponent {
   public isLogged$ = this.authService.isLoggedIn$;
   public user: User | null = null;
   public isUser: boolean = false;
-  public userType: string = '';
   private user$: Subscription = new Subscription();
 
 
@@ -26,7 +25,6 @@ export class HeaderComponent {
       this.user = user;
       if (user) {
         this.isUser = true;
-        this.userType = user.roles[0];
       } else {
         this.isUser = false;
       }
