@@ -16,7 +16,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loadingService.showLoading();
     return of(null).pipe(
-      delay(500), // delay of 500ms
+      delay(300), // delay of 500ms
       concatMap(() => next.handle(request)),
       finalize(() => this.loadingService.hideLoading())
     );

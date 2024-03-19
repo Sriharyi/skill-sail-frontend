@@ -16,7 +16,7 @@ export class ProjectService {
   }
 
   //create project
-  createProject(project: ProjectCreateRequest, file: File) {
+  createProject(project: ProjectCreateRequest, file: File , thumbnail: File) {
     project.employerProfileId = this.userService.getUserId();
   
     // Make the HTTP request to create the project
@@ -29,7 +29,18 @@ export class ProjectService {
         formData.append('file', file);
   
         // Make the HTTP request to upload the file
-        return this.http.put<ProjectResponse>(`${this.apiUrl}/${projectId}/file`, formData);
+        return this.http.put<ProjectResponse>(`${this.apiUrl}/${projectId}/file`, formData).pipe(
+          switchMap((projectResponse: ProjectResponse) => {
+            const projectId = projectResponse.id;
+  
+            // Create a new FormData and append the thumbnail to it
+            const formData = new FormData();
+            formData.append('thumbnail', thumbnail);
+  
+            // Make the HTTP request to upload the thumbnail
+            return this.http.put<ProjectResponse>(`${this.apiUrl}/${projectId}/thumbnail`, formData);
+          })
+          );
       })
     );
   }

@@ -59,10 +59,7 @@
       </ng-template>
       <form [formGroup]="projectDetailForm" class="project-form">
 
-        <mat-form-field appearance="fill">
-          <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Enter project description" formControlName="description"></textarea>
-        </mat-form-field>
+      
 
         <mat-form-field appearance="fill">
           <mat-label>Budget</mat-label>
@@ -85,6 +82,15 @@
           <mat-datepicker #deadlinePicker></mat-datepicker>
         </mat-form-field>
   
+        <div class="file-input">
+          <h3>Upload Project Thumbnail:</h3>
+            <button mat-raised-button type="button" color="primary" (click)="thunmnail.click()">
+              <mat-icon>attach_file</mat-icon>
+              Upload Thumbnail as  Image
+              <input #thunmnail type="file" formControlName="thumbnail" id="image" class="file" (change)="onThumbnailSelected($event)">
+              <span *ngIf="projectDetailForm.get('thumbnail')?.value" class="file-name"> | {{ projectDetailForm.get('thumbnail')?.value }}</span>
+            </button>
+        </div>
   
         <div class="button-section">
           <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>

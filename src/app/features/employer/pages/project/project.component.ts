@@ -22,8 +22,9 @@ export class ProjectComponent {
   skillsList: string[] = [];
   categoriesList: string[] = CATEGORIES;
   private destroy$: Subject<boolean> = new Subject<boolean>();
-  isLinear: boolean = true;
+  isLinear: boolean = false;
   public projectFile : File | null = null;
+  public projectThumbnail : File | null = null;
 
   constructor(private fb: FormBuilder, private projectService: ProjectService, private skillService: SkillService, private router: Router) {
     this.projectInfoForm = this.createProjectInfoForm();
@@ -73,7 +74,7 @@ export class ProjectComponent {
       budget: this.fb.control(null,Validators.required),
       deadline: this.fb.control(null,Validators.required),
       bidDeadline: this.fb.control(null,Validators.required),
-      description: this.fb.control("",Validators.required),
+      thumbnail: this.fb.control(null,Validators.required)
     });
   }
 
@@ -107,6 +108,35 @@ export class ProjectComponent {
     this.projectFile = file;
   } 
 
+  onThumbnailSelected($event: Event) {
+    const file = ($event.target as HTMLInputElement).files![0];
+    if(file.size > 5000000){
+      Swal.fire({
+        title: 'Error!',
+        text: 'File size should be less than 5MB',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+      this.projectDetailForm.patchValue({
+        thumbnail: null
+      });
+      return;
+    }
+    if(file.type !== 'image/jpeg' && file.type !== 'image/png'){
+      Swal.fire({
+        title: 'Error!',
+        text: 'File type should be jpeg or png',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+      this.projectDetailForm.patchValue({
+        thumbnail: null
+      });
+      return;
+    }
+    this.projectThumbnail = file;
+  }
+
 
   onSubmit() {
     if(this.projectInfoForm.invalid || this.projectDetailForm.invalid){
@@ -119,18 +149,20 @@ export class ProjectComponent {
       return;
     }
     const {file,...restInfo} = this.projectInfoForm.value;
+    const {thumbnail,...restDetail} = this.projectDetailForm.value;
     const projectData =   {
       ...restInfo,
-      ...this.projectDetailForm.value,
+      ...restDetail,
       employerProfileId: ''
     } as ProjectCreateRequest;
 
-    if (this.projectFile) {
-      this.projectService.createProject(projectData, this.projectFile)
+    if (this.projectFile && this.projectThumbnail) {
+      this.projectService.createProject(projectData, this.projectFile, this.projectThumbnail)
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           {
             next: (value) => {
+              console.log(value);
               // Swal.fire({
               //   title: 'Success!',
               //   text: 'Project created successfully',

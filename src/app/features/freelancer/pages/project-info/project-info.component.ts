@@ -37,6 +37,8 @@ export class ProjectInfoComponent {
       freelancerProfileId: '',
       title: '',
       description: '',
+      fileUrl: '',
+      thumbnail: '',
       employerProfileId: '',
       category: '',
       skills: [],

@@ -11,12 +11,11 @@ export interface ProjectDetailForm{
     budget: FormControl<number | null>;
     deadline: FormControl<Date | null>;
     bidDeadline: FormControl<Date | null>;
-    description: FormControl<string | null>;
+    thumbnail: FormControl<File | null>;
 }
 
 export interface ProjectCreateRequest{
     title: string;
-    description: string;
     employerProfileId: string;
     category: string;
     skills: string[];
@@ -31,6 +30,8 @@ export interface ProjectResponse {
     title: string;
     description: string;
     employerProfileId: string;
+    fileUrl: string;
+    thumbnail: string;
     category: string;
     skills: string[];
     budget: number;
