@@ -4,6 +4,7 @@ import { environment } from "../../../../environments/environment.development";
 import { Page, ProjectCreateRequest, ProjectResponse } from "../../../shared/models/employer/project-create";
 import { ProjectCard } from "../../../shared/models/freelancer/project";
 import { UserService } from "../user.service";
+import { Observable, switchMap } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,22 @@ export class ProjectService {
   }
 
   //create project
-  createProject(project: ProjectCreateRequest) {
+  createProject(project: ProjectCreateRequest, file: File) {
     project.employerProfileId = this.userService.getUserId();
-    return this.http.post<ProjectResponse>(`${this.apiUrl}`, project);
+  
+    // Make the HTTP request to create the project
+    return this.http.post<ProjectResponse>(`${this.apiUrl}`, project).pipe(
+      switchMap((projectResponse: ProjectResponse) => {
+        const projectId = projectResponse.id;
+        
+        // Create a new FormData and append the file to it
+        const formData = new FormData();
+        formData.append('file', file);
+  
+        // Make the HTTP request to upload the file
+        return this.http.put<ProjectResponse>(`${this.apiUrl}/${projectId}/file`, formData);
+      })
+    );
   }
 
   //get all projects

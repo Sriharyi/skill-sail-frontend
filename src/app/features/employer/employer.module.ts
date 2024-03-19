@@ -17,6 +17,7 @@ import { MatTableModule } from "@angular/material/table";
 import { ProfileAboutComponent } from './components/profile-about/profile-about.component';
 import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 import { ProfileRatingComponent } from './components/profile-rating/profile-rating.component';
+import { MatStepperModule } from '@angular/material/stepper';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { UpdateComponent } from './components/update/update.component';
 import { EmployerRoutingModule } from './employer-routing.module';
@@ -45,7 +46,8 @@ import { ViewProjectsComponent } from './pages/view-projects/view-projects.compo
     MatNativeDateModule,
     MatSortModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatStepperModule
   ]
 })
 export class EmployerModule { }
