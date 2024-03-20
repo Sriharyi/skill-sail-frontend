@@ -61,7 +61,7 @@
     </section>
   </ng-template>
   <section class="pagination">
-
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalrecords"></p-paginator>
   </section>
 
 </main>
