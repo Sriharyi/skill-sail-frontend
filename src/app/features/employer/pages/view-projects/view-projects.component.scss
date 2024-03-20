@@ -25,19 +25,42 @@
 
 .project-container {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-between;
+  margin-right: 15rem;
+  margin-left: 15rem;
 }
 
-.card {
-  flex: 0 0 calc(33.33% - 20px);
-  margin: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+.card{
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba($background-color, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin-top: 20px;
   cursor: pointer;
 
   &:hover {
     transform: scale(1.02);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba($background-color, 0.2);
   }
+}
+
+
+
+.example-container {
+  border: 1px solid #555;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15rem;
+  margin-left: 15rem;
+}
+
+.example-form-field{
+  width: 30%;
+  margin-bottom: 20px;
 }

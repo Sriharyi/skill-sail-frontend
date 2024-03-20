@@ -22,7 +22,7 @@ export class ProjectComponent {
   skillsList: string[] = [];
   categoriesList: string[] = CATEGORIES;
   private destroy$: Subject<boolean> = new Subject<boolean>();
-  isLinear: boolean = false;
+  isLinear: boolean = true;
   public projectFile : File | null = null;
   public projectThumbnail : File | null = null;
 

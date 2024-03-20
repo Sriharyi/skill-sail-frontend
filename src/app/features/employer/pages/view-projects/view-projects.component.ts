@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProjectService } from "../../../../core/services/employer/project.service";
 import { ProjectResponse } from "../../../../shared/models/employer/project-create";
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-view-projects',
@@ -9,10 +10,17 @@ import { ProjectResponse } from "../../../../shared/models/employer/project-crea
   styleUrls: ['./view-projects.component.scss']
 })
 export class ViewProjectsComponent {
+handlePageEvent($event: PageEvent) {
+throw new Error('Method not implemented.');
+}
+search() {
+throw new Error('Method not implemented.');
+}
 
   public projects: ProjectResponse[] = [];
 
   public projectStatus: string = "";
+  searchText: any;
   constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.projectStatus = params['status'];
