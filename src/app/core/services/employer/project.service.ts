@@ -10,7 +10,7 @@ import { Observable, switchMap } from "rxjs";
   providedIn: 'root'
 })
 export class ProjectService {
- 
+  
 
   private readonly apiUrl: string = `${environment.DOMAIN}/projects`;
   constructor(private http: HttpClient, private userService: UserService) {
@@ -76,5 +76,16 @@ export class ProjectService {
   getAcceptedProjects() {
     const freelancerId = this.userService.getUserId();
     return this.http.get<ProjectCard[]>(`${this.apiUrl}/freelancer/${freelancerId}`);
+  }
+
+  //search projects 
+  searchProjects(searchText: string, page: number, pageSize: number) {
+    return this.http.get<Page<ProjectResponse>>(`${this.apiUrl}/search?searchText=${searchText}&page=${page}&size=${pageSize}`);
+  }
+
+  //search projects by employer id
+  searchProjectsByEmployerId(searchText: string, page: number, pageSize: number) {
+    const employerId = this.userService.getUserId();
+    return this.http.get<Page<ProjectResponse>>(`${this.apiUrl}/employer/${employerId}/search?searchText=${searchText}&page=${page}&size=${pageSize}`);
   }
 }

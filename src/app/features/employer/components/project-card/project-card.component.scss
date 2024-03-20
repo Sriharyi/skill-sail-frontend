@@ -25,6 +25,12 @@
     text-align: center;
     margin: 5px;
   }
+
+  p span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
   mat-icon {
    display:inline;
