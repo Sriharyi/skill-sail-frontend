@@ -11,6 +11,7 @@ import { UserService } from "../user.service";
 })
 export class BidService {
 
+
   private readonly apiUrl = `${environment.DOMAIN}/bids`
 
   constructor(private http: HttpClient, private userService: UserService) {
@@ -34,6 +35,11 @@ export class BidService {
   getBidsByFreelancerId() {
     const freelancerId = this.userService.getUserId();
     return this.http.get<FreelancerBidResponse[]>(`${this.apiUrl}/freelancer/${freelancerId}`);
+  }
+
+  isalreadyBidded(id: string) {
+    const freelancerId = this.userService.getUserId();
+    return this.http.get<boolean>(`${this.apiUrl}/project/${id}/freelancer/${freelancerId}`);
   }
 }
 

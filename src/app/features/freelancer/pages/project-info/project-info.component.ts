@@ -84,7 +84,7 @@ export class ProjectInfoComponent {
           console.log(projectSkills);
           const isFreelancerHasSkills = projectSkills.every(skill => freelancerSkills.includes(skill));
           if(isFreelancerHasSkills){
-            this.openMatDialog();
+            this.isAgainBid();
           } else {
             Swal.fire('Error', 'You need to acquire skills to bid', 'error').then(
               () => {
@@ -104,9 +104,20 @@ export class ProjectInfoComponent {
         console.error(error);
       }
     });
+  }
 
-
-
+  isAgainBid() {
+    this.bidService.isalreadyBidded(this.project.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            Swal.fire('Error', 'You have already bidded for this project', 'error');
+          } else {
+            this.openMatDialog();
+          }
+        }
+      });
   }
 
   openMatDialog() {

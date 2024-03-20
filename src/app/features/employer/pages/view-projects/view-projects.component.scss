@@ -5,22 +5,27 @@
   min-height: 100vh;
 }
 
+.project-headers{
+    padding: 20px;
+    margin: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: $secondary-background-color;  
+  }
+
 .project-header {
   padding: 20px;
-  margin-bottom: 20px;
-  background-color: $secondary-background-color;
   border-radius: 5px;
-}
-
-.project-header h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.project-header p {
-  font-size: 16px;
-  color: #666;
+  h1{
+    font-size: 2rem;
+    font-weight: 500;
+    color: $primary-color;
+  }
+  p{
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: $secondary-text-color;
+  }
 }
 
 .project-container {

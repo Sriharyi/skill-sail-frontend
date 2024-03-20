@@ -27,7 +27,10 @@ export class ProjectService {
         
         // Create a new FormData and append the file to it
         const formData = new FormData();
+        
         formData.append('file', file);
+
+        console.log(formData);
   
         // Make the HTTP request to upload the file
         return this.http.put<ProjectResponse>(`${this.apiUrl}/${projectId}/file`, formData).pipe(

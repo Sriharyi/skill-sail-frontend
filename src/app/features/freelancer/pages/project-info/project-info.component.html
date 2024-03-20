@@ -6,16 +6,12 @@
         <mat-list>
           <mat-list-item><strong>Category:</strong> {{ project.category }}</mat-list-item>
           <mat-list-item><strong>Skills required:</strong> {{ project.skills.join(', ') }}</mat-list-item>
-          <mat-list-item><strong>Budget:</strong> &#8377; {{ project.budget }}</mat-list-item>
+          <mat-list-item><strong>Budget:</strong><span class="open"> &#8377; {{ project.budget }}</span> </mat-list-item>
           <mat-list-item><strong>Deadline:</strong> {{ project.deadline | date}}</mat-list-item>
           <mat-list-item><strong>Bid Deadline:</strong> {{ project.bidDeadline | date }}</mat-list-item>
-          <mat-list-item><strong>Status:</strong> <span class="highlight"> {{ project.status }}</span> </mat-list-item>
+          <mat-list-item><strong>Status:</strong> <span class="open"> {{ project.status }}</span> </mat-list-item>
         </mat-list>
       </mat-card-content>
-      <div class="description">
-        <mat-card-title>Project Requirements:</mat-card-title>
-        <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
-      </div>
     </mat-card>
 
     <mat-card class="employer-details">
