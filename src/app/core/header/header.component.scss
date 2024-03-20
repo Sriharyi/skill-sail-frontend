@@ -2,7 +2,7 @@
 
 .topnav {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     background-color: $background-color;
     border-bottom: 3px solid #ccc;
@@ -12,10 +12,11 @@
   
   .topnav .logo {
     height: 30px;
+    margin-left: 10rem;
   }
 
   .nav{
-    margin:10px;
+    margin-right: 10rem;
   }
 
   .nav-btn:hover{

@@ -27,16 +27,16 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-right: 15rem;
-  margin-left: 15rem;
+  margin-right: 10rem;
+  margin-left: 10rem;
 }
 
-.card{
+.card {
   margin-bottom: 20px;
   box-shadow: 0 4px 8px 0 rgba($background-color, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   margin-top: 20px;
+  margin-right: 20px;
   cursor: pointer;
 
   &:hover {
@@ -60,7 +60,7 @@
   margin-left: 15rem;
 }
 
-.example-form-field{
+.example-form-field {
   width: 30%;
   margin-bottom: 20px;
 }
