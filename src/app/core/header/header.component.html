@@ -31,14 +31,12 @@
     <button mat-menu-item *appRoleBasedAccess="['ROLE_ADMIN']" routerLink="/admin/skills">Manages Skills</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_ADMIN']" routerLink="/admin/skill/create">Add Skill</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/profile">My Profile</button>
-    <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/dashboard">My DashBoard</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/projects">Explore Projects</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/bids">My Bids</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/orders">My Orders</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_FREELANCER']" routerLink="/freelancer/skills">Skill Assessments</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/profile">My Profile</button>
-    <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/dashboard">My DashBoard</button>
-    <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/project/create">Launch Project</button>
+    <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/project/create">Post Project</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/projects" [queryParams]="{status: 'open'}" >Open Projects</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/projects" [queryParams]="{status: 'active'}" >Active Projects</button>
     <button mat-menu-item *appRoleBasedAccess="['ROLE_EMPLOYER']" routerLink="/employer/projects" [queryParams]="{status: 'completed'}">Completed Projects</button>

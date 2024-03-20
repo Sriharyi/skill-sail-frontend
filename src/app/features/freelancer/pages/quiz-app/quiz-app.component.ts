@@ -17,7 +17,6 @@ import { ProfileService } from "../../../../core/services/profile/profile.servic
 export class QuizAppComponent {
 
 
-
   timerLeftMin: number = 4;
   timerLeftSec: number = 59;
   questions: Question[] = [];
@@ -31,6 +30,7 @@ export class QuizAppComponent {
   isStarted: boolean = false;
   interval: any;
   totalQuestions: number = 0;
+  skipcount: number = 0;
 
   private assessmentId: string = '';
   private skillId: string = '';
@@ -57,6 +57,12 @@ export class QuizAppComponent {
           console.error(error);
         }
       });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   startQuiz() {
@@ -90,6 +96,21 @@ export class QuizAppComponent {
     this.selectedOption = -1;
   }
 
+  skipQuestion() {
+    if (this.skipcount < 3){
+      const canSkip = 2 - this.skipcount;
+      Swal.fire('You have skipped the question', `You can skip ${canSkip} more questions`, 'info').then(
+        () => this.nextQuestion()
+      );
+    }
+    if (this.skipcount === 3){
+        //he skipped is 3 he can't skip more than 3 questions
+        Swal.fire('You have skipped 3 questions',   'You can not skip more than 3 questions', 'error').then(
+          () => this.nextQuestion()
+        );
+        }
+  }
+
   private isCorrectAnswer() {
     const correctOption = this.currentQuestion.correctOption;
 
@@ -97,8 +118,9 @@ export class QuizAppComponent {
       this.correctAnswer++;
     } else {
       if (this.selectedOption !== -1) {
-
         this.wrongAnswer++;
+      }else{
+        this.skipcount++;
       }
     }
   }
@@ -111,11 +133,8 @@ export class QuizAppComponent {
 
   }
 
-
-  ngOnDestroy() {
-    clearInterval(this.interval);
-    this.destroy$.next();
-    this.destroy$.complete();
+  clearOption() {
+    this.selectedOption = -1;
   }
 
   submitTest() {
@@ -139,7 +158,7 @@ export class QuizAppComponent {
     result.score = (this.correctAnswer * 10) - (this.wrongAnswer * 5);
 
     const totalscore = this.totalQuestions * 10;
-    const passScore = totalscore * 0.8;
+    const passScore = totalscore * 0.7;
 
     if (result.score < 0) {
       result.score = 0;
@@ -164,13 +183,25 @@ export class QuizAppComponent {
   }
 
   showResultDialog(data: AssessmentDto) {
-    Swal.fire({
-      title: 'Test Completed',
-      text: `You have scored ${data.score} out of ${this.totalQuestions * 10} and your status is ${data.status}`,
-      icon: 'success',
-      confirmButtonText: 'OK'
-    }).then(() => {
-      this.router.navigate(['/freelancer/skills']);
-    });
+      if(data.status === 'COMPLETED'){
+        Swal.fire({
+          title: 'Test Completed',
+          html: `You have scored <strong>${data.score}</strong> out of <strong>${this.totalQuestions * 10}</strong> and your status is  <span style="color: green;"> ${data.status} </span>`,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['/freelancer/skills']);
+        });
+      } else {
+        Swal.fire({
+          title: 'Test Failed',
+          html: `You have scored <strong>${data.score}</strong> out of <strong>${this.totalQuestions * 10}</strong> and your status is  <span style="color: red;"> ${data.status} </span>`,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['/freelancer/skills']);
+        });
+      }
+
   }
 }

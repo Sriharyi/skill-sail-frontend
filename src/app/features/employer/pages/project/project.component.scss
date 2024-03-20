@@ -1,60 +1,58 @@
 @import "src/assets/styles/variables.scss";
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: $background-color;
-  height: 100%;
-}
-
-.top-section {
-  padding: 20px;
-  margin: 50px;
-  background-color: $secondary-background-color;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-
-  mat-card-header {
-    background-color: #3f51b5;
-    color: #fff;
+.hero-section {
+  .header{
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: $secondary-background-color; 
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      color: $primary-color;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: $secondary-text-color;
+      margin-left: 2px;
+    }
   }
 
-  mat-card-content {
-    padding-top: 10px;
-  }
 }
 
-.project-form {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  background-color: $secondary-background-color;
+.mat-stepper-horizontal {
+  margin-top: 8px;
 }
 
-mat-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 10px;
-
+.mat-mdc-form-field {
+  margin-top: 16px;
 }
 
-mat-card-content {
+
+.form-section{
+    width: 40rem;
+    margin: 0 auto;
+    box-shadow: 0px 4px 10px rgba($primary-color, 0.2);
+}
+
+.project-form{
+  margin-top: 1rem;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  background-color: $secondary-background-color;
-  padding: 20px;
 }
 
-mat-form-field {
-  margin-bottom: 20px;
-}
-
-mat-card-actions {
+.button-section{
   display: flex;
   justify-content: flex-end;
-  padding: 20px;
-  background-color: $secondary-background-color;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.file-input .file {
+  display: none;
 }

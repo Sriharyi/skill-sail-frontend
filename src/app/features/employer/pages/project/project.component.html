@@ -1,77 +1,99 @@
-
-<div class="container">
-  <!-- Top Section -->
-  <mat-card class="top-section">
-    <mat-card-header>
-      <mat-card-title>Create a New Project</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>This section allows you to create a new project in your application.</p>
-    </mat-card-content>
-  </mat-card>
-
-  <!-- Bottom Section -->
-  <div class="bottom-section">
-    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
-      <mat-card class="project-form">
-        <mat-card-header>
-          <mat-icon>assignment</mat-icon>
-          <h2 mat-card-title>Project Form</h2>
-        </mat-card-header>
-
-        <mat-card-content>
-          <mat-form-field appearance="fill">
-            <mat-label>Title</mat-label>
-            <input matInput placeholder="Enter project title" formControlName="title">
-          </mat-form-field>
-
-
-          <mat-form-field appearance="fill">
-            <mat-label>Budget</mat-label>
-            <span matPrefix>&nbsp;&#8377;</span>
-            <input type="number" matInput placeholder="Enter budget" formControlName="budget">
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Deadline</mat-label>
-            <input matInput [matDatepicker]="deadlinePicker" placeholder="Enter deadline" formControlName="deadline">
-            <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
-            <mat-datepicker #deadlinePicker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Bid Deadline</mat-label>
-            <input matInput [matDatepicker]="bidDeadlinePicker" placeholder="Enter deadline" formControlName="bidDeadline">
-            <mat-datepicker-toggle matSuffix [for]="bidDeadlinePicker"></mat-datepicker-toggle>
-            <mat-datepicker #bidDeadlinePicker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Category</mat-label>
-            <mat-select placeholder="Select category" formControlName="category">
-              <mat-option *ngFor="let category of categoriesList" [value]="category">{{ category }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Skills</mat-label>
-            <mat-select placeholder="Select skills" multiple formControlName="skills">
-              <mat-option *ngFor="let skill of skillsList" [value]="skill">{{ skill }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Describe the project" formControlName="description"></textarea>
-          </mat-form-field>
-
-        </mat-card-content>
-
-        <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" [disabled]="projectForm.invalid">Submit</button>
-          <button mat-button type="reset">Cancel</button>
-        </mat-card-actions>
-      </mat-card>
-    </form>
+<!-- Top Section -->
+<section class="hero-section">
+  <div class="header">
+    <h1>Create a New Project</h1>
+    <p>This section allows you to create a new project in your application.</p>
   </div>
-</div>
+</section>
+
+<section class="form-section">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="projectInfoForm">
+      <ng-template matStepLabel>
+        Project Overview
+      </ng-template>
+      <form [formGroup]="projectInfoForm" class="project-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Enter project title" formControlName="title">
+        </mat-form-field>
+  
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select placeholder="Select category" formControlName="category">
+            <mat-option *ngFor="let category of categoriesList" [value]="category">{{ category }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Skills</mat-label>
+          <mat-select placeholder="Select skills" multiple formControlName="skills">
+            <mat-option *ngFor="let skill of skillsList" [value]="skill">{{ skill }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        
+        
+        <div class="file-input">
+          <h3>Upload Project Details:</h3>
+          <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">
+            <mat-icon>attach_file</mat-icon>
+            Upload File as PDF
+            <input #fileInput type="file" formControlName="file" id="file" class="file" (change)="onFileSelected($event)">
+            <span *ngIf="projectInfoForm.get('file')?.value" class="file-name"> | {{ projectInfoForm.get('file')?.value }}</span>
+          </button>
+        </div>
+  
+  
+        <div class="button-section">
+          <button mat-raised-button color="primary" type="button" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="projectDetailForm">
+      <ng-template matStepLabel>
+        Project Specifications
+      </ng-template>
+      <form [formGroup]="projectDetailForm" class="project-form">
+
+      
+
+        <mat-form-field appearance="fill">
+          <mat-label>Budget</mat-label>
+          <span matPrefix>&nbsp;&#8377;</span>
+          <input type="number" matInput placeholder="Enter budget" formControlName="budget">
+        </mat-form-field>
+  
+       
+        <mat-form-field appearance="fill">
+          <mat-label>Bid Deadline</mat-label>
+          <input matInput [matDatepicker]="bidDeadlinePicker" placeholder="Enter deadline" formControlName="bidDeadline">
+          <mat-datepicker-toggle matSuffix [for]="bidDeadlinePicker"></mat-datepicker-toggle>
+          <mat-datepicker #bidDeadlinePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Deadline</mat-label>
+          <input matInput [matDatepicker]="deadlinePicker" placeholder="Enter deadline" formControlName="deadline">
+          <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+          <mat-datepicker #deadlinePicker></mat-datepicker>
+        </mat-form-field>
+  
+        <div class="file-input">
+          <h3>Upload Project Thumbnail:</h3>
+            <button mat-raised-button type="button" color="primary" (click)="thunmnail.click()">
+              <mat-icon>attach_file</mat-icon>
+              Upload Thumbnail as  Image
+              <input #thunmnail type="file" formControlName="thumbnail" id="image" class="file" (change)="onThumbnailSelected($event)">
+              <span *ngIf="projectDetailForm.get('thumbnail')?.value" class="file-name"> | {{ projectDetailForm.get('thumbnail')?.value }}</span>
+            </button>
+        </div>
+  
+        <div class="button-section">
+          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</section>

@@ -14,13 +14,8 @@
 .project-details,
 .employer-details {
   width: 45%;
-  transition: transform 0.3s ease-in-out;
 }
 
-.project-details:hover,
-.employer-details:hover {
-  transform: scale(1.05);
-}
 
 mat-card {
   padding: 20px;
@@ -71,8 +66,23 @@ img {
   }
 
   button:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
+}
+
+.open{
+  color: $open-color;
+  font-weight: bold;
+}
+
+.active{
+  color: $active-color;
+  font-weight: bold;
+}
+
+.completed{
+  color: $completed-color;
+  font-weight: bold;
 }
 
 

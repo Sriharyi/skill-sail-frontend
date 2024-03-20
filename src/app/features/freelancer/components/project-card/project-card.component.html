@@ -1,0 +1,10 @@
+<mat-card class="example-card">
+    <img mat-card-image class="card-image" [src]="project.thumbnail" alt="Photo of a Shiba Inu">
+    <mat-card-content class="card-content">
+      <h2>{{ project.title }}</h2>
+      <div class="card-info">
+        <p><span><mat-icon color="primary" >dashboard</mat-icon>  Skills: {{ project.skills.join(', ') }}</span></p>
+        <p><span> <mat-icon color="primary">local_offer</mat-icon> Budget: {{ project.budget }}</span></p>
+      </div>
+    </mat-card-content>
+</mat-card>

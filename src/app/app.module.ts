@@ -10,11 +10,13 @@ import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
+import { SafeurlPipe } from './shared/pipes/safeurl.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     UnauthorizedComponent,
+    SafeurlPipe
   ],
   imports: [
     BrowserModule,

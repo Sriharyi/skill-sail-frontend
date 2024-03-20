@@ -32,10 +32,11 @@
           </div>
         </div>
         <div class="question-action">
+          <button mat-raised-button color="warn" type="reset" (click)="clearOption()">Clear</button>
+          <button mat-raised-button  color="accent" [disabled]="skipcount === 3" (click)="skipQuestion()">skip</button>
           <ng-container *ngIf="currentQuestionIndex<totalQuestions-1; else submitTemplate">
-            <button mat-raised-button color="primary" (click)="nextQuestion()">Next</button>
+            <button mat-raised-button color="primary" [disabled]="selectedOption === -1" (click)="nextQuestion()">Next</button>
           </ng-container>
-
           <ng-template #submitTemplate>
             <button mat-raised-button color="primary" (click)="submitTest()">Submit</button>
           </ng-template>

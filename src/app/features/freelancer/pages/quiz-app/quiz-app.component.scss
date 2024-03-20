@@ -13,8 +13,8 @@
   display: flex;
   flex-direction: column;
   width: 80rem;
-  min-height: 30rem;
-  margin-top: 2rem;
+  height: 40rem;
+  margin-top: 9rem;
   padding: 2rem;
   background-color: $secondary-background-color;
   border-radius: 4px;
@@ -38,17 +38,27 @@
   border-radius: 4px;
 }
 
+.time{
+  margin-right: 1rem;
+}
+
+.time-count{
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .question-body {
   margin-top: 1rem;
 }
 
 .question-text {
   font-size: 2.5rem;
-  /* line-height: 1.5; */
+  line-height: 1; 
 }
 
 .question-options {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .question-option {
@@ -62,7 +72,8 @@
   padding: 1.4rem;
   margin: 0.5rem 0;
   color: $primary-color;
-  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .question-option:hover {
@@ -77,6 +88,12 @@ input[type="checkbox"] {
 .question-option input[type="radio"]:checked+label {
   background: $primary-color;
   color: white;
+}
+
+//unchecked
+.question-option input[type="radio"]+label {
+  background: white;
+  color: $primary-color;
 }
 
 
@@ -94,7 +111,19 @@ input[type="checkbox"] {
 }
 
 .question-footer .question-left {
-  font-size: 1rem;
+  font-size: 1.5rem;
+}
+
+.total-question{
+  color: $primary-color;
+}
+
+.question-number{
+  color: $primary-color;
+}
+
+.bold{
+  font-weight: 700;
 }
 
 .next-btn {
@@ -122,4 +151,35 @@ input[type="checkbox"] {
 /* btn arrow On hover */
 .next-btn:hover span i {
   transform: translateX(1rem);
+}
+
+.warn{
+  color: $warn-color;
+  font-weight: bold;
+}
+
+
+.skip-btn {
+  font-size: 1rem;
+  padding: 1.5em 1.5em;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background-color: $secondary-color;
+  color: white;
+}
+
+.skip-btn:hover {
+  background-color: $primary-color;
+  filter: brightness(90%);
+  transform: scale(1.02);
+}
+
+.question-action {
+  
+  button{
+    margin: 0 1rem;
+  }
 }

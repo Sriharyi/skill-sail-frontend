@@ -34,7 +34,7 @@ export class AssessmentComponent {
         .subscribe({
           next: (page: any) => this.loadPage(page.pageIndex, page.pageSize)
         });
-      this.loadPage(0, 2);
+      this.loadPage(0, 10);
     }
     this.changeDetectorRef.detectChanges();
   }
@@ -52,7 +52,6 @@ export class AssessmentComponent {
               .pipe(takeUntil(this.destroy))
               .subscribe({
                 next: (response) => {
-                  console.log(response);
                   const testId = response.id;
                   const skillId = response.skillId;
                   this.router.navigate([`/freelancer/assessment/${testId}`], { queryParams: { skillId: skillId } });

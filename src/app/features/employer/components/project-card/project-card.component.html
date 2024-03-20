@@ -1,14 +1,19 @@
-<mat-card class="project-card">
-  <mat-card-header class="project-card-header">
-    <mat-card-title><mat-icon>title</mat-icon> {{ project.title }}</mat-card-title>
-    <mat-card-subtitle><mat-icon>category</mat-icon> {{ project.category }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content class="project-card-content">
-    <p><mat-icon>description</mat-icon> {{ project.description }}</p>
-    <p><mat-icon>build</mat-icon> Skills: {{ project.skills.join(', ') }}</p>
-    <p><mat-icon>attach_money</mat-icon> Budget: {{ project.budget }}</p>
-    <p><mat-icon>update</mat-icon> Status: <span class="highlight">{{ project.status }}</span> </p>
-    <p><mat-icon>calendar_today</mat-icon> Deadline: {{ project.deadline | date }}</p>
-    <p><mat-icon>alarm</mat-icon> Bid Deadline: <span class="highlight"> {{ project.bidDeadline | date }} </span></p>
+<mat-card class="example-card">
+  <img mat-card-image class="card-image" [src]="project.thumbnail" alt="Photo of a Shiba Inu">
+  <mat-card-content class="card-content">
+    <h2>{{ project.title }}</h2>
+    <div class="card-info">
+      <p>
+        <span>
+          <mat-icon color="primary">update</mat-icon>
+          Status: 
+          <span [ngClass]="{'open': project.status === 'OPEN', 'completed': project.status === 'COMPLETED', 'active': project.status === 'ACTIVE'}">
+            {{ project.status }}
+          </span>
+        </span>
+      </p>
+      <p><span><mat-icon color="primary" >dashboard</mat-icon>  Skills: {{ project.skills.join(', ') }}</span></p>
+    </div>
   </mat-card-content>
 </mat-card>
+

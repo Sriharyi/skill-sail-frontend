@@ -1,5 +1,29 @@
 @import "src/assets/styles/variables";
 
+.hero-section {
+  .header{
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: $secondary-background-color; 
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      color: $primary-color;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: $secondary-text-color;
+      margin-left: 2px;
+    }
+  }
+
+}
+
 .search-section {
   display: flex;
   flex-direction: column;
@@ -9,65 +33,29 @@
   background-color: $background-color;
 }
 
-.project-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  background-color: $background-color;
-  padding: 2em;
-}
 
 .project-list {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: start;
-  padding: 2em;
+  margin-right: 10rem;
+  margin-left: 10rem;
 }
 
-.project-card {
-  width: 30%;
-  margin: 1em;
-  box-sizing: border-box;
-  transition: transform 0.3s ease-in-out;
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba($background-color, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin-top: 20px;
+  margin-right: 20px;
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.05);
-  }
-
-  mat-card-header {
-    background-color: $primary-color;
-    font-size: 1.5rem;
-    padding: 1rem;
-  }
-
-  mat-card-title,
-  mat-card-subtitle {
-    color: #fff;
-  }
-
-  mat-card-content {
-    padding: 1em;
-  }
-
-  .highlight{
-    color: $accent-color;
-    font-weight: bold;
-  }
-
-  mat-card-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1em;
-
-    button {
-      color: #fff;
-      background-color: #007bff;
-    }
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px 0 rgba($background-color, 0.2);
   }
 }
+
 
 .example-form-field {
   width: 30%;

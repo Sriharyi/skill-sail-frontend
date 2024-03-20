@@ -27,6 +27,9 @@ const routes: Routes = [
       {
         path: "skills",
         component: ManageSkillComponent
+      },{
+        path: "skill/:id/edit",
+        component: CreateSkillComponent
       }
 
     ]

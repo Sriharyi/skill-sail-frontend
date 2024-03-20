@@ -3,12 +3,14 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ProjectService } from "../../../../core/services/employer/project.service";
 import { ProjectCard } from "../../../../shared/models/freelancer/project";
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent {
+
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -36,6 +38,21 @@ export class OrdersComponent {
           console.error(error);
         }
       });
+  }
+
+  openProject(project: ProjectCard) {
+    //this is an ongoing task add a sweet alert to show the project details remove description from the project card
+    Swal.fire({
+      title: project.title,
+      showCancelButton: true,
+      confirmButtonText: 'View Project',
+      cancelButtonText: 'Close',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //navigate to the project details pdf
+        window.open(project.fileUrl, '_blank');
+      }
+    });
   }
 
 }

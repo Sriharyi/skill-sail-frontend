@@ -15,6 +15,8 @@ export class ProjectCardComponent {
             freelancerProfileId: '',
             title: '',
             description: '',
+            fileUrl: '',
+            thumbnail: '',
             employerProfileId: '',
             category: '',
             skills: [],
