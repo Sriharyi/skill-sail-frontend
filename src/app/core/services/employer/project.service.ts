@@ -10,6 +10,7 @@ import { Observable, switchMap } from "rxjs";
   providedIn: 'root'
 })
 export class ProjectService {
+ 
 
   private readonly apiUrl: string = `${environment.DOMAIN}/projects`;
   constructor(private http: HttpClient, private userService: UserService) {
@@ -63,6 +64,12 @@ export class ProjectService {
   getProjectsByEmployerId() {
     const employerId = this.userService.getUserId();
     return this.http.get<ProjectResponse[]>(`${this.apiUrl}/employer/${employerId}`);
+  }
+
+  //get paginated projects by employer id
+  getPaginatedProjectsByEmployerId(page: number, size: number) {
+    const employerId = this.userService.getUserId();
+    return this.http.get<Page<ProjectResponse>>(`${this.apiUrl}/employer/${employerId}/page?page=${page}&size=${size}`);
   }
 
 

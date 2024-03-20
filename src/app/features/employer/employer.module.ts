@@ -29,7 +29,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { ViewBidsComponent } from './pages/view-bids/view-bids.component';
 import { ViewProjectsComponent } from './pages/view-projects/view-projects.component';
-
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   declarations: [EmployerComponent, DashboardComponent, ProfileComponent, ProfileCardComponent, UpdateComponent, ProfileRatingComponent, ProfileAboutComponent, ProjectComponent, ViewProjectsComponent, ProjectCardComponent, ViewBidsComponent],
   imports: [
@@ -51,6 +51,7 @@ import { ViewProjectsComponent } from './pages/view-projects/view-projects.compo
     MatStepperModule,
     MatSidenavModule,
     MatTooltipModule,
+    PaginatorModule,
     FormsModule
   ]
 })

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProjectService } from "../../../../core/services/employer/project.service";
 import { ProjectResponse } from "../../../../shared/models/employer/project-create";
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-view-projects',
@@ -10,9 +9,11 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./view-projects.component.scss']
 })
 export class ViewProjectsComponent {
-handlePageEvent($event: PageEvent) {
-throw new Error('Method not implemented.');
-}
+first: number = 0;
+rows: number = 12;
+totalrecords: number=60;
+
+
 search() {
 throw new Error('Method not implemented.');
 }
@@ -24,24 +25,28 @@ throw new Error('Method not implemented.');
   constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.projectStatus = params['status'];
-      this.loadProjects();
     });
   }
 
   ngOnInit(): void {
-    this.loadProjects();
+    this.loadProjects(this.first, this.rows);
   }
 
-  loadProjects() {
-    this.projectService.getProjectsByEmployerId().subscribe({
+  onPageChange($event: any) {
+    this.loadProjects($event.page, $event.rows);
+  }
+
+  loadProjects(page: number, rows: number) {
+    this.projectService.getPaginatedProjectsByEmployerId(page, rows).subscribe({
       next: (response) => {
-        this.projects = response;
+        this.projects = response.content;
+        this.totalrecords = response.totalElements;
         this.filterProjects();
       },
       error: (error) => {
         console.error(error);
       }
-    })
+    });
   }
 
   openProject(project: ProjectResponse) {
