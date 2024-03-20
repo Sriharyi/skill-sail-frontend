@@ -162,15 +162,14 @@ export class ProjectComponent {
         .subscribe(
           {
             next: (value) => {
-              console.log(value);
-              // Swal.fire({
-              //   title: 'Success!',
-              //   text: 'Project created successfully',
-              //   icon: 'success',
-              //   confirmButtonText: 'Ok'
-              // }).then(() => {
-              //   this.router.navigate(['/employer/projects'], { queryParams: { status: 'open' } });
-              // });
+              Swal.fire({
+                title: 'Success!',
+                text: 'Project created successfully',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              }).then(() => {
+                this.router.navigate(['/employer/projects'], { queryParams: { status: 'open' } });
+              });
             },
             error: (error) => {
               console.log(error);

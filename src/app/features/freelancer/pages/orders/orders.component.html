@@ -1,11 +1,15 @@
-<section class="order">
+
+<section class="hero-section">
   <header class="header">
-    <h2>My Projects</h2>
+    <h1>My Projects</h1>
     <p>Here are the projects that are allocated to you</p>
-  </header>
-  <div class="order-container">
+  </header>  
+</section>
+
+<section class="project-view">
+  <div class="project-list">
     <ng-container *ngFor="let project of projects">
-      <app-order-card [project]="project" class="card"></app-order-card>
+      <app-order-card [project]="project" class="card" (click)="openProject(project)"></app-order-card>
     </ng-container>
   </div>
 </section>

@@ -32,6 +32,8 @@ export interface ProjectCard {
   id: number;
   title: string;
   description: string;
+  thumbnail: string;
+  fileUrl: string;
   category: string;
   skills: string[];
   bidAmount: number;

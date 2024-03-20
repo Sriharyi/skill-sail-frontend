@@ -120,6 +120,11 @@ export class ProjectInfoComponent {
       });
   }
 
+  openProjectDetails() {
+    console.log(this.project.fileUrl);
+    window.open(this.project.fileUrl, '_blank');
+  }
+
   openMatDialog() {
     this.matDialog.open(BidCreateComponent, {
       width: '800px',

@@ -1,7 +1,7 @@
 <section class="project">
   <div class="project-info">
     <mat-card class="project-details">
-      <mat-card-title>{{ project.title }}</mat-card-title>
+      <mat-card-title>{{ project.title | titlecase }}</mat-card-title>
       <mat-card-content>
         <mat-list>
           <mat-list-item><strong>Category:</strong> {{ project.category }}</mat-list-item>
@@ -10,6 +10,11 @@
           <mat-list-item><strong>Deadline:</strong> {{ project.deadline | date}}</mat-list-item>
           <mat-list-item><strong>Bid Deadline:</strong> {{ project.bidDeadline | date }}</mat-list-item>
           <mat-list-item><strong>Status:</strong> <span class="open"> {{ project.status }}</span> </mat-list-item>
+          <mat-list-item><a href="javascript:void(0)" (click)="openProjectDetails()">
+            <strong>
+              click here to view more about project details
+            </strong>
+          </a></mat-list-item>
         </mat-list>
       </mat-card-content>
     </mat-card>
