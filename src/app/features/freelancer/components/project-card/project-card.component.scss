@@ -1,0 +1,61 @@
+@import "src/assets/styles/variables.scss";
+
+.example-card {
+  width: 400px;
+  height: 500px;
+}
+
+.card-image{
+  height: 300px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-content{
+ 
+  h2{
+    font-size: 24px;
+    color: $primary-text-color;
+    text-align: center;
+  }
+  p{
+    font-size: 16px;
+    color: $secondary-text-color;
+    text-align: center;
+    margin: 5px;
+  }
+
+  p span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  mat-icon {
+   display:inline;
+  }
+
+  .card-info{
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+  }
+}
+
+
+.open {
+  color: $open-color;
+  font-weight: bold;
+}
+
+.active {
+  color: $active-color;
+  font-weight: bold;
+}
+
+.completed {
+  color: $completed-color;
+  font-weight: bold;
+}
+

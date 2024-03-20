@@ -24,7 +24,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ProjectInfoComponent } from './pages/project-info/project-info.component';
 import { QuizAppComponent } from './pages/quiz-app/quiz-app.component';
 import { QuizInfoComponent } from './pages/quiz-info/quiz-info.component';
-
+import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { QuizInfoComponent } from './pages/quiz-info/quiz-info.component';
     BidCreateComponent,
     OrdersComponent,
     MyBidsComponent,
-    OrderCardComponent
+    OrderCardComponent,
+    ProjectCardComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { QuizInfoComponent } from './pages/quiz-info/quiz-info.component';
     MatExpansionModule,
     MatDialogModule,
     ReactiveFormsModule,
+    PaginatorModule,
     MatSortModule
   ]
 })

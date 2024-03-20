@@ -1,26 +1,26 @@
+<section class="hero-section">
+  <h1>Find Projects</h1>
+  <p>Find the projects that are currently open for bidding</p>
+</section>
+
 <section class="search-section">
   <mat-form-field class="example-form-field">
     <mat-label>Search for Project..</mat-label>
-    <input matInput type="text" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+    <input matInput placeholder="Eg. Javascript" type="text" [(ngModel)]="searchTerm" (keyup.enter)="search()">
     <button  *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="search()">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
 </section>
 
-<div class="project-list">
-  <mat-card class="project-card" *ngFor="let project of projects">
-    <mat-card-header>
-      <mat-card-title>{{ project.title }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ project.description.substring(0,250) }} ....</p>
-      <p>Required Skills: <span class="highlight">{{ project.skills.join(', ') }}</span></p>
-      <p>Budget: <span class="highlight">{{ project.budget }} &#8377;</span></p>
-      <p>Deadline: <span class="highlight">{{ project.deadline | date }}</span> </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" routerLink="/freelancer/project/{{ project.id }}">View Details</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+<section class="project-view">
+  <div  class="project-list">
+    <ng-container *ngFor="let project of projects">
+      <app-project-card [project]="project" class="card" (click)="openProject(project)"></app-project-card>
+    </ng-container>
+  </div>
+</section>
+
+<section class="pagination">
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalrecords"></p-paginator>
+</section>
