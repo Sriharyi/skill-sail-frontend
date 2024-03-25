@@ -23,11 +23,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.user$ = this.userService.user$.subscribe(user => {
       this.user = user;
-      if (user) {
-        this.isUser = true;
-      } else {
-        this.isUser = false;
-      }
+      this.isUser = !!user;
     });
   }
 

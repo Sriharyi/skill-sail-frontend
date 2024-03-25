@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class FindProjectComponent {
  
   first: number = 0;
-  rows: number = 12;
-  totalrecords: number = 60;
+  rows: number = 2;
+  totalrecords: number = 0;
   searchTerm: any;
   projects: Project[] = [];
 
