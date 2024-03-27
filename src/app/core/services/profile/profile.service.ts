@@ -44,5 +44,4 @@ export class ProfileService {
     return this.http.get<EarnedSkillResponse>(`${this.API}/skills/${id}`);
   }
 
-
 }

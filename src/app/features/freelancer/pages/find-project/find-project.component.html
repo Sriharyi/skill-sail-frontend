@@ -7,8 +7,8 @@
 
 <section class="search-section">
   <mat-form-field class="example-form-field">
-    <mat-label>Search for Project..</mat-label>
-    <input matInput placeholder="Eg. Javascript" type="text" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+    <mat-label>Search By Skill</mat-label>
+    <input matInput placeholder="Eg.Javascript" type="text" [(ngModel)]="searchTerm" (keyup)="onSearch($event)" (keyup.enter)="search()">
     <button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="search()">
       <mat-icon>search</mat-icon>
     </button>

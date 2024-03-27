@@ -10,7 +10,7 @@
       </div>
       <mat-divider></mat-divider>
       <div class="question-body">
-        <h2 class="question-text">{{ currentQuestion.question }}</h2>
+        <h2 class="question-text">{{currentQuestionIndex + 1}}. {{ currentQuestion.question }}</h2>
         <div class="question-options">
           <ng-container *ngFor="let option of currentQuestion.options; let i = index">
             <div class="question-option">
@@ -33,12 +33,12 @@
         </div>
         <div class="question-action">
           <button mat-raised-button color="warn" type="reset" (click)="clearOption()">Clear</button>
-          <button mat-raised-button  color="accent" [disabled]="skipcount === 3" (click)="skipQuestion()">skip</button>
-          <ng-container *ngIf="currentQuestionIndex<totalQuestions-1; else submitTemplate">
-            <button mat-raised-button color="primary" [disabled]="selectedOption === -1" (click)="nextQuestion()">Next</button>
+          <button mat-raised-button  color="accent" [disabled]="skipcount === 3 || selectedOption !== -1" (click)="skipQuestion()">Skip</button>
+          <ng-container *ngIf="currentQuestionIndex === totalQuestions-1; else nextTemplate">
+            <button mat-raised-button color="primary" [disabled]="selectedOption === -1" (click)="submitTest()">Submit</button>
           </ng-container>
-          <ng-template #submitTemplate>
-            <button mat-raised-button color="primary" (click)="submitTest()">Submit</button>
+          <ng-template #nextTemplate>
+            <button mat-raised-button color="primary" [disabled]="selectedOption === -1" (click)="nextQuestion()">Next</button>
           </ng-template>
         </div>
       </div>

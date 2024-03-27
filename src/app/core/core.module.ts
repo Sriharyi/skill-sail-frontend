@@ -9,6 +9,7 @@ import { RouterLink } from "@angular/router";
 import { PermissionBasedAccessDirective } from '../shared/directives/app-permission-based-access.directive';
 import { RoleBasedAccessDirective } from '../shared/directives/app-role-based-access.directive';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -16,9 +17,11 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent,
     RoleBasedAccessDirective,
     PermissionBasedAccessDirective,
+    FooterComponent,
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

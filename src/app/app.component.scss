@@ -1,0 +1,14 @@
+.app-container{
+  position: relative;
+  min-height: 100vh;
+}
+
+router-outlet{
+  padding-bottom: 200px;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

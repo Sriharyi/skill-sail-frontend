@@ -11,10 +11,7 @@ import { ProjectResponse } from "../../../../shared/models/employer/project-crea
 export class ViewProjectsComponent {
 first: number = 0;
 rows: number = 12;
-totalrecords: number=60;
-
-
-
+totalrecords: number=0;
 
   public projects: ProjectResponse[] = [];
 

@@ -1,0 +1,16 @@
+@import "src/assets/styles/variables.scss";
+
+.footer {
+    background-color: black;
+    color: white;   
+}
+
+.container {
+    padding: 5px;
+    text-align: center;
+
+    p {
+        font-size: 14px;
+        margin: 0;
+    }
+}
