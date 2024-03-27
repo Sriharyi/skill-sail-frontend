@@ -22,10 +22,10 @@
       <h3>Questions:</h3>
       <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">
         <mat-icon>library_add</mat-icon>
-        <span>Import as Json File</span>
-        <input #fileInput  type="file" (change)="onFileInput($event)" class="file-hide"/>
+        <span>Import Questions</span>
+        <input #fileInput type="file" (change)="onFileInput($event)" accept=".json" class="file-hide" />
 
-        <ng-container *ngIf="jsonFile"  >
+        <ng-container *ngIf="jsonFile">
           <span class="file-name"> | {{jsonFile.name}}</span>
         </ng-container>
       </button>
@@ -35,8 +35,12 @@
     </form>
   </div>
   <div class="info">
-   <h1>Question Json Format:</h1>
+    <h1>Questions Json Format:</h1>
     <p>Questions are imported as a json file. The format of the json file is as follows:</p>
-    <img src="assets/images/utility/questionformat.png" >
+    <img src="assets/images/utility/questionformat.png">
+    <button mat-raised-button color="primary" (click)="quizanchor.click()">
+      Click here to download the JSON format
+    </button>
+    <a #quizanchor href="assets/data/utility/questionformat.json" download="questionformat.json"></a>
   </div>
 </section>

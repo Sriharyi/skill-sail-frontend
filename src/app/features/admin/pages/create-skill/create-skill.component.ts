@@ -95,8 +95,8 @@ export class CreateSkillComponent {
       fileReader.onload = (e) => {
         const fileContent = fileReader.result;
         if (fileContent !== null) {
-          const pars = JSON.parse(fileContent.toString());
-          const questions: Question[] = pars.questions;
+          const jsonpars = JSON.parse(fileContent.toString());
+          const questions: Question[] = jsonpars;
           this.skillForm.value.questions.length = 0;
           questions.forEach((question: Question) => {
             this.skillForm.value.questions.push(question);
