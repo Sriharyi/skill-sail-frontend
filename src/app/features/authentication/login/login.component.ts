@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -38,8 +38,23 @@ export class LoginComponent {
   createLoginForm(): FormGroup {
     return this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      password: ['', [Validators.required, this.passwordValidator, Validators.minLength(6), Validators.maxLength(15)]],
     });
+  }
+
+  passwordValidator(control: AbstractControl): ValidationErrors | null {
+    const value: string = <string>control.value;
+    if (!value) {
+      return null;
+    }
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasNumeric = /[0-9]/.test(value);
+    const hasSpecialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
+    const valid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialCharacters;
+    return valid ? null : {
+      invalidPassword: true
+    };
   }
   onSubmit() {
     if (this.loginForm.invalid) {

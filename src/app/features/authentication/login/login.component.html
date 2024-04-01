@@ -34,9 +34,12 @@
                 </mat-error>
                 <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('minlength')">
                   Password must be at least 6 characters long
-                </mat-error>
+                </mat-error> 
                 <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('maxlength')">
                   Password cannot be more than 15 characters long
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.hasError('invalidPassword')">
+                  Password must contain at least one uppercase letter, one lowercase letter, one number and one special character
                 </mat-error>
               </mat-form-field>
             </div>
