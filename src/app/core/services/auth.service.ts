@@ -5,6 +5,7 @@ import { LoginRequest } from 'src/app/shared/models/authentication/login-request
 import { environment } from 'src/environments/environment.development';
 import { SignInResponse } from "../../shared/models/authentication/sign-in-response";
 import { SignUpRequest } from "../../shared/models/authentication/sign-up-request";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AuthService {
   public isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   public isLoggedIn$ = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private JwtHelper: JwtHelperService) {
   }
 
   httpOptions = {
@@ -41,7 +42,7 @@ export class AuthService {
   public register(registerRequest: SignUpRequest): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(`${this.authUrl}/register`, registerRequest, this.httpOptions).pipe(
       tap(data => {
-        this.doLoginUser(data);
+        this.doLoginUser(data); 
       }
       ));
   }
@@ -49,6 +50,7 @@ export class AuthService {
   //logout
   public logout() {
     localStorage.removeItem(this.JWT_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
     this.isAuthenticatedSubject.next(false);
   }
 
@@ -72,7 +74,7 @@ export class AuthService {
 
   //authenticate user
   public isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.JWT_TOKEN);
+    return !this.JwtHelper.isTokenExpired(this.getAccessToken());
   }
 
 }

@@ -10,6 +10,7 @@ import { PermissionBasedAccessDirective } from '../shared/directives/app-permiss
 import { RoleBasedAccessDirective } from '../shared/directives/app-role-based-access.directive';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -30,7 +31,17 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     RouterLink,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: ['http://localhost:3000/auth/']
+      }
+    })
+    
   ]
 })
 export class CoreModule {
