@@ -9,11 +9,14 @@ import { OrdersComponent } from "./pages/orders/orders.component";
 import { ProjectInfoComponent } from "./pages/project-info/project-info.component";
 import { QuizAppComponent } from "./pages/quiz-app/quiz-app.component";
 import { QuizInfoComponent } from "./pages/quiz-info/quiz-info.component";
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: "",
     component: FreelancerLandingComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',

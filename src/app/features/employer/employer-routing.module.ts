@@ -7,11 +7,14 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { ViewBidsComponent } from "./pages/view-bids/view-bids.component";
 import { ViewProjectsComponent } from "./pages/view-projects/view-projects.component";
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path:"",
     component: EmployerComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children:[
       {
         path: '',

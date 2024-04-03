@@ -4,12 +4,15 @@ import { AdminComponent } from "./admin.component";
 import { CreateSkillComponent } from "./pages/create-skill/create-skill.component";
 import { DashboardInfoComponent } from "./pages/dashboard-info/dashboard-info.component";
 import { ManageSkillComponent } from "./pages/manage-skill/manage-skill.component";
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 
 const routes: Routes = [
   {
     path: "",
     component: AdminComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: "",

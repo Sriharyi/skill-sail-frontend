@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/shared/models/authentication/user-dto';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent {
   private user$: Subscription = new Subscription();
 
 
-  constructor(public authService: AuthService, private userService: UserService) { }
+  constructor(public authService: AuthService, private userService: UserService,private router:Router) { }
 
   ngOnInit(): void {
     this.user$ = this.userService.user$.subscribe(user => {
@@ -34,6 +35,7 @@ export class HeaderComponent {
   logout() {
     this.authService.logout();
     this.userService.clearUser();
+    this.router.navigate(['auth/login']);
   }
 }
 

@@ -51,7 +51,6 @@ export class UserService {
     );
   }
 
-
   clearUser(): void {
     localStorage.removeItem(this.USER_KEY);
     this.userSubject.next(null);

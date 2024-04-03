@@ -33,6 +33,8 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(`${this.authUrl}/authenticate`, loginRequest, this.httpOptions).pipe(
       tap(data => {
+        const token =  this.JwtHelper.decodeToken(data.accessToken);
+        console.log(token);
         this.doLoginUser(data);
       }
       ));
